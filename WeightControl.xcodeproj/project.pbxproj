@@ -13,6 +13,7 @@
 		0157A0EB27C7F3AD00E2C4BB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0157A0E927C7F3AD00E2C4BB /* Main.storyboard */; };
 		0157A0ED27C7F3AF00E2C4BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0157A0EC27C7F3AF00E2C4BB /* Assets.xcassets */; };
 		0157A0F027C7F3AF00E2C4BB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0157A0EE27C7F3AF00E2C4BB /* LaunchScreen.storyboard */; };
+		D0E763F9D1575B2189F299A6 /* Pods_WeightControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E81205373D4212DF6F293FC8 /* Pods_WeightControl.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,9 @@
 		0157A0EC27C7F3AF00E2C4BB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0157A0EF27C7F3AF00E2C4BB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0157A0F127C7F3AF00E2C4BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		379CF2612C7D2516A3FF1339 /* Pods-WeightControl.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeightControl.debug.xcconfig"; path = "Target Support Files/Pods-WeightControl/Pods-WeightControl.debug.xcconfig"; sourceTree = "<group>"; };
+		72292AB6F04F727AFD05CF13 /* Pods-WeightControl.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeightControl.release.xcconfig"; path = "Target Support Files/Pods-WeightControl/Pods-WeightControl.release.xcconfig"; sourceTree = "<group>"; };
+		E81205373D4212DF6F293FC8 /* Pods_WeightControl.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeightControl.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0E763F9D1575B2189F299A6 /* Pods_WeightControl.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +47,8 @@
 			children = (
 				0157A0E227C7F3AD00E2C4BB /* WeightControl */,
 				0157A0E127C7F3AD00E2C4BB /* Products */,
+				409D9E051E94972F6647C933 /* Pods */,
+				7511BDB07224B517E9B83341 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,6 +74,24 @@
 			path = WeightControl;
 			sourceTree = "<group>";
 		};
+		409D9E051E94972F6647C933 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				379CF2612C7D2516A3FF1339 /* Pods-WeightControl.debug.xcconfig */,
+				72292AB6F04F727AFD05CF13 /* Pods-WeightControl.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		7511BDB07224B517E9B83341 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E81205373D4212DF6F293FC8 /* Pods_WeightControl.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,9 +99,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0157A0F427C7F3AF00E2C4BB /* Build configuration list for PBXNativeTarget "WeightControl" */;
 			buildPhases = (
+				C0B800F9237C7DFA13DE5E9C /* [CP] Check Pods Manifest.lock */,
 				0157A0DC27C7F3AD00E2C4BB /* Sources */,
 				0157A0DD27C7F3AD00E2C4BB /* Frameworks */,
 				0157A0DE27C7F3AD00E2C4BB /* Resources */,
+				29685A1507B301A36FE6E844 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -132,6 +159,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		29685A1507B301A36FE6E844 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WeightControl/Pods-WeightControl-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WeightControl/Pods-WeightControl-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WeightControl/Pods-WeightControl-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C0B800F9237C7DFA13DE5E9C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WeightControl-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0157A0DC27C7F3AD00E2C4BB /* Sources */ = {
@@ -284,6 +353,7 @@
 		};
 		0157A0F527C7F3AF00E2C4BB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 379CF2612C7D2516A3FF1339 /* Pods-WeightControl.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -312,6 +382,7 @@
 		};
 		0157A0F627C7F3AF00E2C4BB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 72292AB6F04F727AFD05CF13 /* Pods-WeightControl.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
