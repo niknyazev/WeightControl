@@ -11,7 +11,13 @@ import Charts
 class ViewController: UIViewController {
 
     lazy var lineChartView: LineChartView = {
-        let chartView = LineChartView(frame: CGRect(x: 10, y: 10, width: 400, height: 400))
+        let frame = CGRect(
+            x: 0,
+            y: 400,
+            width: view.frame.width,
+            height: view.frame.height - 400
+        )
+        let chartView = LineChartView(frame: frame)
         chartView.backgroundColor = .blue
         return chartView
     }()
