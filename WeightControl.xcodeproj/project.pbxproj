@@ -65,16 +65,40 @@
 		0157A0E227C7F3AD00E2C4BB /* WeightControl */ = {
 			isa = PBXGroup;
 			children = (
-				0157A0E327C7F3AD00E2C4BB /* AppDelegate.swift */,
-				01E4787727CE663F0068D14B /* WeightLogTableViewController.swift */,
-				0157A0E527C7F3AD00E2C4BB /* SceneDelegate.swift */,
-				0157A0E727C7F3AD00E2C4BB /* ViewController.swift */,
-				0157A0E927C7F3AD00E2C4BB /* Main.storyboard */,
-				0157A0EC27C7F3AF00E2C4BB /* Assets.xcassets */,
-				0157A0EE27C7F3AF00E2C4BB /* LaunchScreen.storyboard */,
-				0157A0F127C7F3AF00E2C4BB /* Info.plist */,
+				01E4787A27CE76EA0068D14B /* Storyboards */,
+				01E4787927CE769A0068D14B /* ViewControllers */,
+				01E4787B27CE77310068D14B /* App */,
 			);
 			path = WeightControl;
+			sourceTree = "<group>";
+		};
+		01E4787927CE769A0068D14B /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				01E4787727CE663F0068D14B /* WeightLogTableViewController.swift */,
+				0157A0E727C7F3AD00E2C4BB /* ViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		01E4787A27CE76EA0068D14B /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				0157A0E927C7F3AD00E2C4BB /* Main.storyboard */,
+				0157A0EE27C7F3AF00E2C4BB /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		01E4787B27CE77310068D14B /* App */ = {
+			isa = PBXGroup;
+			children = (
+				0157A0F127C7F3AF00E2C4BB /* Info.plist */,
+				0157A0EC27C7F3AF00E2C4BB /* Assets.xcassets */,
+				0157A0E527C7F3AD00E2C4BB /* SceneDelegate.swift */,
+				0157A0E327C7F3AD00E2C4BB /* AppDelegate.swift */,
+			);
+			name = App;
 			sourceTree = "<group>";
 		};
 		409D9E051E94972F6647C933 /* Pods */ = {
