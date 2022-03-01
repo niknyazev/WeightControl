@@ -7,24 +7,13 @@
 
 import UIKit
 
-struct WeightData {
-    let date: Date
-    let weight: Int
-    let photoData: Data?
-}
-
 class WeightLogTableViewController: UITableViewController {
     
-    let weightData = [
-        WeightData(date: .now, weight: 80, photoData: nil),
-        WeightData(date: .now, weight: 83, photoData: nil),
-        WeightData(date: .now, weight: 85, photoData: nil),
-        WeightData(date: .now, weight: 87, photoData: nil),
-        WeightData(date: .now, weight: 88, photoData: nil)
-    ]
-
+    var weightData: [WeightData] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        weightData = StorageManager.shared.fetchData()
     }
 
     // MARK: - Table view data source
