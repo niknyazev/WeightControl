@@ -26,7 +26,7 @@ class WeightLogTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "weightData", for: indexPath)
         
         var content = cell.defaultContentConfiguration()
-        content.text = weightData[indexPath.row].date.description
+        content.text = weightData[indexPath.row].dateDescription
         content.secondaryText = String(weightData[indexPath.row].weight)
         
         cell.contentConfiguration = content

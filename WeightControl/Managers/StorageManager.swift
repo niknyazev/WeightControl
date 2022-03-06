@@ -11,6 +11,14 @@ struct WeightData {
     let date: Date
     let weight: Int
     let photoData: Data?
+    var dateDescription: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .none
+        let result = dateFormatter.string(from: date)
+        return result
+    }
+ 
 }
 
 final class StorageManager {
@@ -23,10 +31,14 @@ final class StorageManager {
         
         let weightData = [
             WeightData(date: .now, weight: 80, photoData: nil),
-            WeightData(date: .now, weight: 83, photoData: nil),
-            WeightData(date: .now, weight: 85, photoData: nil),
-            WeightData(date: .now, weight: 87, photoData: nil),
-            WeightData(date: .now, weight: 88, photoData: nil)
+            WeightData(date: .now + 1 * 24 * 3600, weight: 83, photoData: nil),
+            WeightData(date: .now + 2 * 24 * 3600, weight: 85, photoData: nil),
+            WeightData(date: .now + 3 * 24 * 3600, weight: 87, photoData: nil),
+            WeightData(date: .now + 4 * 24 * 3600, weight: 86, photoData: nil),
+            WeightData(date: .now + 5 * 24 * 3600, weight: 82, photoData: nil),
+            WeightData(date: .now + 6 * 24 * 3600, weight: 80, photoData: nil),
+            WeightData(date: .now + 7 * 24 * 3600, weight: 78, photoData: nil),
+            WeightData(date: .now + 8 * 24 * 3600, weight: 75, photoData: nil)
         ]
         
         return weightData
