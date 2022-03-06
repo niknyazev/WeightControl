@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  ChartViewController.swift
 //  WeightControl
 //
 //  Created by Николай on 24.02.2022.
@@ -8,7 +8,7 @@
 import UIKit
 import Charts
 
-class ViewController: UIViewController {
+class ChartViewController: UIViewController {
 
     var weightData: [WeightData] = []
     
@@ -47,7 +47,7 @@ class ViewController: UIViewController {
 
 }
 
-extension ViewController: ChartViewDelegate {
+extension ChartViewController: ChartViewDelegate {
     
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
         
