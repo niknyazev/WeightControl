@@ -72,10 +72,10 @@
             </objects>
             <point key="canvasLocation" x="264" y="-208"/>
         </scene>
-        <!--View Controller-->
+        <!--Chart View Controller-->
         <scene sceneID="O3x-vp-Z00">
             <objects>
-                <viewController id="KBz-G9-f4W" customClass="ViewController" customModule="WeightControl" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="KBz-G9-f4W" customClass="ChartViewController" customModule="WeightControl" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0mQ-me-pt3">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

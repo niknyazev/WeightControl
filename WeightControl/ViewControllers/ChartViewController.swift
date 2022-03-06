@@ -20,7 +20,7 @@ class ChartViewController: UIViewController {
             height: view.frame.height - 400
         )
         let chartView = LineChartView(frame: frame)
-        chartView.backgroundColor = .blue
+        chartView.backgroundColor = .white
         return chartView
     }()
     
