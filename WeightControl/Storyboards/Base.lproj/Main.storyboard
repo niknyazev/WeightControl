@@ -91,16 +91,16 @@
         <!--Settings-->
         <scene sceneID="s3z-n1-aRv">
             <objects>
-                <tableViewController id="bPI-dt-LnM" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="l5M-IC-Zof">
+                <tableViewController id="bPI-dt-LnM" customClass="HumanParametersViewController" customModule="WeightControl" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="l5M-IC-Zof">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <sections>
                             <tableViewSection id="VRt-Qv-Tfw">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="6NZ-hm-5kP" detailTextLabel="cXh-iL-0e7" style="IBUITableViewCellStyleValue1" id="YoT-P0-vgb">
-                                        <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="18" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YoT-P0-vgb" id="JW0-MD-kVd">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -124,7 +124,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="axh-jH-uRz" detailTextLabel="Jeo-Zv-DfE" style="IBUITableViewCellStyleValue1" id="ZhI-HH-VY7">
-                                        <rect key="frame" x="0.0" y="88" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="61.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZhI-HH-VY7" id="j2A-zw-hBy">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -148,7 +148,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="GFT-JH-2jv" detailTextLabel="ngC-eA-dkv" style="IBUITableViewCellStyleValue1" id="GqF-hk-Tq1">
-                                        <rect key="frame" x="0.0" y="131.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="105" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GqF-hk-Tq1" id="cUH-05-lT9">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -172,7 +172,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="IRU-QE-OGx" detailTextLabel="Prp-Eu-27R" style="IBUITableViewCellStyleValue1" id="IEg-QJ-qXq">
-                                        <rect key="frame" x="0.0" y="175" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="148.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="IEg-QJ-qXq" id="CV9-TW-fZo">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -204,6 +204,12 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Settings" id="QZN-IT-NRK"/>
+                    <connections>
+                        <outlet property="ageLabel" destination="cXh-iL-0e7" id="jkw-vG-Hto"/>
+                        <outlet property="heightLabel" destination="Jeo-Zv-DfE" id="1Zc-EM-y3L"/>
+                        <outlet property="sexLabel" destination="ngC-eA-dkv" id="4Nk-9c-61x"/>
+                        <outlet property="weightGoalLabel" destination="Prp-Eu-27R" id="aGW-bv-qrd"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nsb-SM-A5J" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
