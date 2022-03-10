@@ -19,7 +19,7 @@ class HumanParametersViewController: UITableViewController {
     private let userDefaults = UserDefaultsManager.shared
     private var pickerValues: [pickerValue] = []
     
-    typealias pickerValue = (values: [String], title: String)
+    typealias pickerValue = (values: [String], title: String, element: UILabel)
     
     // MARK: - Override methods
     
@@ -45,10 +45,10 @@ class HumanParametersViewController: UITableViewController {
             UserData.Sex.female.rawValue
         ]
         
-        pickerValues.append((values: (10...500).map { String($0) }, title: "age"))
-        pickerValues.append((values: (10...110).map { String($0) }, title: "height"))
-        pickerValues.append((values: sexes, title: "sex"))
-        pickerValues.append((values: (0...200).map { String($0) }, title: "weight goal"))
+        pickerValues.append((values: (10...500).map { String($0) }, title: "age", element: ageLabel))
+        pickerValues.append((values: (10...110).map { String($0) }, title: "height", element: heightLabel))
+        pickerValues.append((values: sexes, title: "sex", element: sexLabel))
+        pickerValues.append((values: (0...200).map { String($0) }, title: "weight goal", element: weightGoalLabel))
         
     }
     
@@ -67,10 +67,28 @@ class HumanParametersViewController: UITableViewController {
         let editRadiusAlert = UIAlertController(title: "Choose \(pickerValues[pickerView.tag].title)", message: "", preferredStyle: .alert)
         
         editRadiusAlert.setValue(viewController, forKey: "contentViewController")
-        editRadiusAlert.addAction(UIAlertAction(title: "Done", style: .default))
+        editRadiusAlert.addAction(UIAlertAction(title: "Done", style: .default) { _ in
+            let currentPicker = self.pickerValues[pickerView.tag]
+            let selectedRow = pickerView.selectedRow(inComponent: 0)
+            currentPicker.element.text = currentPicker.values[selectedRow]
+            self.saveValues()
+        })
         editRadiusAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
        
         self.present(editRadiusAlert, animated: true)
+        
+    }
+    
+    private func saveValues() {
+        
+        let userData = UserData(
+            age: Int(ageLabel.text ?? "") ?? 0,
+            height: Int(heightLabel.text ?? "") ?? 0,
+            weightGoal: Int(weightGoalLabel.text ?? "") ?? 0,
+            sex: UserData.Sex(rawValue: sexLabel.text ?? "") ?? .male
+        )
+        
+        userDefaults.saveUserData(userData: userData)
         
     }
     
