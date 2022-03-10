@@ -65,6 +65,10 @@ class WeightLogTableViewController: UITableViewController {
 
 extension WeightLogTableViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        String(row)
+    }
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         2
     }
