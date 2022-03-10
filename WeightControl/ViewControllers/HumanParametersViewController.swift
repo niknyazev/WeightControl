@@ -17,9 +17,15 @@ class HumanParametersViewController: UITableViewController {
     @IBOutlet weak var weightGoalLabel: UILabel!
     
     private let userDefaults = UserDefaultsManager.shared
+    private var pickerValues: [pickerValue] = []
+    
+    typealias pickerValue = (values: [String], title: String)
+    
+    // MARK: - Override methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        fillPickerValues()
         setupElements()
 
     }
@@ -32,7 +38,21 @@ class HumanParametersViewController: UITableViewController {
     
     // MARK: - Private methods
     
-    func selectValue(tag: Int) {
+    func fillPickerValues() {
+        
+        let sexes = [
+            UserData.Sex.male.rawValue,
+            UserData.Sex.female.rawValue
+        ]
+        
+        pickerValues.append((values: (10...500).map { String($0) }, title: "age"))
+        pickerValues.append((values: (10...110).map { String($0) }, title: "height"))
+        pickerValues.append((values: sexes, title: "sex"))
+        pickerValues.append((values: (0...200).map { String($0) }, title: "weight goal"))
+        
+    }
+    
+    private func selectValue(tag: Int) {
         
         let viewController = UIViewController()
         viewController.preferredContentSize = CGSize(width: 250,height: 200)
@@ -44,15 +64,7 @@ class HumanParametersViewController: UITableViewController {
         
         viewController.view.addSubview(pickerView)
         
-        var chooserTitle = ""
-        
-        if tag == 0 {
-            chooserTitle = "age"
-        } else if tag == 1 {
-            chooserTitle = "height"
-        }
-        
-        let editRadiusAlert = UIAlertController(title: "Choose \(chooserTitle)", message: "", preferredStyle: .alert)
+        let editRadiusAlert = UIAlertController(title: "Choose \(pickerValues[pickerView.tag].title)", message: "", preferredStyle: .alert)
         
         editRadiusAlert.setValue(viewController, forKey: "contentViewController")
         editRadiusAlert.addAction(UIAlertAction(title: "Done", style: .default))
@@ -84,7 +96,7 @@ class HumanParametersViewController: UITableViewController {
 extension HumanParametersViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        String(row)
+        pickerValues[pickerView.tag].values[row]
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -92,15 +104,7 @@ extension HumanParametersViewController: UIPickerViewDelegate, UIPickerViewDataS
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        
-        if pickerView.tag == 0 {
-            return 110
-        } else if pickerView.tag == 1 {
-            return 250
-        } else {
-            return 0
-        }
-    
+        return pickerValues[pickerView.tag].values.count
     }
 
 }
