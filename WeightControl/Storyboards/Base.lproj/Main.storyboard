@@ -66,7 +66,13 @@
                             <outlet property="delegate" destination="cC4-Fb-J4d" id="92l-sB-TVA"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="History" id="ObY-mL-jLD"/>
+                    <navigationItem key="navigationItem" title="History" id="ObY-mL-jLD">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="PaS-4L-5H4">
+                            <connections>
+                                <action selector="addEntryDidPress:" destination="cC4-Fb-J4d" id="2AV-Xh-Hra"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AEx-Py-6zt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

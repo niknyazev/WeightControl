@@ -9,14 +9,16 @@ import UIKit
 
 class WeightLogTableViewController: UITableViewController {
     
+    // MARK: - Properties
+    
     var weightData: [WeightData] = []
+    
+    // MARK: - Override methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
         weightData = StorageManager.shared.fetchData()
     }
-
-    // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         weightData.count
@@ -33,5 +35,42 @@ class WeightLogTableViewController: UITableViewController {
 
         return cell
     }
+    
+    // MARK: - IBAction methods
+    
+    @IBAction func addEntryDidPress(_ sender: UIBarButtonItem) {
+        
+        let viewController = UIViewController()
+        viewController.preferredContentSize = CGSize(width: 250,height: 200)
+        
+        let pickerView = UIPickerView(frame: CGRect(x: 0, y: 0, width: 250, height: 200))
+        pickerView.delegate = self
+        pickerView.dataSource = self
+        
+        viewController.view.addSubview(pickerView)
+        
+        let editRadiusAlert = UIAlertController(title: "Select weight", message: "", preferredStyle: .alert)
 
+        editRadiusAlert.setValue(viewController, forKey: "contentViewController")
+        editRadiusAlert.addAction(UIAlertAction(title: "Done", style: .default))
+        editRadiusAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+
+        self.present(editRadiusAlert, animated: true)
+        
+    }
+    
+}
+
+// MARK: - PickerView
+
+extension WeightLogTableViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        2
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        200
+    }
+    
 }
