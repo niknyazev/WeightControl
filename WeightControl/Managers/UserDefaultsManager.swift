@@ -8,9 +8,16 @@
 import Foundation
 
 struct UserData: Codable {
+    
+    enum Sex: String, Codable {
+        case male
+        case female
+    }
+    
     let age: Int
     let height: Int
     let weightGoal: Int
+    let sex: Sex
 }
 
 class UserDefaultsManager {
