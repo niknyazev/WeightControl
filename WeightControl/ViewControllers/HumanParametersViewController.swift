@@ -27,16 +27,12 @@ class HumanParametersViewController: UITableViewController {
     // MARK: - Table view
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        if indexPath.row == 0 {
-            selectAge()
-        }
-        
+        selectValue(tag: indexPath.row)
     }
     
     // MARK: - Private methods
     
-    func selectAge() {
+    func selectValue(tag: Int) {
         
         let viewController = UIViewController()
         viewController.preferredContentSize = CGSize(width: 250,height: 200)
@@ -44,10 +40,19 @@ class HumanParametersViewController: UITableViewController {
         let pickerView = UIPickerView(frame: CGRect(x: 0, y: 0, width: 250, height: 200))
         pickerView.delegate = self
         pickerView.dataSource = self
+        pickerView.tag = tag
         
         viewController.view.addSubview(pickerView)
         
-        let editRadiusAlert = UIAlertController(title: "Choose age", message: "", preferredStyle: .alert)
+        var chooserTitle = ""
+        
+        if tag == 0 {
+            chooserTitle = "age"
+        } else if tag == 1 {
+            chooserTitle = "height"
+        }
+        
+        let editRadiusAlert = UIAlertController(title: "Choose \(chooserTitle)", message: "", preferredStyle: .alert)
         
         editRadiusAlert.setValue(viewController, forKey: "contentViewController")
         editRadiusAlert.addAction(UIAlertAction(title: "Done", style: .default))
@@ -87,7 +92,15 @@ extension HumanParametersViewController: UIPickerViewDelegate, UIPickerViewDataS
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        100
+        
+        if pickerView.tag == 0 {
+            return 110
+        } else if pickerView.tag == 1 {
+            return 250
+        } else {
+            return 0
+        }
+    
     }
 
 }
