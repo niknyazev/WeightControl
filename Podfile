@@ -7,5 +7,6 @@ target 'WeightControl' do
   # Pods for WeightControl
 
   pod 'Charts'
+  pod 'RealmSwift', '~>10'
 
 end
