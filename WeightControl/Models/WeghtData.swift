@@ -6,11 +6,12 @@
 //
 
 import Foundation
+import RealmSwift
 
-struct WeightData {
-    let date: Date
-    let weight: Int
-    let photoData: Data?
+class WeightData: Object {
+    @Persisted var date: Date = .now
+    @Persisted var weight: Int = 0
+    @Persisted var photoData: Data? = nil
     var dateDescription: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
