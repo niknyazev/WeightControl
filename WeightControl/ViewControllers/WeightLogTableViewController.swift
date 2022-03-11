@@ -6,18 +6,19 @@
 //
 
 import UIKit
+import RealmSwift
 
 class WeightLogTableViewController: UITableViewController {
     
     // MARK: - Properties
     
-    var weightData: [WeightData] = []
+    private var weightData: Results<WeightData>!
     
     // MARK: - Override methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        weightData = StorageManager.shared.fetchData()
+        weightData = StorageManager.shared.realm.objects(WeightData.self)
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

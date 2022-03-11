@@ -7,10 +7,11 @@
 
 import UIKit
 import Charts
+import RealmSwift
 
 class ChartViewController: UIViewController {
 
-    var weightData: [WeightData] = []
+    private var weightData: Results<WeightData>!
     
     lazy var lineChartView: LineChartView = {
         let frame = CGRect(
@@ -26,7 +27,7 @@ class ChartViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        weightData = StorageManager.shared.fetchData()
+        weightData = StorageManager.shared.realm.objects(WeightData.self)
         view.addSubview(lineChartView)
         lineChartView.center = view.center
         setChartData()

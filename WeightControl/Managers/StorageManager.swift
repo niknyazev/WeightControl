@@ -5,22 +5,47 @@
 //  Created by Николай on 01.03.2022.
 //
 
-import Foundation
+import RealmSwift
 
-final class StorageManager {
+class StorageManager {
     
+    // MARK: - Properties
+   
     static let shared = StorageManager()
     
-    private init() { }
+    let realm = try! Realm()
     
-    func fetchData() -> [WeightData] {
-        
-        let weightData = [
-            WeightData()
-        ]
-        
-        return weightData
-        
+    private init() {}
+    
+    // MARK: - Public methods
+    
+    func save(_ weightData: WeightData) {
+        write {
+            realm.add(weightData)
+        }
     }
     
+    func delete(_ weightData: WeightData) {
+        write {
+            realm.delete(weightData)
+        }
+    }
+    
+    func edit(_ weightData: WeightData) {
+        write {
+            // TODO
+        }
+    }
+    
+    // MARK: - Private methods
+        
+    private func write(completion: () -> Void) {
+        do {
+            try realm.write {
+                completion()
+            }
+        } catch let error {
+            print(error)
+        }
+    }
 }
