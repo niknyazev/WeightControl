@@ -11,7 +11,7 @@ import RealmSwift
 class WeightLogTableViewController: UITableViewController {
     
     // MARK: - Properties
-    
+        
     private var weightData: Results<WeightData>!
     private let storageManager = StorageManager.shared
     private let pickerWidth: CGFloat = 250
@@ -63,6 +63,12 @@ class WeightLogTableViewController: UITableViewController {
             
             self.storageManager.save(weightData)
             self.tableView.reloadData()
+                        
+            guard let navigationController = self.tabBarController?.viewControllers?[0] as? UINavigationController,
+                  let chart = navigationController.viewControllers[0] as? ChartViewController
+            else { return }
+            
+            chart.updateChart()
         }
 
         editRadiusAlert.setValue(viewController, forKey: "contentViewController")

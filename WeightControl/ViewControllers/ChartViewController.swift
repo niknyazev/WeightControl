@@ -27,9 +27,13 @@ class ChartViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        weightData = StorageManager.shared.realm.objects(WeightData.self)
         view.addSubview(lineChartView)
         lineChartView.center = view.center
+        updateChart()
+    }
+    
+    func updateChart() {
+        weightData = StorageManager.shared.realm.objects(WeightData.self)
         setChartData()
     }
 
