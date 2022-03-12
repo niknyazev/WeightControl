@@ -13,12 +13,13 @@ class WeightLogTableViewController: UITableViewController {
     // MARK: - Properties
     
     private var weightData: Results<WeightData>!
+    private let storageManager = StorageManager.shared
     
     // MARK: - Override methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        weightData = StorageManager.shared.realm.objects(WeightData.self)
+        weightData = storageManager.realm.objects(WeightData.self)
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -51,9 +52,12 @@ class WeightLogTableViewController: UITableViewController {
         viewController.view.addSubview(pickerView)
         
         let editRadiusAlert = UIAlertController(title: "Select weight", message: "", preferredStyle: .alert)
+        let doneAction = UIAlertAction(title: "Done", style: .default) {_ in
+            self.storageManager.save(WeightData())
+        }
 
         editRadiusAlert.setValue(viewController, forKey: "contentViewController")
-        editRadiusAlert.addAction(UIAlertAction(title: "Done", style: .default))
+        editRadiusAlert.addAction(doneAction)
         editRadiusAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
 
         self.present(editRadiusAlert, animated: true)
