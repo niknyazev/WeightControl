@@ -56,7 +56,12 @@ class WeightLogTableViewController: UITableViewController {
         
         let editRadiusAlert = UIAlertController(title: "Select weight", message: "", preferredStyle: .alert)
         let doneAction = UIAlertAction(title: "Done", style: .default) {_ in
-            self.storageManager.save(WeightData())
+            
+            let weightData = WeightData()
+            weightData.weight = Float(pickerView.selectedRow(inComponent: 0))
+            weightData.date = .now
+            
+            self.storageManager.save(weightData)
             self.tableView.reloadData()
         }
 
@@ -76,7 +81,6 @@ extension WeightLogTableViewController: UIPickerViewDelegate, UIPickerViewDataSo
     
     func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
         50
-        
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {

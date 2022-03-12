@@ -10,7 +10,7 @@ import RealmSwift
 
 class WeightData: Object {
     @Persisted var date: Date = .now
-    @Persisted var weight: Int = 0
+    @Persisted var weight: Float = 0
     @Persisted var photoData: Data? = nil
     var dateDescription: String {
         let dateFormatter = DateFormatter()
