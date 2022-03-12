@@ -10,6 +10,8 @@ import Charts
 import RealmSwift
 
 class ChartViewController: UIViewController {
+    
+    // MARK: - Properties
 
     private var weightData: Results<WeightData>!
     
@@ -25,6 +27,8 @@ class ChartViewController: UIViewController {
         return chartView
     }()
     
+    // MARK: - Override methods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(lineChartView)
@@ -32,11 +36,15 @@ class ChartViewController: UIViewController {
         updateChart()
     }
     
+    // MARK: - Public methods
+    
     func updateChart() {
         weightData = StorageManager.shared.realm.objects(WeightData.self)
         setChartData()
     }
 
+    // MARK: - Private methods
+    
     private func setChartData() {
         
         var weightValues: [ChartDataEntry] = []
