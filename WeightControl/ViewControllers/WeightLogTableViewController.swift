@@ -54,6 +54,7 @@ class WeightLogTableViewController: UITableViewController {
         let editRadiusAlert = UIAlertController(title: "Select weight", message: "", preferredStyle: .alert)
         let doneAction = UIAlertAction(title: "Done", style: .default) {_ in
             self.storageManager.save(WeightData())
+            self.tableView.reloadData()
         }
 
         editRadiusAlert.setValue(viewController, forKey: "contentViewController")
