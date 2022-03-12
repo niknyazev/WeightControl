@@ -14,6 +14,7 @@ class WeightLogTableViewController: UITableViewController {
     
     private var weightData: Results<WeightData>!
     private let storageManager = StorageManager.shared
+    private let pickerWidth: CGFloat = 250
     
     // MARK: - Override methods
     
@@ -43,11 +44,13 @@ class WeightLogTableViewController: UITableViewController {
     @IBAction func addEntryDidPress(_ sender: UIBarButtonItem) {
         
         let viewController = UIViewController()
-        viewController.preferredContentSize = CGSize(width: 250,height: 200)
+        viewController.preferredContentSize = CGSize(width: pickerWidth,height: 200)
         
-        let pickerView = UIPickerView(frame: CGRect(x: 0, y: 0, width: 250, height: 200))
+        let pickerView = UIPickerView(frame: CGRect(x: 0, y: 0, width: pickerWidth, height: 200))
         pickerView.delegate = self
         pickerView.dataSource = self
+        pickerView.selectRow(60, inComponent: 0, animated: false)
+        pickerView.selectRow(0, inComponent: 1, animated: false)
         
         viewController.view.addSubview(pickerView)
         
@@ -71,6 +74,11 @@ class WeightLogTableViewController: UITableViewController {
 
 extension WeightLogTableViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
+    func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
+        50
+        
+    }
+    
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         String(row)
     }
@@ -80,7 +88,11 @@ extension WeightLogTableViewController: UIPickerViewDelegate, UIPickerViewDataSo
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        200
+        if component == 0 {
+            return 200
+        } else {
+            return 10
+        }
     }
     
 }

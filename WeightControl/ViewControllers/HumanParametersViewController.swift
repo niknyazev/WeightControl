@@ -18,6 +18,7 @@ class HumanParametersViewController: UITableViewController {
     
     private let userDefaults = UserDefaultsManager.shared
     private var pickerValues: [pickerValue] = []
+    private let pickerWidth: CGFloat = 250
     
     typealias pickerValue = (values: [String], title: String, element: UILabel)
     
@@ -55,9 +56,9 @@ class HumanParametersViewController: UITableViewController {
     private func selectValue(tag: Int) {
         
         let viewController = UIViewController()
-        viewController.preferredContentSize = CGSize(width: 250,height: 200)
+        viewController.preferredContentSize = CGSize(width: pickerWidth,height: 200)
         
-        let pickerView = UIPickerView(frame: CGRect(x: 0, y: 0, width: 250, height: 200))
+        let pickerView = UIPickerView(frame: CGRect(x: 0, y: 0, width: pickerWidth, height: 200))
         pickerView.delegate = self
         pickerView.dataSource = self
         pickerView.tag = tag
@@ -112,6 +113,10 @@ class HumanParametersViewController: UITableViewController {
 // MARK: - Picker view
 
 extension HumanParametersViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
+        pickerWidth
+    }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         pickerValues[pickerView.tag].values[row]
