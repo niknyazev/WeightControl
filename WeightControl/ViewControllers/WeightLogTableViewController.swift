@@ -39,15 +39,28 @@ class WeightLogTableViewController: UITableViewController {
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let editAction = UIContextualAction(style: .normal, title: "Edit") { _, _, handler in
+            self.editWeightData()
+            handler(true)
+        }
+        
+        let result = UISwipeActionsConfiguration(actions: [editAction])
+        
+        return result
+        
+    }
+    
     // MARK: - IBAction methods
     
     @IBAction func addEntryDidPress(_ sender: UIBarButtonItem) {
-        enterWeightData()
+        editWeightData()
     }
     
     // MARK: - Private methods
     
-    func enterWeightData() {
+    func editWeightData() {
         
         let viewController = UIViewController()
         viewController.preferredContentSize = CGSize(width: pickerWidth,height: 200)
