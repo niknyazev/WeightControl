@@ -42,6 +42,12 @@ class WeightLogTableViewController: UITableViewController {
     // MARK: - IBAction methods
     
     @IBAction func addEntryDidPress(_ sender: UIBarButtonItem) {
+        enterWeightData()
+    }
+    
+    // MARK: - Private methods
+    
+    func enterWeightData() {
         
         let viewController = UIViewController()
         viewController.preferredContentSize = CGSize(width: pickerWidth,height: 200)
