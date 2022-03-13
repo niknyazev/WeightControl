@@ -60,17 +60,30 @@ class WeightLogTableViewController: UITableViewController {
     
     // MARK: - Private methods
     
-    func editWeightData() {
+    private func formattedDate(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .none
+        let result = dateFormatter.string(from: date)
+        return result
+    }
+    
+    private func editWeightData() {
         
         let viewController = UIViewController()
-        viewController.preferredContentSize = CGSize(width: pickerWidth,height: 200)
+        viewController.preferredContentSize = CGSize(width: pickerWidth, height: 200)
         
-        let pickerView = UIPickerView(frame: CGRect(x: 0, y: 0, width: pickerWidth, height: 200))
+        let dateButton = UIButton(frame: CGRect(x: 0, y: 0, width: 150, height: 50))
+        dateButton.setTitle(formattedDate(date: Date.now), for: .normal)
+        dateButton.backgroundColor = .red
+        
+        let pickerView = UIPickerView(frame: CGRect(x: 0, y: 0, width: pickerWidth, height: 150))
         pickerView.delegate = self
         pickerView.dataSource = self
         pickerView.selectRow(60, inComponent: 0, animated: false)
         pickerView.selectRow(0, inComponent: 1, animated: false)
         
+        viewController.view.addSubview(dateButton)
         viewController.view.addSubview(pickerView)
         
         let editRadiusAlert = UIAlertController(title: "Select weight", message: "", preferredStyle: .alert)
