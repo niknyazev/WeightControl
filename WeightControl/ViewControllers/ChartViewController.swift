@@ -64,7 +64,7 @@ class ChartViewController: UIViewController {
 
     // MARK: - Private methods
     
-    func setupElements() {
+    private func setupElements() {
         
         view.addSubview(currentWeightLabel)
         view.addSubview(weightRemaining)
