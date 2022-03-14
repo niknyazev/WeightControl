@@ -71,7 +71,7 @@ class WeightLogTableViewController: UITableViewController {
     private func editWeightData() {
         
         let viewController = UIViewController()
-        viewController.preferredContentSize = CGSize(width: pickerWidth, height: 220)
+        viewController.preferredContentSize = CGSize(width: pickerWidth, height: 260)
         
         let datePicker = UIDatePicker(frame: CGRect(x: 0, y: 0, width: pickerWidth, height: 45))
         
@@ -80,9 +80,14 @@ class WeightLogTableViewController: UITableViewController {
         pickerView.dataSource = self
         pickerView.selectRow(60, inComponent: 0, animated: false)
         pickerView.selectRow(0, inComponent: 1, animated: false)
+                
+        let photoButton = UIButton(frame: CGRect(x: 0, y: 205, width: pickerWidth, height: 45))
+        photoButton.setTitle("Make photo", for: .normal)
+        photoButton.setTitleColor(.tintColor, for: .normal)
         
         viewController.view.addSubview(datePicker)
         viewController.view.addSubview(pickerView)
+        viewController.view.addSubview(photoButton)
         
         let editRadiusAlert = UIAlertController(title: "Select weight value", message: "", preferredStyle: .alert)
         let doneAction = UIAlertAction(title: "Done", style: .default) {_ in
@@ -109,10 +114,6 @@ class WeightLogTableViewController: UITableViewController {
         
     }
     
-    @objc private func changeDate() {
-        let dataPicker = UIDatePicker()
-//        present(dataPicker, animated: true, completion: nil)
-    }
     
 }
 
