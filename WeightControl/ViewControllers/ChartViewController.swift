@@ -100,9 +100,9 @@ class ChartViewController: UIViewController {
 
         NSLayoutConstraint.activate([
             buttonAddWeightData.topAnchor.constraint(equalTo: lineChartView.bottomAnchor, constant: 30),
+            buttonAddWeightData.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             buttonAddWeightData.heightAnchor.constraint(equalToConstant: 50),
-            buttonAddWeightData.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50),
-            buttonAddWeightData.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50)
+            buttonAddWeightData.widthAnchor.constraint(equalToConstant: 250)
         ])
         
     }
