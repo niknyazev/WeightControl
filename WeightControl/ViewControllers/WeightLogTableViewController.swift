@@ -71,13 +71,14 @@ class WeightLogTableViewController: UITableViewController {
     private func editWeightData() {
         
         let viewController = UIViewController()
-        viewController.preferredContentSize = CGSize(width: pickerWidth, height: 200)
+        viewController.preferredContentSize = CGSize(width: pickerWidth, height: 220)
         
-        let dateButton = UIButton(frame: CGRect(x: 0, y: 0, width: 150, height: 50))
+        let dateButton = UIButton(frame: CGRect(x: 0, y: 0, width: pickerWidth, height: 45))
         dateButton.setTitle(formattedDate(date: Date.now), for: .normal)
-        dateButton.backgroundColor = .red
+        dateButton.setTitleColor(.tintColor, for: .normal)
+        dateButton.addTarget(self, action: #selector(changeDate), for: .touchUpInside)
         
-        let pickerView = UIPickerView(frame: CGRect(x: 0, y: 0, width: pickerWidth, height: 150))
+        let pickerView = UIPickerView(frame: CGRect(x: 0, y: 50, width: pickerWidth, height: 150))
         pickerView.delegate = self
         pickerView.dataSource = self
         pickerView.selectRow(60, inComponent: 0, animated: false)
@@ -86,7 +87,7 @@ class WeightLogTableViewController: UITableViewController {
         viewController.view.addSubview(dateButton)
         viewController.view.addSubview(pickerView)
         
-        let editRadiusAlert = UIAlertController(title: "Select weight", message: "", preferredStyle: .alert)
+        let editRadiusAlert = UIAlertController(title: "Select weight value", message: "", preferredStyle: .alert)
         let doneAction = UIAlertAction(title: "Done", style: .default) {_ in
             
             let weightData = WeightData()
@@ -109,6 +110,9 @@ class WeightLogTableViewController: UITableViewController {
 
         self.present(editRadiusAlert, animated: true)
         
+    }
+    
+    @objc private func changeDate() {
     }
     
 }
