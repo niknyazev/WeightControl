@@ -33,6 +33,20 @@ class ChartViewController: UIViewController {
         
     }()
     
+    private lazy var currentWeightLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Current weight: 80"
+        label.textColor = .black
+        return label
+    }()
+    
+    private lazy var weightRemaining: UILabel = {
+        let label = UILabel()
+        label.text = "Remaining: 10"
+        label.textColor = .black
+        return label
+    }()
+    
     // MARK: - Override methods
     
     override func viewDidLoad() {
@@ -52,16 +66,34 @@ class ChartViewController: UIViewController {
     
     func setupElements() {
         
+        view.addSubview(currentWeightLabel)
+        view.addSubview(weightRemaining)
         view.addSubview(lineChartView)
         view.addSubview(buttonAddWeightData)
+        
+        currentWeightLabel.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            currentWeightLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
+            currentWeightLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            currentWeightLabel.trailingAnchor.constraint(greaterThanOrEqualTo: view.trailingAnchor, constant: -300)
+        ])
+        
+        weightRemaining.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            weightRemaining.topAnchor.constraint(equalTo: currentWeightLabel.bottomAnchor, constant: 20),
+            weightRemaining.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            weightRemaining.trailingAnchor.constraint(greaterThanOrEqualTo: view.trailingAnchor, constant: -300)
+        ])
         
         lineChartView.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            lineChartView.topAnchor.constraint(equalTo: view.topAnchor, constant: 150),
+            lineChartView.topAnchor.constraint(equalTo: weightRemaining.bottomAnchor, constant: 20),
             lineChartView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5),
-            lineChartView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
-            lineChartView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0)
+            lineChartView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            lineChartView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
         ])
         
         buttonAddWeightData.translatesAutoresizingMaskIntoConstraints = false
