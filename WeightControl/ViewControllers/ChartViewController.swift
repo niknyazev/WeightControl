@@ -24,6 +24,9 @@ class ChartViewController: UIViewController {
         let rightAxis = chartView.rightAxis
         rightAxis.enabled = false
         
+        let leftAxis = chartView.leftAxis
+        leftAxis.labelPosition = .outsideChart
+        
         let xAsis = chartView.xAxis
         xAsis.labelPosition = .bottom
         
@@ -43,15 +46,22 @@ class ChartViewController: UIViewController {
     
     private lazy var currentWeightLabel: UILabel = {
         let label = UILabel()
-        label.text = "Current weight: 80"
-        label.textColor = .black
+        label.text = "Current weight:"
+        label.textColor = .systemGray
+        return label
+    }()
+    
+    private lazy var currentWeightValueLabel: UILabel = {
+        let label = UILabel()
+        label.text = "80"
+        label.textColor = .tintColor
         return label
     }()
     
     private lazy var weightRemaining: UILabel = {
         let label = UILabel()
-        label.text = "Remaining: 10"
-        label.textColor = .black
+        label.text = "Remaining:"
+        label.textColor = .systemGray
         return label
     }()
     
@@ -75,6 +85,7 @@ class ChartViewController: UIViewController {
     private func setupElements() {
         
         view.addSubview(currentWeightLabel)
+        view.addSubview(currentWeightValueLabel)
         view.addSubview(weightRemaining)
         view.addSubview(lineChartView)
         view.addSubview(buttonAddWeightData)
@@ -87,10 +98,18 @@ class ChartViewController: UIViewController {
             currentWeightLabel.trailingAnchor.constraint(greaterThanOrEqualTo: view.trailingAnchor, constant: -300)
         ])
         
+        currentWeightValueLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            currentWeightValueLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
+            currentWeightValueLabel.leadingAnchor.constraint(equalTo: currentWeightLabel.trailingAnchor, constant: 5),
+            currentWeightValueLabel.trailingAnchor.constraint(greaterThanOrEqualTo: view.trailingAnchor, constant: -300)
+        ])
+        
         weightRemaining.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            weightRemaining.topAnchor.constraint(equalTo: currentWeightLabel.bottomAnchor, constant: 20),
+            weightRemaining.topAnchor.constraint(equalTo: currentWeightLabel.bottomAnchor, constant: 15),
             weightRemaining.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             weightRemaining.trailingAnchor.constraint(greaterThanOrEqualTo: view.trailingAnchor, constant: -300)
         ])

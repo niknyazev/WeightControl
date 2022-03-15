@@ -78,7 +78,7 @@
             </objects>
             <point key="canvasLocation" x="264" y="-208"/>
         </scene>
-        <!--Chart View Controller-->
+        <!--Weight control-->
         <scene sceneID="O3x-vp-Z00">
             <objects>
                 <viewController id="KBz-G9-f4W" customClass="ChartViewController" customModule="WeightControl" customModuleProvider="target" sceneMemberID="viewController">
@@ -88,7 +88,7 @@
                         <viewLayoutGuide key="safeArea" id="nQI-op-7ND"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="o94-QB-C3r"/>
+                    <navigationItem key="navigationItem" title="Weight control" id="o94-QB-C3r"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="39R-qo-9RV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
