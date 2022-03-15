@@ -16,9 +16,17 @@ class ChartViewController: UIViewController {
     private var weightData: Results<WeightData>!
     
     private lazy var lineChartView: LineChartView = {
-        let frame = CGRect()
-        let chartView = LineChartView(frame: frame)
+       
+        let chartView = LineChartView()
         chartView.backgroundColor = .white
+        chartView.legend.enabled = false
+        
+        let rightAxis = chartView.rightAxis
+        rightAxis.enabled = false
+        
+        let xAsis = chartView.xAxis
+        xAsis.labelPosition = .bottom
+        
         return chartView
     }()
     
@@ -119,6 +127,11 @@ class ChartViewController: UIViewController {
         }
         
         let dataSet = LineChartDataSet(entries: weightValues, label: "Weight data")
+        dataSet.drawCirclesEnabled = false
+        dataSet.mode = .cubicBezier
+        dataSet.drawValuesEnabled = false
+        dataSet.setColor(.red)
+        
         let data = LineChartData(dataSet: dataSet)
         lineChartView.data = data
     }
