@@ -102,32 +102,13 @@ class WeightLogTableViewController: UITableViewController {
         viewController.view.addSubview(photoButton)
         
         let editRadiusAlert = UIAlertController(title: "Select weight value", message: "", preferredStyle: .alert)
-        let doneAction = UIAlertAction(title: "Done", style: .default) {[unowned self]_ in
-            
-            if let weightData = weightData {
-                storageManager.edit(
-                    weightData,
-                    date: datePicker.date,
-                    weightKilo: pickerView.selectedRow(inComponent: 0),
-                    weightGramm: pickerView.selectedRow(inComponent: 1)
-                )
-            } else {
-                let currentWeightData = WeightData()
-                
-                currentWeightData.weightKilo = pickerView.selectedRow(inComponent: 0)
-                currentWeightData.weightGramm = pickerView.selectedRow(inComponent: 1)
-                currentWeightData.date = datePicker.date
-                
-                storageManager.save(currentWeightData)
-            }
-            
-            tableView.reloadData()
-                        
-            guard let navigationController = self.tabBarController?.viewControllers?[0] as? UINavigationController,
-                  let chart = navigationController.viewControllers[0] as? ChartViewController
-            else { return }
-            
-            chart.updateChart()
+        let doneAction = UIAlertAction(title: "Done", style: .default) {_ in
+            self.saveWeightDataUpdateElements(
+                weightData: weightData,
+                date: datePicker.date,
+                weightKilo: pickerView.selectedRow(inComponent: 0),
+                weightGramm: pickerView.selectedRow(inComponent: 1)
+            )
         }
 
         editRadiusAlert.setValue(viewController, forKey: "contentViewController")
@@ -138,7 +119,37 @@ class WeightLogTableViewController: UITableViewController {
         
     }
     
-    
+    private func saveWeightDataUpdateElements(
+        weightData: WeightData?,
+        date: Date,
+        weightKilo: Int,
+        weightGramm: Int) {
+        
+        if let weightData = weightData {
+            storageManager.edit(
+                weightData,
+                date: date,
+                weightKilo: weightKilo,
+                weightGramm: weightGramm
+            )
+        } else {
+            let currentWeightData = WeightData()
+            
+            currentWeightData.weightKilo = weightKilo
+            currentWeightData.weightGramm = weightGramm
+            currentWeightData.date = date
+            
+            storageManager.save(currentWeightData)
+        }
+        
+        tableView.reloadData()
+                    
+        guard let navigationController = self.tabBarController?.viewControllers?[0] as? UINavigationController,
+              let chart = navigationController.viewControllers[0] as? ChartViewController
+        else { return }
+        
+        chart.updateChart()
+    }
 }
 
 // MARK: - PickerView
