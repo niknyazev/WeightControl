@@ -139,7 +139,7 @@ class ChartViewController: UIViewController {
 
         NSLayoutConstraint.activate([
             lineChartView.topAnchor.constraint(equalTo: weightRemainingLabel.bottomAnchor, constant: 20),
-            lineChartView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5),
+            lineChartView.heightAnchor.constraint(equalTo: lineChartView.widthAnchor, multiplier: 1),
             lineChartView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             lineChartView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
         ])
