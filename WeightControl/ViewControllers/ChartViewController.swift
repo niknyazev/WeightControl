@@ -26,14 +26,13 @@ class ChartViewController: UIViewController {
         
         let leftAxis = chartView.leftAxis
         leftAxis.labelPosition = .outsideChart
-        leftAxis.axisMaximum = 80
-        leftAxis.axisMinimum = 0
         leftAxis.drawAxisLineEnabled = false
+        leftAxis.granularity = 10.0
         
         let xAsis = chartView.xAxis
         xAsis.labelPosition = .bottom
-        xAsis.enabled = true
-        xAsis.granularity = 2
+        xAsis.enabled = false
+        xAsis.granularity = 2.0
         
         return chartView
     }()
@@ -88,7 +87,7 @@ class ChartViewController: UIViewController {
     // MARK: - Public methods
     
     func updateChart() {
-        weightData = StorageManager.shared.realm.objects(WeightData.self)
+        weightData = StorageManager.shared.realm.objects(WeightData.self).sorted(byKeyPath: "date")
         setChartData()
     }
 
@@ -161,10 +160,20 @@ class ChartViewController: UIViewController {
     
     private func setChartData() {
         
+        lineChartView.data = nil
+        
         var weightValues: [ChartDataEntry] = []
+        var maxValue: Float = 0
+        var minValue: Float = 500
         for (index, value) in weightData.enumerated() {
             weightValues.append(ChartDataEntry(x: Double(index), y: Double(value.weight)))
+            maxValue = max(maxValue, value.weight)
+            minValue = min(minValue, value.weight)
         }
+        
+        // TODO: argly code
+        lineChartView.leftAxis.axisMaximum = Double((Int(maxValue / 10) * 10) + 10)
+        lineChartView.leftAxis.axisMinimum = Double((Int(minValue / 10) * 10) - 10)
         
         let dataSet = LineChartDataSet(entries: weightValues, label: "Weight data")
         dataSet.drawCirclesEnabled = false

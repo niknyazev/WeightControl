@@ -89,7 +89,8 @@ class WeightLogTableViewController: UITableViewController {
         let viewController = UIViewController()
         viewController.preferredContentSize = CGSize(width: pickerWidth, height: 260)
         
-        let datePicker = UIDatePicker(frame: CGRect(x: 0, y: 0, width: pickerWidth, height: 45))
+        // TODO: problem with coordinates
+        let datePicker = UIDatePicker(frame: CGRect(x: -10, y: 0, width: pickerWidth, height: 45))
         
         let pickerView = UIPickerView(frame: CGRect(x: 0, y: 50, width: pickerWidth, height: 150))
         pickerView.delegate = self
