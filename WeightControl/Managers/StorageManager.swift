@@ -31,9 +31,11 @@ class StorageManager {
         }
     }
     
-    func edit(_ weightData: WeightData) {
+    func edit(_ weightData: WeightData, date: Date, weightKilo: Int, weightGramm: Int) {
         write {
-            // TODO
+            weightData.date = date
+            weightData.weightKilo = weightKilo
+            weightData.weightGramm = weightGramm
         }
     }
     

@@ -20,7 +20,7 @@ class WeightLogTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        weightData = storageManager.realm.objects(WeightData.self)
+        weightData = storageManager.realm.objects(WeightData.self).sorted(byKeyPath: "date")
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -42,7 +42,7 @@ class WeightLogTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let editAction = UIContextualAction(style: .normal, title: "Edit") { _, _, handler in
-            self.editWeightData()
+            self.editWeightData(weightData: self.weightData[indexPath.row])
             handler(true)
         }
         
@@ -68,7 +68,7 @@ class WeightLogTableViewController: UITableViewController {
         return result
     }
     
-    private func editWeightData() {
+    private func editWeightData(weightData: WeightData? = nil) {
         
         let viewController = UIViewController()
         viewController.preferredContentSize = CGSize(width: pickerWidth, height: 260)
@@ -78,9 +78,21 @@ class WeightLogTableViewController: UITableViewController {
         let pickerView = UIPickerView(frame: CGRect(x: 0, y: 50, width: pickerWidth, height: 150))
         pickerView.delegate = self
         pickerView.dataSource = self
-        pickerView.selectRow(60, inComponent: 0, animated: false)
-        pickerView.selectRow(0, inComponent: 1, animated: false)
-                
+        
+        if let weightData = weightData {
+            datePicker.date = weightData.date
+            
+            let weightInKilo = weightData.weightKilo
+            let weightInGramm = weightData.weightGramm
+            
+            pickerView.selectRow(weightInKilo, inComponent: 0, animated: false)
+            pickerView.selectRow(weightInGramm, inComponent: 1, animated: false)
+            
+        } else {
+            pickerView.selectRow(60, inComponent: 0, animated: false)
+            pickerView.selectRow(0, inComponent: 1, animated: false)
+        }
+                        
         let photoButton = UIButton(frame: CGRect(x: 0, y: 205, width: pickerWidth, height: 45))
         photoButton.setTitle("Make photo", for: .normal)
         photoButton.setTitleColor(.tintColor, for: .normal)
@@ -90,14 +102,26 @@ class WeightLogTableViewController: UITableViewController {
         viewController.view.addSubview(photoButton)
         
         let editRadiusAlert = UIAlertController(title: "Select weight value", message: "", preferredStyle: .alert)
-        let doneAction = UIAlertAction(title: "Done", style: .default) {_ in
+        let doneAction = UIAlertAction(title: "Done", style: .default) {[unowned self]_ in
             
-            let weightData = WeightData()
-            weightData.weight = Float(pickerView.selectedRow(inComponent: 0))
-            weightData.date = .now
+            if let weightData = weightData {
+                storageManager.edit(
+                    weightData,
+                    date: datePicker.date,
+                    weightKilo: pickerView.selectedRow(inComponent: 0),
+                    weightGramm: pickerView.selectedRow(inComponent: 1)
+                )
+            } else {
+                let currentWeightData = WeightData()
+                
+                currentWeightData.weightKilo = pickerView.selectedRow(inComponent: 0)
+                currentWeightData.weightGramm = pickerView.selectedRow(inComponent: 1)
+                currentWeightData.date = datePicker.date
+                
+                storageManager.save(currentWeightData)
+            }
             
-            self.storageManager.save(weightData)
-            self.tableView.reloadData()
+            tableView.reloadData()
                         
             guard let navigationController = self.tabBarController?.viewControllers?[0] as? UINavigationController,
                   let chart = navigationController.viewControllers[0] as? ChartViewController
@@ -122,7 +146,7 @@ class WeightLogTableViewController: UITableViewController {
 extension WeightLogTableViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
-        50
+        60
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
