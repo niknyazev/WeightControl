@@ -26,9 +26,14 @@ class ChartViewController: UIViewController {
         
         let leftAxis = chartView.leftAxis
         leftAxis.labelPosition = .outsideChart
+        leftAxis.axisMaximum = 80
+        leftAxis.axisMinimum = 0
+        leftAxis.drawAxisLineEnabled = false
         
         let xAsis = chartView.xAxis
         xAsis.labelPosition = .bottom
+        xAsis.enabled = true
+        xAsis.granularity = 2
         
         return chartView
     }()
