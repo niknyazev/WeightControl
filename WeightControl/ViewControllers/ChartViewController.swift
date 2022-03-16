@@ -58,10 +58,17 @@ class ChartViewController: UIViewController {
         return label
     }()
     
-    private lazy var weightRemaining: UILabel = {
+    private lazy var weightRemainingLabel: UILabel = {
         let label = UILabel()
         label.text = "Remaining:"
         label.textColor = .systemGray
+        return label
+    }()
+    
+    private lazy var weightRemainingValueLabel: UILabel = {
+        let label = UILabel()
+        label.text = "75"
+        label.textColor = .tintColor
         return label
     }()
     
@@ -86,7 +93,8 @@ class ChartViewController: UIViewController {
         
         view.addSubview(currentWeightLabel)
         view.addSubview(currentWeightValueLabel)
-        view.addSubview(weightRemaining)
+        view.addSubview(weightRemainingLabel)
+        view.addSubview(weightRemainingValueLabel)
         view.addSubview(lineChartView)
         view.addSubview(buttonAddWeightData)
         
@@ -106,18 +114,26 @@ class ChartViewController: UIViewController {
             currentWeightValueLabel.trailingAnchor.constraint(greaterThanOrEqualTo: view.trailingAnchor, constant: -300)
         ])
         
-        weightRemaining.translatesAutoresizingMaskIntoConstraints = false
+        weightRemainingLabel.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            weightRemaining.topAnchor.constraint(equalTo: currentWeightLabel.bottomAnchor, constant: 15),
-            weightRemaining.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            weightRemaining.trailingAnchor.constraint(greaterThanOrEqualTo: view.trailingAnchor, constant: -300)
+            weightRemainingLabel.topAnchor.constraint(equalTo: currentWeightLabel.bottomAnchor, constant: 10),
+            weightRemainingLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            weightRemainingLabel.trailingAnchor.constraint(greaterThanOrEqualTo: view.trailingAnchor, constant: -300)
+        ])
+        
+        weightRemainingValueLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            weightRemainingValueLabel.topAnchor.constraint(equalTo: currentWeightLabel.bottomAnchor, constant: 10),
+            weightRemainingValueLabel.leadingAnchor.constraint(equalTo: weightRemainingLabel.trailingAnchor, constant: 5),
+            weightRemainingValueLabel.trailingAnchor.constraint(greaterThanOrEqualTo: view.trailingAnchor, constant: -300)
         ])
         
         lineChartView.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            lineChartView.topAnchor.constraint(equalTo: weightRemaining.bottomAnchor, constant: 20),
+            lineChartView.topAnchor.constraint(equalTo: weightRemainingLabel.bottomAnchor, constant: 20),
             lineChartView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5),
             lineChartView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             lineChartView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
