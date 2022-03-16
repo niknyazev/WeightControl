@@ -68,17 +68,7 @@ class WeightLogTableViewController: UITableViewController {
         return result
     }
     
-    private func editWeightData(weightData: WeightData? = nil) {
-        
-        let viewController = UIViewController()
-        viewController.preferredContentSize = CGSize(width: pickerWidth, height: 260)
-        
-        let datePicker = UIDatePicker(frame: CGRect(x: 0, y: 0, width: pickerWidth, height: 45))
-        
-        let pickerView = UIPickerView(frame: CGRect(x: 0, y: 50, width: pickerWidth, height: 150))
-        pickerView.delegate = self
-        pickerView.dataSource = self
-        
+    private func setValuesPickerView(_ weightData: WeightData?, _ datePicker: UIDatePicker, _ pickerView: UIPickerView) {
         if let weightData = weightData {
             datePicker.date = weightData.date
             
@@ -92,6 +82,20 @@ class WeightLogTableViewController: UITableViewController {
             pickerView.selectRow(60, inComponent: 0, animated: false)
             pickerView.selectRow(0, inComponent: 1, animated: false)
         }
+    }
+    
+    private func editWeightData(weightData: WeightData? = nil) {
+        
+        let viewController = UIViewController()
+        viewController.preferredContentSize = CGSize(width: pickerWidth, height: 260)
+        
+        let datePicker = UIDatePicker(frame: CGRect(x: 0, y: 0, width: pickerWidth, height: 45))
+        
+        let pickerView = UIPickerView(frame: CGRect(x: 0, y: 50, width: pickerWidth, height: 150))
+        pickerView.delegate = self
+        pickerView.dataSource = self
+        
+        setValuesPickerView(weightData, datePicker, pickerView)
                         
         let photoButton = UIButton(frame: CGRect(x: 0, y: 205, width: pickerWidth, height: 45))
         photoButton.setTitle("Make photo", for: .normal)
