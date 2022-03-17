@@ -21,6 +21,7 @@ class WeightLogTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         weightData = storageManager.realm.objects(WeightData.self).sorted(byKeyPath: "date")
+        tableView.rowHeight = 65
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -28,17 +29,15 @@ class WeightLogTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "weightData", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "weightData", for: indexPath) as! WeightDataCellController
         
-        var content = cell.defaultContentConfiguration()
-        content.text = weightData[indexPath.row].dateDescription
-        content.secondaryText = String(weightData[indexPath.row].weight)
+        let weightChange = indexPath.row == 0 ? nil : weightData[indexPath.row].weight - weightData[indexPath.row - 1].weight
         
-        cell.contentConfiguration = content
-
+        cell.configure(with: weightData[indexPath.row], weightChange: weightChange)
+        
         return cell
     }
-    
+        
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let editAction = UIContextualAction(style: .normal, title: "Edit") { _, _, handler in

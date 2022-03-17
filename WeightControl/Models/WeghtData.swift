@@ -18,6 +18,10 @@ class WeightData: Object {
         Float(weightKilo) + Float(weightGramm) / 100
     }
     
+    var weightDescription: String {
+        "\(weight) kg"
+    }
+    
     var dateDescription: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
