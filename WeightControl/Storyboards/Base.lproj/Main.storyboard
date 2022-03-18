@@ -249,11 +249,11 @@
             </objects>
             <point key="canvasLocation" x="264" y="520"/>
         </scene>
-        <!--Item-->
+        <!--Settings-->
         <scene sceneID="bhu-Xm-ttY">
             <objects>
                 <navigationController id="7Po-Ys-V15" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" image="trash.circle" catalog="system" id="1xM-jl-UeM"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="trash.circle" catalog="system" id="1xM-jl-UeM"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Uev-fm-jJw">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -266,11 +266,11 @@
             </objects>
             <point key="canvasLocation" x="-546" y="520"/>
         </scene>
-        <!--Item-->
+        <!--History-->
         <scene sceneID="Ow3-JW-l50">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6VK-fR-9Z9" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" image="pencil.circle.fill" catalog="system" id="wq4-AX-nuY"/>
+                    <tabBarItem key="tabBarItem" title="History" image="pencil.circle.fill" catalog="system" id="wq4-AX-nuY"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="r9X-bj-YMr">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -285,11 +285,11 @@
             </objects>
             <point key="canvasLocation" x="-546" y="-208"/>
         </scene>
-        <!--Item-->
+        <!--Main-->
         <scene sceneID="NJB-9A-tKt">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="HO2-Am-vu0" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" image="rectangle.portrait.and.arrow.right.fill" catalog="system" id="Cwo-QC-cGe"/>
+                    <tabBarItem key="tabBarItem" title="Main" image="rectangle.portrait.and.arrow.right.fill" catalog="system" id="Cwo-QC-cGe"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="PKp-QZ-qYw">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
