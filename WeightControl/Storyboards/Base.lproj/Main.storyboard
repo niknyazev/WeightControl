@@ -43,12 +43,6 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20.03.2022 10:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m1q-WU-uXF">
-                                            <rect key="frame" x="20" y="19.5" width="137" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="80.0 kg" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y5C-bB-6LY">
                                             <rect key="frame" x="337" y="10" width="57" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -62,21 +56,28 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.crop.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="V33-nq-WH5">
-                                            <rect key="frame" x="269" y="13" width="35" height="34"/>
+                                            <rect key="frame" x="20" y="13" width="35" height="34"/>
+                                            <color key="tintColor" systemColor="systemGray2Color"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="35" id="bvd-Wj-BeI"/>
                                                 <constraint firstAttribute="width" constant="35" id="jcC-g4-h7Z"/>
                                             </constraints>
                                         </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20.03.2022 10:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m1q-WU-uXF">
+                                            <rect key="frame" x="65" y="19.5" width="135" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="V33-nq-WH5" firstAttribute="leading" secondItem="O1u-Fa-hEP" secondAttribute="leadingMargin" id="6Is-bu-N5p"/>
                                         <constraint firstAttribute="trailing" secondItem="y5C-bB-6LY" secondAttribute="trailing" constant="20" symbolic="YES" id="7Ox-yB-LQR"/>
                                         <constraint firstItem="V33-nq-WH5" firstAttribute="centerY" secondItem="O1u-Fa-hEP" secondAttribute="centerY" id="8md-Dm-Jiu"/>
                                         <constraint firstItem="m1q-WU-uXF" firstAttribute="centerY" secondItem="O1u-Fa-hEP" secondAttribute="centerY" id="Igt-Fc-wjZ"/>
-                                        <constraint firstAttribute="trailing" secondItem="V33-nq-WH5" secondAttribute="trailing" constant="110" id="Jxx-Eg-ihl"/>
                                         <constraint firstItem="y5C-bB-6LY" firstAttribute="top" secondItem="O1u-Fa-hEP" secondAttribute="top" constant="10" id="NXh-4o-edy"/>
-                                        <constraint firstItem="V33-nq-WH5" firstAttribute="leading" relation="lessThanOrEqual" secondItem="m1q-WU-uXF" secondAttribute="trailing" constant="112" id="afZ-UF-356"/>
-                                        <constraint firstItem="m1q-WU-uXF" firstAttribute="leading" secondItem="O1u-Fa-hEP" secondAttribute="leadingMargin" id="fdV-bo-G5s"/>
+                                        <constraint firstItem="m1q-WU-uXF" firstAttribute="leading" secondItem="V33-nq-WH5" secondAttribute="trailing" constant="10" id="ePO-za-UFk"/>
+                                        <constraint firstItem="y5C-bB-6LY" firstAttribute="leading" relation="lessThanOrEqual" secondItem="m1q-WU-uXF" secondAttribute="trailing" constant="137" id="mZC-4a-Rep"/>
                                         <constraint firstItem="VcB-DQ-NQl" firstAttribute="trailing" secondItem="O1u-Fa-hEP" secondAttribute="trailingMargin" id="sJA-Rj-EAQ"/>
                                         <constraint firstItem="VcB-DQ-NQl" firstAttribute="bottom" secondItem="O1u-Fa-hEP" secondAttribute="bottomMargin" id="wzW-Vt-RSr"/>
                                     </constraints>
