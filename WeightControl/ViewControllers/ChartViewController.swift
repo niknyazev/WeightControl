@@ -37,6 +37,11 @@ class ChartViewController: UIViewController {
         return chartView
     }()
     
+    private lazy var circleProgressView: UIView = {
+        let result = UIView()
+        return result
+    }()
+    
     private lazy var buttonAddWeightData: UIButton = {
         let button = UIButton()
         button.backgroundColor = UIColor(red: 21/255, green: 101/255, blue: 192/255, alpha: 1)
@@ -71,7 +76,7 @@ class ChartViewController: UIViewController {
     
     private lazy var currentWeightLabel: UILabel = {
         let label = UILabel()
-        label.text = "weight"
+        label.text = "current"
         label.textColor = .systemGray
         return label
     }()
@@ -86,7 +91,7 @@ class ChartViewController: UIViewController {
     
     private lazy var startWeightLabel: UILabel = {
         let label = UILabel()
-        label.text = "index"
+        label.text = "start"
         label.textColor = .systemGray
         return label
     }()
@@ -122,6 +127,10 @@ class ChartViewController: UIViewController {
         updateChart()
     }
     
+    override func viewDidLayoutSubviews() {
+        addProgressCircle(flashcardsLearned: 0.3, color: .blue)
+    }
+    
     // MARK: - Public methods
     
     func updateChart() {
@@ -137,6 +146,7 @@ class ChartViewController: UIViewController {
         view.addSubview(startWeight)
         view.addSubview(remainWeight)
         view.addSubview(lineChartView)
+        view.addSubview(circleProgressView)
         view.addSubview(buttonAddWeightData)
         
         startWeight.translatesAutoresizingMaskIntoConstraints = false
@@ -175,25 +185,59 @@ class ChartViewController: UIViewController {
         lineChartView.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            lineChartView.topAnchor.constraint(equalTo: currentWeightStackView.bottomAnchor, constant: 20),
+            lineChartView.topAnchor.constraint(equalTo: currentWeightStackView.bottomAnchor, constant: 10),
             lineChartView.heightAnchor.constraint(equalTo: lineChartView.widthAnchor, multiplier: 1),
             lineChartView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             lineChartView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
         ])
         
-        buttonAddWeightData.translatesAutoresizingMaskIntoConstraints = false
+        circleProgressView.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            buttonAddWeightData.topAnchor.constraint(equalTo: lineChartView.bottomAnchor, constant: 30),
-            buttonAddWeightData.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            buttonAddWeightData.heightAnchor.constraint(equalToConstant: 50),
-            buttonAddWeightData.widthAnchor.constraint(equalToConstant: 250)
+            circleProgressView.topAnchor.constraint(equalTo: lineChartView.bottomAnchor, constant: 10),
+            circleProgressView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            circleProgressView.heightAnchor.constraint(equalToConstant: 120),
+            circleProgressView.widthAnchor.constraint(equalToConstant: 120)
         ])
-        
+                
     }
     
     @objc private func addWeightData() {
         
+    }
+    
+    private func addProgressCircle(flashcardsLearned: Float, color: UIColor) {
+                  
+        let center = circleProgressView.center
+        let radius = circleProgressView.frame.height / 2 - 10
+        
+        let circle = UIBezierPath(
+            arcCenter: center,
+            radius: radius,
+            startAngle: -(.pi / 2),
+            endAngle: .pi * 1.5,
+            clockwise: true
+        )
+        
+        let track = CAShapeLayer()
+        track.path = circle.cgPath
+        track.fillColor = UIColor.clear.cgColor
+        track.lineWidth = 7
+        track.strokeColor = UIColor.systemGray5.cgColor
+        
+        circleProgressView.layer.addSublayer(track)
+        
+        let fill = CAShapeLayer()
+        fill.path = circle.cgPath
+        fill.fillColor = UIColor.clear.cgColor
+        fill.lineWidth = 7
+        fill.strokeColor = color.cgColor
+        fill.strokeStart = 0
+        fill.strokeEnd = CGFloat(flashcardsLearned)
+        fill.lineCap = .round
+       
+        circleProgressView.layer.addSublayer(fill)
+       
     }
     
     private func setChartData() {
