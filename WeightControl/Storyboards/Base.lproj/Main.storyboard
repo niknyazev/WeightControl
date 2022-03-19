@@ -116,7 +116,13 @@
                         <viewLayoutGuide key="safeArea" id="nQI-op-7ND"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Weight control" id="o94-QB-C3r"/>
+                    <navigationItem key="navigationItem" title="Weight control" id="o94-QB-C3r">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Id0-LX-Hkg">
+                            <connections>
+                                <action selector="addWeightDataPressed:" destination="KBz-G9-f4W" id="bdF-2Z-BRP"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="39R-qo-9RV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
