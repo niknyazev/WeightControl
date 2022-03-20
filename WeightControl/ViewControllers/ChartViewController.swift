@@ -20,6 +20,8 @@ class ChartViewController: UIViewController {
         let chartView = LineChartView()
         chartView.backgroundColor = .white
         chartView.legend.enabled = false
+        chartView.drawBordersEnabled = true
+        chartView.borderColor = .systemGray
         
         let rightAxis = chartView.rightAxis
         rightAxis.enabled = false
@@ -31,7 +33,7 @@ class ChartViewController: UIViewController {
         
         let xAsis = chartView.xAxis
         xAsis.labelPosition = .bottom
-        xAsis.enabled = true
+        xAsis.enabled = false
         xAsis.granularity = 2.0
         
         return chartView
@@ -97,11 +99,20 @@ class ChartViewController: UIViewController {
         return label
     }()
     
+    // MARK: - Progress label
+    
+    private lazy var progressTitleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "progress"
+        label.textColor = .systemGray
+        return label
+    }()
+    
     private lazy var progressLayer: UILabel = {
         let label = UILabel()
-        label.text = "80%"
+        label.text = "30"
         label.font = .systemFont(ofSize: 30)
-        label.textColor = .systemGray
+        label.textColor = .tintColor
         return label
     }()
     
@@ -165,7 +176,7 @@ class ChartViewController: UIViewController {
         view.addSubview(lineChartView)
         view.addSubview(circleProgressView)
         view.addSubview(buttonAddWeightData)
-                
+    
         startWeight.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
@@ -216,7 +227,24 @@ class ChartViewController: UIViewController {
             circleProgressView.heightAnchor.constraint(equalToConstant: 120),
             circleProgressView.widthAnchor.constraint(equalToConstant: 120)
         ])
-                
+        
+        circleProgressView.addSubview(progressLayer)
+        circleProgressView.addSubview(progressTitleLabel)
+        
+        progressLayer.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            progressLayer.topAnchor.constraint(equalTo: circleProgressView.topAnchor, constant: 55),
+            progressLayer.centerXAnchor.constraint(equalTo: circleProgressView.centerXAnchor)
+        ])
+        
+        progressTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            progressTitleLabel.topAnchor.constraint(equalTo: circleProgressView.topAnchor, constant: 30),
+            progressTitleLabel.centerXAnchor.constraint(equalTo: circleProgressView.centerXAnchor)
+        ])
+      
     }
     
     
@@ -259,10 +287,6 @@ class ChartViewController: UIViewController {
         fill.lineCap = .round
        
         view.layer.addSublayer(fill)
-                
-        view.addSubview(progressLayer)
-        progressLayer.translatesAutoresizingMaskIntoConstraints = false
-        progressLayer.center = circleProgressView.center
         
     }
     
@@ -271,17 +295,9 @@ class ChartViewController: UIViewController {
         lineChartView.data = nil
         
         var weightValues: [ChartDataEntry] = []
-        var maxValue: Float = 0
-        var minValue: Float = 500
         for (index, value) in weightData.enumerated() {
             weightValues.append(ChartDataEntry(x: Double(index), y: Double(value.weight)))
-            maxValue = max(maxValue, value.weight)
-            minValue = min(minValue, value.weight)
         }
-        
-        // TODO: argly code
-        lineChartView.leftAxis.axisMaximum = Double((Int(maxValue / 10) * 10) + 10)
-        lineChartView.leftAxis.axisMinimum = Double((Int(minValue / 10) * 10) - 10)
         
         let dataSet = LineChartDataSet(entries: weightValues, label: "Weight data")
         dataSet.drawCirclesEnabled = false
