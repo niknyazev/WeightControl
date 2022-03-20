@@ -41,7 +41,6 @@ class ChartViewController: UIViewController {
     
     private lazy var circleProgressView: UIView = {
         let result = UIView()
-        result.backgroundColor = .white
         return result
     }()
     
@@ -108,7 +107,7 @@ class ChartViewController: UIViewController {
         return label
     }()
     
-    private lazy var progressLayer: UILabel = {
+    private lazy var progressLabel: UILabel = {
         let label = UILabel()
         label.text = "30"
         label.font = .systemFont(ofSize: 30)
@@ -170,11 +169,13 @@ class ChartViewController: UIViewController {
     
     private func setupTopInformationViews() {
         
+        let saveArea = view.safeAreaLayoutGuide
+        
         startWeight.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            startWeight.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
-            startWeight.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 60),
+            startWeight.topAnchor.constraint(equalTo: saveArea.topAnchor, constant: 20),
+            startWeight.leadingAnchor.constraint(equalTo: saveArea.leadingAnchor, constant: 60),
             startWeight.heightAnchor.constraint(equalToConstant: 60)
         ])
         
@@ -184,7 +185,7 @@ class ChartViewController: UIViewController {
         currentWeightStackView.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            currentWeightStackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
+            currentWeightStackView.topAnchor.constraint(equalTo: saveArea.topAnchor, constant: 20),
             currentWeightStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             currentWeightStackView.heightAnchor.constraint(equalToConstant: 60)
         ])
@@ -195,8 +196,8 @@ class ChartViewController: UIViewController {
         remainWeight.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            remainWeight.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
-            remainWeight.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -60),
+            remainWeight.topAnchor.constraint(equalTo: saveArea.topAnchor, constant: 20),
+            remainWeight.trailingAnchor.constraint(equalTo: saveArea.trailingAnchor, constant: -60),
             remainWeight.heightAnchor.constraint(equalToConstant: 60)
         ])
         
@@ -224,26 +225,9 @@ class ChartViewController: UIViewController {
 
         NSLayoutConstraint.activate([
             circleProgressView.topAnchor.constraint(equalTo: lineChartView.bottomAnchor, constant: 30),
+            circleProgressView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
             circleProgressView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            circleProgressView.heightAnchor.constraint(equalToConstant: 120),
-            circleProgressView.widthAnchor.constraint(equalToConstant: 120)
-        ])
-        
-        circleProgressView.addSubview(progressLayer)
-        circleProgressView.addSubview(progressTitleLabel)
-        
-        progressLayer.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            progressLayer.topAnchor.constraint(equalTo: circleProgressView.topAnchor, constant: 55),
-            progressLayer.centerXAnchor.constraint(equalTo: circleProgressView.centerXAnchor)
-        ])
-        
-        progressTitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            progressTitleLabel.topAnchor.constraint(equalTo: circleProgressView.topAnchor, constant: 30),
-            progressTitleLabel.centerXAnchor.constraint(equalTo: circleProgressView.centerXAnchor)
+            circleProgressView.heightAnchor.constraint(equalTo: circleProgressView.widthAnchor, multiplier: 1),
         ])
         
     }
@@ -275,7 +259,7 @@ class ChartViewController: UIViewController {
     private func addProgressCircle(flashcardsLearned: Float, color: UIColor) {
                   
         let center = circleProgressView.center
-        let radius = 60.0
+        let radius = circleProgressView.bounds.width / 2
         
         let circle = UIBezierPath(
             arcCenter: center,
@@ -303,6 +287,24 @@ class ChartViewController: UIViewController {
         fill.lineCap = .round
        
         view.layer.addSublayer(fill)
+        
+        circleProgressView.addSubview(progressLabel)
+        circleProgressView.addSubview(progressTitleLabel)
+
+        progressTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            progressTitleLabel.topAnchor.constraint(equalTo: circleProgressView.topAnchor, constant: circleProgressView.bounds.height / 3),
+            progressTitleLabel.centerXAnchor.constraint(equalTo: circleProgressView.centerXAnchor)
+        ])
+        
+        progressLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            progressLabel.topAnchor.constraint(equalTo: progressTitleLabel.bottomAnchor, constant: 5),
+            progressLabel.centerXAnchor.constraint(equalTo: circleProgressView.centerXAnchor)
+        ])
+        
         
     }
     
