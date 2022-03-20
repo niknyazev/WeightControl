@@ -168,15 +168,8 @@ class ChartViewController: UIViewController {
 
     // MARK: - Private methods
     
-    private func setupElements() {
-                
-        view.addSubview(currentWeightStackView)
-        view.addSubview(startWeight)
-        view.addSubview(remainWeight)
-        view.addSubview(lineChartView)
-        view.addSubview(circleProgressView)
-        view.addSubview(buttonAddWeightData)
-    
+    private func setupTopInformationViews() {
+        
         startWeight.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
@@ -209,7 +202,11 @@ class ChartViewController: UIViewController {
         
         remainWeight.addArrangedSubview(remainWeightLabel)
         remainWeight.addArrangedSubview(remainWeightValueLabel)
-                
+        
+    }
+    
+    private func setupChartView() {
+        
         lineChartView.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
@@ -218,6 +215,10 @@ class ChartViewController: UIViewController {
             lineChartView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             lineChartView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
         ])
+        
+    }
+    
+    private func setupBottomInformationViews() {
         
         circleProgressView.translatesAutoresizingMaskIntoConstraints = false
 
@@ -244,7 +245,22 @@ class ChartViewController: UIViewController {
             progressTitleLabel.topAnchor.constraint(equalTo: circleProgressView.topAnchor, constant: 30),
             progressTitleLabel.centerXAnchor.constraint(equalTo: circleProgressView.centerXAnchor)
         ])
-      
+        
+    }
+    
+    private func setupElements() {
+                
+        view.addSubview(currentWeightStackView)
+        view.addSubview(startWeight)
+        view.addSubview(remainWeight)
+        view.addSubview(lineChartView)
+        view.addSubview(circleProgressView)
+        view.addSubview(buttonAddWeightData)
+        
+        setupTopInformationViews()
+        setupChartView()
+        setupBottomInformationViews()
+
     }
     
     
