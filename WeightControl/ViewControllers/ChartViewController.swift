@@ -14,6 +14,7 @@ class ChartViewController: UIViewController {
     // MARK: - Properties
 
     private var weightData: Results<WeightData>!
+    private var userData: UserData!
     
     private lazy var lineChartView: LineChartView = {
        
@@ -142,11 +143,26 @@ class ChartViewController: UIViewController {
     // MARK: - Public methods
     
     func updateChart() {
+        fetchUserData()
         weightData = StorageManager.shared.realm.objects(WeightData.self).sorted(byKeyPath: "date")
+        fillElementValues()
         setChartData()
     }
 
     // MARK: - Private methods
+    
+    private func fillElementValues() {
+        
+        let remainWeight = userData.weightGoal - (weightData.last?.weightKilo ?? 0)
+        
+        currentWeightValueLabel.text = String(weightData.last?.weightKilo ?? 0)
+        startWeightValueLabel.text = String(weightData.first?.weightKilo ?? 0)
+        remainWeightValueLabel.text = String(remainWeight < 0 ? 0 : remainWeight)
+    }
+    
+    private func fetchUserData() {
+        userData = UserDefaultsManager.shared.fetchUserData()
+    }
     
     private func setupTopInformationViews() {
         
