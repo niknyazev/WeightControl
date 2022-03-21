@@ -24,6 +24,7 @@ class WeightDataCellController: UITableViewCell {
         
         if let weightChange = weightChange {
             weightChangeLabel.text = String(weightChange)
+            weightChangeLabel.textColor = weightChange > 0 ? .red : .green
             weightChangeLabel.isHidden = false
         } else {
             weightChangeLabel.isHidden = true

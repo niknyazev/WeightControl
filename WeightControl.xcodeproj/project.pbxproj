@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01302DB727E8843600E43186 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01302DB627E8843600E43186 /* Colors.swift */; };
 		0157A0E427C7F3AD00E2C4BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0157A0E327C7F3AD00E2C4BB /* AppDelegate.swift */; };
 		0157A0E627C7F3AD00E2C4BB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0157A0E527C7F3AD00E2C4BB /* SceneDelegate.swift */; };
 		0157A0E827C7F3AD00E2C4BB /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0157A0E727C7F3AD00E2C4BB /* ChartViewController.swift */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		01302DB627E8843600E43186 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		0157A0E027C7F3AD00E2C4BB /* WeightControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeightControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0157A0E327C7F3AD00E2C4BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0157A0E527C7F3AD00E2C4BB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -54,6 +56,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		01302DB527E8842100E43186 /* Сonstants */ = {
+			isa = PBXGroup;
+			children = (
+				01302DB627E8843600E43186 /* Colors.swift */,
+			);
+			path = "Сonstants";
+			sourceTree = "<group>";
+		};
 		0157A0D727C7F3AD00E2C4BB = {
 			isa = PBXGroup;
 			children = (
@@ -75,6 +85,7 @@
 		0157A0E227C7F3AD00E2C4BB /* WeightControl */ = {
 			isa = PBXGroup;
 			children = (
+				01302DB527E8842100E43186 /* Сonstants */,
 				01E4788327DB8B730068D14B /* Models */,
 				01E4787C27CE8F720068D14B /* Managers */,
 				01E4787A27CE76EA0068D14B /* Storyboards */,
@@ -265,6 +276,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0157A0E827C7F3AD00E2C4BB /* ChartViewController.swift in Sources */,
+				01302DB727E8843600E43186 /* Colors.swift in Sources */,
 				0157A0E427C7F3AD00E2C4BB /* AppDelegate.swift in Sources */,
 				01E4788227D8F5960068D14B /* HumanParametersViewController.swift in Sources */,
 				01E4788527DB8B9B0068D14B /* WeghtData.swift in Sources */,

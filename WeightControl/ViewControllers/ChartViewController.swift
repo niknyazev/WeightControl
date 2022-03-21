@@ -43,18 +43,7 @@ class ChartViewController: UIViewController {
         let result = UIView()
         return result
     }()
-    
-    private lazy var buttonAddWeightData: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = UIColor(red: 21/255, green: 101/255, blue: 192/255, alpha: 1)
-        button.setTitle("Add weight", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = 4
-        button.addTarget(self, action: #selector(addWeightData), for: .touchUpInside)
-        return button
         
-    }()
-    
     private lazy var currentWeightStackView: UIStackView = {
         let result = UIStackView()
         result.axis = .vertical
@@ -231,14 +220,12 @@ class ChartViewController: UIViewController {
         view.addSubview(remainWeight)
         view.addSubview(lineChartView)
         view.addSubview(circleProgressView)
-        view.addSubview(buttonAddWeightData)
         
         setupTopInformationViews()
         setupChartView()
         setupBottomInformationViews()
 
     }
-    
     
     @IBAction func addWeightDataPressed(_ sender: UIBarButtonItem) {
         
