@@ -212,7 +212,7 @@ class ChartViewController: UIViewController {
 
         NSLayoutConstraint.activate([
             lineChartView.topAnchor.constraint(equalTo: currentWeightStackView.bottomAnchor, constant: 10),
-            lineChartView.heightAnchor.constraint(equalTo: lineChartView.widthAnchor, multiplier: 1),
+            lineChartView.bottomAnchor.constraint(equalTo: circleProgressView.topAnchor, constant: -20),
             lineChartView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             lineChartView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
         ])
@@ -220,14 +220,14 @@ class ChartViewController: UIViewController {
     }
     
     private func setupBottomInformationViews() {
-        
+                        
         circleProgressView.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            circleProgressView.topAnchor.constraint(equalTo: lineChartView.bottomAnchor, constant: 30),
             circleProgressView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
             circleProgressView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            circleProgressView.heightAnchor.constraint(equalTo: circleProgressView.widthAnchor, multiplier: 1),
+            circleProgressView.heightAnchor.constraint(equalToConstant: 120),
+            circleProgressView.widthAnchor.constraint(equalToConstant: 120)
         ])
         
     }
@@ -294,7 +294,7 @@ class ChartViewController: UIViewController {
         progressTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            progressTitleLabel.topAnchor.constraint(equalTo: circleProgressView.topAnchor, constant: circleProgressView.bounds.height / 3),
+            progressTitleLabel.topAnchor.constraint(equalTo: circleProgressView.topAnchor, constant: 35),
             progressTitleLabel.centerXAnchor.constraint(equalTo: circleProgressView.centerXAnchor)
         ])
         
