@@ -146,18 +146,10 @@ class ChartViewController: UIViewController {
         updateChart()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        
-    }
-    
     override func viewDidLayoutSubviews() {
         addProgressCircle(flashcardsLearned: 0.3, color: .red)
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        
-    }
-    
+
     // MARK: - Public methods
     
     func updateChart() {
