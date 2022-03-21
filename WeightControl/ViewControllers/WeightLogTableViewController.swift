@@ -14,7 +14,7 @@ class WeightLogTableViewController: UITableViewController {
         
     private var weightData: Results<WeightData>!
     private let storageManager = StorageManager.shared
-    private let pickerWidth: CGFloat = 250
+    private let pickerWidth: CGFloat = 400
     
     // MARK: - Override methods
     
@@ -89,19 +89,42 @@ class WeightLogTableViewController: UITableViewController {
     
     private func editWeightData(weightData: WeightData? = nil) {
         
+        let editRadiusAlert = UIAlertController(title: "Select weight value", message: "", preferredStyle: .actionSheet)
+        
+        let width = editRadiusAlert.view.bounds.width
+        
         let viewController = UIViewController()
-        viewController.preferredContentSize = CGSize(width: pickerWidth, height: 260)
+        viewController.preferredContentSize = CGSize(
+            width: width,
+            height: 260
+        )
         
         // TODO: problem with coordinates
-        let datePicker = UIDatePicker(frame: CGRect(x: -10, y: 0, width: pickerWidth, height: 45))
+        let datePicker = UIDatePicker(frame: CGRect(
+            x: 0,
+            y: 0,
+            width: width,
+            height: 45
+        ))
         
-        let pickerView = UIPickerView(frame: CGRect(x: 0, y: 50, width: pickerWidth, height: 150))
+            
+        let pickerView = UIPickerView(frame: CGRect(
+            x: 0,
+            y: 50,
+            width: width,
+            height: 150
+        ))
+        
+        pickerView.backgroundColor = .red
+        
         pickerView.delegate = self
         pickerView.dataSource = self
         
         setValuesPickerView(weightData, datePicker, pickerView)
                         
-        let photoButton = UIButton(frame: CGRect(x: 0, y: 205, width: pickerWidth, height: 45))
+        let photoButton = UIButton(frame: CGRect(x: 0, y: 205, width: width, height: 45))
+        photoButton.backgroundColor = .red
+        
         photoButton.setTitle("Make photo", for: .normal)
         photoButton.setTitleColor(.tintColor, for: .normal)
         
@@ -109,7 +132,36 @@ class WeightLogTableViewController: UITableViewController {
         viewController.view.addSubview(pickerView)
         viewController.view.addSubview(photoButton)
         
-        let editRadiusAlert = UIAlertController(title: "Select weight value", message: "", preferredStyle: .alert)
+        datePicker.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            datePicker.centerXAnchor.constraint(equalTo: viewController.view.centerXAnchor)
+        ])
+ 
+        
+        
+//        let constraintHeight = NSLayoutConstraint(
+//           item: editRadiusAlert.view!,
+//           attribute: .height,
+//           relatedBy: .equal,
+//           toItem: nil,
+//           attribute: .notAnAttribute,
+//           multiplier: 1,
+//           constant: 500)
+//
+//        editRadiusAlert.view.addConstraint(constraintHeight)
+//
+//        let constraintWidth = NSLayoutConstraint(
+//           item: editRadiusAlert.view!,
+//           attribute: .width,
+//           relatedBy: .equal,
+//           toItem: nil,
+//           attribute: .notAnAttribute,
+//           multiplier: 1,
+//           constant: 600)
+        
+//        editRadiusAlert.view.addConstraint(constraintWidth)
+
         let doneAction = UIAlertAction(title: "Done", style: .default) {_ in
             self.saveWeightDataUpdateElements(
                 weightData: weightData,
@@ -118,7 +170,6 @@ class WeightLogTableViewController: UITableViewController {
                 weightGramm: pickerView.selectedRow(inComponent: 1)
             )
         }
-
         editRadiusAlert.setValue(viewController, forKey: "contentViewController")
         editRadiusAlert.addAction(doneAction)
         editRadiusAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
