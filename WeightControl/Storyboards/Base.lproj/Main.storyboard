@@ -98,6 +98,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="PaS-4L-5H4">
                             <connections>
                                 <action selector="addEntryDidPress:" destination="cC4-Fb-J4d" id="2AV-Xh-Hra"/>
+                                <segue destination="bto-ob-9VV" kind="presentation" id="Y4n-hN-f5k"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -105,6 +106,120 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AEx-Py-6zt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="263.768115942029" y="-208.25892857142856"/>
+        </scene>
+        <!--Weight data-->
+        <scene sceneID="Pea-IR-XfL">
+            <objects>
+                <tableViewController id="nJu-dk-m1I" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="pBr-Xr-ZyS">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <sections>
+                            <tableViewSection headerTitle="Weight data" id="X7n-n8-MCM">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="60" id="dmQ-y6-cxW">
+                                        <rect key="frame" x="20" y="49.5" width="374" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dmQ-y6-cxW" id="caf-3U-udj">
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="60"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="kv1-5G-OoT">
+                                                    <rect key="frame" x="87" y="5" width="200" height="50"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="50" id="Pui-ou-Xns"/>
+                                                        <constraint firstAttribute="width" constant="200" id="SxZ-ZH-CFv"/>
+                                                    </constraints>
+                                                </datePicker>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="kv1-5G-OoT" firstAttribute="centerX" secondItem="caf-3U-udj" secondAttribute="centerX" id="WMS-HW-3tW"/>
+                                                <constraint firstItem="kv1-5G-OoT" firstAttribute="centerY" secondItem="caf-3U-udj" secondAttribute="centerY" id="rP9-qR-9X3"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="150" id="F0f-KG-ARh">
+                                        <rect key="frame" x="20" y="109.5" width="374" height="150"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="F0f-KG-ARh" id="2xV-7T-Ozc">
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="150"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LdU-dw-quJ">
+                                                    <rect key="frame" x="27" y="10" width="320" height="130"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="130" id="0iZ-D8-u8O"/>
+                                                    </constraints>
+                                                </pickerView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="LdU-dw-quJ" firstAttribute="centerX" secondItem="2xV-7T-Ozc" secondAttribute="centerX" id="9hh-WD-xkL"/>
+                                                <constraint firstItem="LdU-dw-quJ" firstAttribute="centerY" secondItem="2xV-7T-Ozc" secondAttribute="centerY" id="W74-ye-Pbm"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="240" id="3Rt-Bj-RgD">
+                                        <rect key="frame" x="20" y="259.5" width="374" height="240"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3Rt-Bj-RgD" id="S0T-dG-yFh">
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="240"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="3ha-SI-9dS">
+                                                    <rect key="frame" x="82" y="15.5" width="210" height="208"/>
+                                                    <color key="tintColor" systemColor="systemGray3Color"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="210" id="99B-LJ-acr"/>
+                                                        <constraint firstAttribute="width" constant="210" id="N6u-sK-ON7"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="3ha-SI-9dS" firstAttribute="centerY" secondItem="S0T-dG-yFh" secondAttribute="centerY" id="7E4-AT-N1z"/>
+                                                <constraint firstItem="3ha-SI-9dS" firstAttribute="centerX" secondItem="S0T-dG-yFh" secondAttribute="centerX" id="swG-Q4-sXQ"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="130" id="srG-WT-sK9">
+                                        <rect key="frame" x="20" y="499.5" width="374" height="130"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="srG-WT-sK9" id="ev8-yE-ukc">
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="130"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IxC-is-qjA">
+                                                    <rect key="frame" x="20" y="11" width="334" height="108"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                                    <color key="textColor" systemColor="labelColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                </textView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="IxC-is-qjA" firstAttribute="bottom" secondItem="ev8-yE-ukc" secondAttribute="bottomMargin" id="06T-Fr-vYF"/>
+                                                <constraint firstItem="IxC-is-qjA" firstAttribute="trailing" secondItem="ev8-yE-ukc" secondAttribute="trailingMargin" id="PmE-ch-QPd"/>
+                                                <constraint firstItem="IxC-is-qjA" firstAttribute="top" secondItem="ev8-yE-ukc" secondAttribute="topMargin" id="VOz-Ke-OIx"/>
+                                                <constraint firstItem="IxC-is-qjA" firstAttribute="leading" secondItem="ev8-yE-ukc" secondAttribute="leadingMargin" id="bHE-hP-eSa"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="nJu-dk-m1I" id="foB-Jj-bLF"/>
+                            <outlet property="delegate" destination="nJu-dk-m1I" id="Jxx-h9-ZOB"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Weight data" id="6mE-T3-opx">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="S5M-bN-cVh"/>
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="4AL-gd-kZZ"/>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="p9l-fq-paA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2201" y="-208"/>
         </scene>
         <!--Weight control-->
         <scene sceneID="O3x-vp-Z00">
@@ -120,6 +235,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Id0-LX-Hkg">
                             <connections>
                                 <action selector="addWeightDataPressed:" destination="KBz-G9-f4W" id="bdF-2Z-BRP"/>
+                                <segue destination="bto-ob-9VV" kind="presentation" id="KF4-F4-W0V"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -309,17 +425,45 @@
             </objects>
             <point key="canvasLocation" x="-546" y="-931"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="FHE-XV-nLM">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bto-ob-9VV" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="E6b-Ei-XRx">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="nJu-dk-m1I" kind="relationship" relationship="rootViewController" id="4cC-ua-uYt"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Eal-LA-4Tx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1291" y="-208"/>
+        </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="KF4-F4-W0V"/>
+    </inferredMetricsTieBreakers>
     <resources>
+        <image name="camera" catalog="system" width="128" height="94"/>
         <image name="pencil.circle.fill" catalog="system" width="128" height="121"/>
         <image name="person.crop.circle" catalog="system" width="128" height="121"/>
         <image name="rectangle.portrait.and.arrow.right.fill" catalog="system" width="128" height="108"/>
         <image name="trash.circle" catalog="system" width="128" height="121"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray2Color">
             <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGray3Color">
+            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

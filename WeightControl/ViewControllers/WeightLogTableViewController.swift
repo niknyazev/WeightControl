@@ -55,12 +55,6 @@ class WeightLogTableViewController: UITableViewController {
         
     }
     
-    // MARK: - IBAction methods
-    
-    @IBAction func addEntryDidPress(_ sender: UIBarButtonItem) {
-        editWeightData()
-    }
-    
     // MARK: - Private methods
     
     private func formattedDate(date: Date) -> String {
