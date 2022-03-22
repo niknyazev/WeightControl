@@ -14,6 +14,7 @@
 		0157A0EB27C7F3AD00E2C4BB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0157A0E927C7F3AD00E2C4BB /* Main.storyboard */; };
 		0157A0ED27C7F3AF00E2C4BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0157A0EC27C7F3AF00E2C4BB /* Assets.xcassets */; };
 		0157A0F027C7F3AF00E2C4BB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0157A0EE27C7F3AF00E2C4BB /* LaunchScreen.storyboard */; };
+		01648AAF27EA13E500F91EE5 /* WeightDataDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01648AAE27EA13E500F91EE5 /* WeightDataDetailsViewController.swift */; };
 		018753D927E333FE004248D3 /* WeightDataCellController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018753D827E333FE004248D3 /* WeightDataCellController.swift */; };
 		01E4787827CE663F0068D14B /* WeightLogTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E4787727CE663F0068D14B /* WeightLogTableViewController.swift */; };
 		01E4787E27CE8F8B0068D14B /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E4787D27CE8F8B0068D14B /* StorageManager.swift */; };
@@ -33,6 +34,7 @@
 		0157A0EC27C7F3AF00E2C4BB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0157A0EF27C7F3AF00E2C4BB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0157A0F127C7F3AF00E2C4BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		01648AAE27EA13E500F91EE5 /* WeightDataDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightDataDetailsViewController.swift; sourceTree = "<group>"; };
 		018753D827E333FE004248D3 /* WeightDataCellController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightDataCellController.swift; sourceTree = "<group>"; };
 		01E4787727CE663F0068D14B /* WeightLogTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightLogTableViewController.swift; sourceTree = "<group>"; };
 		01E4787D27CE8F8B0068D14B /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 		01E4787927CE769A0068D14B /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				01648AAE27EA13E500F91EE5 /* WeightDataDetailsViewController.swift */,
 				01E4788127D8F5960068D14B /* HumanParametersViewController.swift */,
 				018753D827E333FE004248D3 /* WeightDataCellController.swift */,
 				01E4787727CE663F0068D14B /* WeightLogTableViewController.swift */,
@@ -276,6 +279,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0157A0E827C7F3AD00E2C4BB /* ChartViewController.swift in Sources */,
+				01648AAF27EA13E500F91EE5 /* WeightDataDetailsViewController.swift in Sources */,
 				01302DB727E8843600E43186 /* Colors.swift in Sources */,
 				0157A0E427C7F3AD00E2C4BB /* AppDelegate.swift in Sources */,
 				01E4788227D8F5960068D14B /* HumanParametersViewController.swift in Sources */,

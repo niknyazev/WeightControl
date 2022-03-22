@@ -45,13 +45,29 @@ class WeightLogTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
         let editAction = UIContextualAction(style: .normal, title: "Edit") { _, _, handler in
-            self.editWeightData(weightData: self.weightData[indexPath.row])
+            self.performSegue(withIdentifier: "weightDetails", sender: self.weightData[indexPath.row])
             handler(true)
         }
         
         let result = UISwipeActionsConfiguration(actions: [editAction])
         
         return result
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "weightDetails" {
+            
+            guard let navigationController = segue.destination as? UINavigationController,
+                  let weightDetails = navigationController.viewControllers.first as? WeightDataDetailsViewController else {
+                return
+            }
+            
+            if let weightData = sender as? WeightData {
+                weightDetails.weightData = weightData
+            }
+        }
         
     }
     

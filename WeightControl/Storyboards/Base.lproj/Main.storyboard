@@ -98,7 +98,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="PaS-4L-5H4">
                             <connections>
                                 <action selector="addEntryDidPress:" destination="cC4-Fb-J4d" id="2AV-Xh-Hra"/>
-                                <segue destination="bto-ob-9VV" kind="presentation" id="Y4n-hN-f5k"/>
+                                <segue destination="bto-ob-9VV" kind="presentation" identifier="weightDetails" id="Y4n-hN-f5k"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -110,7 +110,7 @@
         <!--Weight data-->
         <scene sceneID="Pea-IR-XfL">
             <objects>
-                <tableViewController id="nJu-dk-m1I" sceneMemberID="viewController">
+                <tableViewController id="nJu-dk-m1I" customClass="WeightDataDetailsViewController" customModule="WeightControl" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="pBr-Xr-ZyS">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -213,9 +213,21 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Weight data" id="6mE-T3-opx">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="S5M-bN-cVh"/>
-                        <barButtonItem key="rightBarButtonItem" title="Save" id="4AL-gd-kZZ"/>
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="S5M-bN-cVh">
+                            <connections>
+                                <action selector="cancelPressed:" destination="nJu-dk-m1I" id="TPg-yF-Ch4"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="4AL-gd-kZZ">
+                            <connections>
+                                <action selector="savePressed:" destination="nJu-dk-m1I" id="cIh-iB-pFV"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="datePicker" destination="kv1-5G-OoT" id="j7P-Tf-9Mb"/>
+                        <outlet property="weightPicker" destination="LdU-dw-quJ" id="prL-4J-LVv"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p9l-fq-paA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -445,7 +457,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="KF4-F4-W0V"/>
+        <segue reference="Y4n-hN-f5k"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="camera" catalog="system" width="128" height="94"/>
