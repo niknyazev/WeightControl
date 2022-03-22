@@ -46,10 +46,10 @@ class HumanParametersViewController: UITableViewController {
             UserData.Sex.female.rawValue
         ]
         
-        pickerValues.append((values: (10...500).map { String($0) }, title: "age", element: ageLabel))
-        pickerValues.append((values: (10...110).map { String($0) }, title: "height", element: heightLabel))
+        pickerValues.append((values: (10...110).map { String($0) }, title: "age", element: ageLabel))
+        pickerValues.append((values: (10...250).map { String($0) }, title: "height", element: heightLabel))
         pickerValues.append((values: sexes, title: "sex", element: sexLabel))
-        pickerValues.append((values: (0...200).map { String($0) }, title: "weight goal", element: weightGoalLabel))
+        pickerValues.append((values: (0...300).map { String($0) }, title: "weight goal", element: weightGoalLabel))
         
     }
     
@@ -62,6 +62,15 @@ class HumanParametersViewController: UITableViewController {
         pickerView.delegate = self
         pickerView.dataSource = self
         pickerView.tag = tag
+        
+        let currentValue = pickerValues[tag].element.text ?? ""
+        let currentValueIndex = pickerValues[tag].values.firstIndex(of: currentValue)
+        
+        guard let currentValueIndex = currentValueIndex else {
+            return
+        }
+        
+        pickerView.selectRow(currentValueIndex, inComponent: 0, animated: false)
         
         viewController.view.addSubview(pickerView)
         
