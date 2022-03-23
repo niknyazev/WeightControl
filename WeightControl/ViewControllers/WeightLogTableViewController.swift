@@ -48,12 +48,26 @@ class WeightLogTableViewController: UITableViewController {
         
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        let editAction = UIContextualAction(style: .normal, title: "Edit") { _, _, handler in
-            self.performSegue(withIdentifier: "weightDetails", sender: self.weightData[indexPath.row])
+        let currentWeightData = weightData[indexPath.row]
+        
+        let openAction = UIContextualAction(style: .normal, title: "Open") { _, _, handler in
+            self.performSegue(withIdentifier: "weightDetails", sender: currentWeightData)
             handler(true)
         }
         
-        let result = UISwipeActionsConfiguration(actions: [editAction])
+        let editAction = UIContextualAction(style: .normal, title: "Edit") { _, _, handler in
+            self.editWeightData(weightData: currentWeightData)
+            handler(true)
+        }
+        
+        let deleteAction = UIContextualAction(style: .normal, title: "Delete") { _, _, handler in
+            self.storageManager.delete(currentWeightData)
+            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+            self.updateWeightData()
+            handler(true)
+        }
+        
+        let result = UISwipeActionsConfiguration(actions: [editAction, openAction, deleteAction])
         
         return result
         
@@ -120,7 +134,7 @@ class WeightLogTableViewController: UITableViewController {
         let viewController = UIViewController()
         viewController.preferredContentSize = CGSize(
             width: width,
-            height: 260
+            height: 210
         )
         
         let datePicker = UIDatePicker(frame: CGRect(
@@ -129,7 +143,7 @@ class WeightLogTableViewController: UITableViewController {
             width: width,
             height: 45
         ))
-                
+                        
         let pickerView = UIPickerView(frame: CGRect(
             x: 0,
             y: 50,
@@ -142,31 +156,13 @@ class WeightLogTableViewController: UITableViewController {
 
         setValuesPickerView(weightData, datePicker, pickerView)
 
-        let photoButton = UIButton()
-
-        photoButton.setTitle("Make photo", for: .normal)
-        photoButton.setTitleColor(.tintColor, for: .normal)
-        photoButton.backgroundColor = .systemGray5
-        photoButton.layer.cornerRadius = 10
-
         viewController.view.addSubview(datePicker)
         viewController.view.addSubview(pickerView)
-        viewController.view.addSubview(photoButton)
 
         datePicker.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
             datePicker.centerXAnchor.constraint(equalTo: viewController.view.centerXAnchor)
-            
-        ])
-
-        photoButton.translatesAutoresizingMaskIntoConstraints = false
-
-        NSLayoutConstraint.activate([
-            photoButton.centerXAnchor.constraint(equalTo: viewController.view.centerXAnchor),
-            photoButton.topAnchor.constraint(equalTo: pickerView.bottomAnchor, constant: 5),
-            photoButton.widthAnchor.constraint(equalToConstant: 200),
-            photoButton.heightAnchor.constraint(equalToConstant: 40)
         ])
         
         let doneAction = UIAlertAction(title: "Done", style: .default) {_ in
@@ -182,7 +178,7 @@ class WeightLogTableViewController: UITableViewController {
         alertController.addAction(doneAction)
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
 
-        self.present(alertController, animated: true)
+        present(alertController, animated: true)
         
     }
     

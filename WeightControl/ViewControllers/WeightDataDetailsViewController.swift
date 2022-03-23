@@ -95,6 +95,8 @@ class WeightDataDetailsViewController: UITableViewController {
     
     func setupElements() {
         
+        datePicker.locale = Locale(identifier: "ru-RU")
+        
         weightPicker.delegate = self
         weightPicker.dataSource = self
         
