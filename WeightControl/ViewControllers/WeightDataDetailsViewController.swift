@@ -15,6 +15,8 @@ class WeightDataDetailsViewController: UITableViewController {
     @IBOutlet weak var weightPicker: UIPickerView!
     
     var weightData: WeightData?
+    var lastWeightData: WeightData?
+    var delegate: WeightDataUpdaterDelegate!
     
     private let storageManager = StorageManager.shared
     
@@ -42,6 +44,10 @@ class WeightDataDetailsViewController: UITableViewController {
             
             storageManager.save(currentWeightData)
         }
+        
+        delegate.updateWeightData()
+        dismiss(animated: true, completion: nil)
+        
     }
     
     @IBAction func cancelPressed(_ sender: Any) {
@@ -54,6 +60,12 @@ class WeightDataDetailsViewController: UITableViewController {
         weightPicker.dataSource = self
         
         guard let weightData = weightData else {
+            if let lastWeightData = lastWeightData {
+                weightPicker.selectRow(lastWeightData.weightKilo, inComponent: 0, animated: false)
+                weightPicker.selectRow(lastWeightData.weightGramm, inComponent: 1, animated: false)
+            } else {
+                weightPicker.selectRow(50, inComponent: 0, animated: false)
+            }
             return
         }
         

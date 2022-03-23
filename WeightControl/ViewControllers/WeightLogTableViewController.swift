@@ -8,6 +8,10 @@
 import UIKit
 import RealmSwift
 
+protocol WeightDataUpdaterDelegate {
+    func updateWeightData()
+}
+
 class WeightLogTableViewController: UITableViewController {
     
     // MARK: - Properties
@@ -64,8 +68,14 @@ class WeightLogTableViewController: UITableViewController {
                 return
             }
             
+            weightDetails.delegate = self
+            
             if let weightData = sender as? WeightData {
                 weightDetails.weightData = weightData
+            } else {
+                if !weightData.isEmpty {
+                    weightDetails.lastWeightData = weightData.first
+                }
             }
         }
         
@@ -198,14 +208,8 @@ class WeightLogTableViewController: UITableViewController {
             
             storageManager.save(currentWeightData)
         }
-        
-        tableView.reloadData()
-                    
-        guard let navigationController = self.tabBarController?.viewControllers?[0] as? UINavigationController,
-              let chart = navigationController.viewControllers[0] as? ChartViewController
-        else { return }
-        
-        chart.updateChart()
+            
+        updateWeightData()
     }
 }
 
@@ -233,4 +237,18 @@ extension WeightLogTableViewController: UIPickerViewDelegate, UIPickerViewDataSo
         }
     }
     
+}
+
+// MARK: - Updater delegate
+
+extension WeightLogTableViewController: WeightDataUpdaterDelegate {
+    func updateWeightData() {
+        tableView.reloadData()
+                    
+        guard let navigationController = self.tabBarController?.viewControllers?[0] as? UINavigationController,
+              let chart = navigationController.viewControllers[0] as? ChartViewController
+        else { return }
+        
+        chart.updateChart()
+    }
 }
