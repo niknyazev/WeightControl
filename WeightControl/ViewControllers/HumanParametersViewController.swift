@@ -105,10 +105,6 @@ class HumanParametersViewController: UITableViewController {
     private func setupElements() {
         
         let userData = userDefaults.fetchUserData()
-        
-        guard let userData = userData else {
-            return
-        }
  
         ageLabel.text = String(userData.age)
         heightLabel.text = String(userData.height)

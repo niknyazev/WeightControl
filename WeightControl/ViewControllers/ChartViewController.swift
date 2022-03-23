@@ -34,7 +34,7 @@ class ChartViewController: UIViewController {
         
         let xAsis = chartView.xAxis
         xAsis.labelPosition = .bottom
-        xAsis.enabled = false
+        xAsis.enabled = true
         xAsis.granularity = 2.0
         
         return chartView
@@ -144,16 +144,20 @@ class ChartViewController: UIViewController {
     
     func updateChart() {
         fetchUserData()
-        weightData = StorageManager.shared.realm.objects(WeightData.self).sorted(byKeyPath: "date")
+        fetchWeightData()
         fillElementValues()
         setChartData()
     }
 
     // MARK: - Private methods
     
+    private func fetchWeightData() {
+        weightData = StorageManager.shared.realm.objects(WeightData.self).sorted(byKeyPath: "date")
+    }
+    
     private func fillElementValues() {
         
-        let remainWeight = (weightData.last?.weightKilo ?? 0) - userData.weightGoal ?? 0
+        let remainWeight = (weightData.last?.weightKilo ?? 0) - userData.weightGoal
 
         currentWeightValueLabel.text = String(weightData.last?.weightKilo ?? 0)
         startWeightValueLabel.text = String(weightData.first?.weightKilo ?? 0)
@@ -209,7 +213,7 @@ class ChartViewController: UIViewController {
 
         NSLayoutConstraint.activate([
             lineChartView.topAnchor.constraint(equalTo: currentWeightStackView.bottomAnchor, constant: 10),
-            lineChartView.bottomAnchor.constraint(equalTo: circleProgressView.topAnchor, constant: -20),
+            lineChartView.bottomAnchor.constraint(equalTo: circleProgressView.topAnchor, constant: -25),
             lineChartView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             lineChartView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
         ])
@@ -223,8 +227,8 @@ class ChartViewController: UIViewController {
         NSLayoutConstraint.activate([
             circleProgressView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
             circleProgressView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            circleProgressView.heightAnchor.constraint(equalToConstant: 120),
-            circleProgressView.widthAnchor.constraint(equalToConstant: 120)
+            circleProgressView.heightAnchor.constraint(equalToConstant: 115),
+            circleProgressView.widthAnchor.constraint(equalToConstant: 115)
         ])
         
     }
@@ -289,7 +293,7 @@ class ChartViewController: UIViewController {
         progressTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            progressTitleLabel.topAnchor.constraint(equalTo: circleProgressView.topAnchor, constant: 35),
+            progressTitleLabel.topAnchor.constraint(equalTo: circleProgressView.topAnchor, constant: 32),
             progressTitleLabel.centerXAnchor.constraint(equalTo: circleProgressView.centerXAnchor)
         ])
         
