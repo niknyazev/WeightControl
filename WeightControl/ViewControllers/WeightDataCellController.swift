@@ -14,6 +14,7 @@ class WeightDataCellController: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var weightLabel: UILabel!
     @IBOutlet weak var weightChangeLabel: UILabel!
+    @IBOutlet weak var iconImage: UIImageView!
     
     // MARK: - Public methods
     
@@ -21,9 +22,10 @@ class WeightDataCellController: UITableViewCell {
         
         dateLabel.text = weightDate.dateDescription
         weightLabel.text = weightDate.weightDescription
-        
+        iconImage.tintColor = weightDate.photoData == nil ? .systemGray3 : .tintColor
+
         if let weightChange = weightChange {
-            weightChangeLabel.text = String(weightChange)
+            weightChangeLabel.text = String(format: "%.2f", weightChange)
             weightChangeLabel.textColor = weightChange > 0 ? .red : .green
             weightChangeLabel.isHidden = false
         } else {

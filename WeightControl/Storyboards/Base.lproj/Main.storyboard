@@ -64,7 +64,7 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20.03.2022 10:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m1q-WU-uXF">
-                                            <rect key="frame" x="65" y="19.5" width="135" height="21"/>
+                                            <rect key="frame" x="67" y="19.5" width="135" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -76,7 +76,7 @@
                                         <constraint firstItem="V33-nq-WH5" firstAttribute="centerY" secondItem="O1u-Fa-hEP" secondAttribute="centerY" id="8md-Dm-Jiu"/>
                                         <constraint firstItem="m1q-WU-uXF" firstAttribute="centerY" secondItem="O1u-Fa-hEP" secondAttribute="centerY" id="Igt-Fc-wjZ"/>
                                         <constraint firstItem="y5C-bB-6LY" firstAttribute="top" secondItem="O1u-Fa-hEP" secondAttribute="top" constant="10" id="NXh-4o-edy"/>
-                                        <constraint firstItem="m1q-WU-uXF" firstAttribute="leading" secondItem="V33-nq-WH5" secondAttribute="trailing" constant="10" id="ePO-za-UFk"/>
+                                        <constraint firstItem="m1q-WU-uXF" firstAttribute="leading" secondItem="V33-nq-WH5" secondAttribute="trailing" constant="12" id="ePO-za-UFk"/>
                                         <constraint firstItem="y5C-bB-6LY" firstAttribute="leading" relation="lessThanOrEqual" secondItem="m1q-WU-uXF" secondAttribute="trailing" constant="137" id="mZC-4a-Rep"/>
                                         <constraint firstItem="VcB-DQ-NQl" firstAttribute="trailing" secondItem="O1u-Fa-hEP" secondAttribute="trailingMargin" id="sJA-Rj-EAQ"/>
                                         <constraint firstItem="VcB-DQ-NQl" firstAttribute="bottom" secondItem="O1u-Fa-hEP" secondAttribute="bottomMargin" id="wzW-Vt-RSr"/>
@@ -84,6 +84,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="dateLabel" destination="m1q-WU-uXF" id="DrJ-bH-gaS"/>
+                                    <outlet property="iconImage" destination="V33-nq-WH5" id="pQa-GF-brz"/>
                                     <outlet property="weightChangeLabel" destination="VcB-DQ-NQl" id="Cct-P7-APS"/>
                                     <outlet property="weightLabel" destination="y5C-bB-6LY" id="HiS-lG-bdX"/>
                                 </connections>

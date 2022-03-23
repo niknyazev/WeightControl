@@ -19,7 +19,7 @@ class WeightData: Object {
     }
     
     var weightDescription: String {
-        "\(weight) kg"
+        String(format: "%.2f kg", weight)
     }
     
     var dateDescription: String {
