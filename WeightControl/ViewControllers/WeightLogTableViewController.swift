@@ -197,7 +197,8 @@ class WeightLogTableViewController: UITableViewController {
                 weightData,
                 date: date,
                 weightKilo: weightKilo,
-                weightGramm: weightGramm
+                weightGramm: weightGramm,
+                photoData: nil
             )
         } else {
             let currentWeightData = WeightData()

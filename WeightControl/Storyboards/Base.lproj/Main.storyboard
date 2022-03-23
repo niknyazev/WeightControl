@@ -225,6 +225,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="bodyImage" destination="3ha-SI-9dS" id="k0M-C2-LrZ"/>
                         <outlet property="datePicker" destination="kv1-5G-OoT" id="j7P-Tf-9Mb"/>
                         <outlet property="weightPicker" destination="LdU-dw-quJ" id="prL-4J-LVv"/>
                     </connections>
