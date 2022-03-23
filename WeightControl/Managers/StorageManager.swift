@@ -40,6 +40,15 @@ class StorageManager {
         }
     }
     
+    // Function for editing weight data in compact mode (without choosing photo)
+    func edit(_ weightData: WeightData, date: Date, weightKilo: Int, weightGramm: Int) {
+        write {
+            weightData.date = date
+            weightData.weightKilo = weightKilo
+            weightData.weightGramm = weightGramm
+        }
+    }
+    
     // MARK: - Private methods
         
     private func write(completion: () -> Void) {

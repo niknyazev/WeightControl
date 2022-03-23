@@ -65,13 +65,17 @@ class WeightDataDetailsViewController: UITableViewController {
     
     @IBAction func savePressed(_ sender: UIBarButtonItem) {
         
+        let imageData = bodyImage.contentMode == .scaleAspectFit
+            ? nil
+            : bodyImage.image?.pngData()
+        
         if let weightData = weightData {
             storageManager.edit(
                 weightData,
                 date: datePicker.date,
                 weightKilo: weightPicker.selectedRow(inComponent: 0),
                 weightGramm: weightPicker.selectedRow(inComponent: 1),
-                photoData: bodyImage.image?.pngData()
+                photoData: imageData
             )
         } else {
             let currentWeightData = WeightData()
@@ -79,7 +83,7 @@ class WeightDataDetailsViewController: UITableViewController {
             currentWeightData.weightKilo = weightPicker.selectedRow(inComponent: 0)
             currentWeightData.weightGramm = weightPicker.selectedRow(inComponent: 1)
             currentWeightData.date = datePicker.date
-            currentWeightData.photoData = bodyImage.image?.pngData()
+            currentWeightData.photoData = imageData
             
             storageManager.save(currentWeightData)
         }
@@ -117,6 +121,8 @@ class WeightDataDetailsViewController: UITableViewController {
         if let photoData = weightData.photoData {
             bodyImage.image = UIImage(data: photoData)
             bodyImage.contentMode = .scaleToFill
+        } else {
+            bodyImage.contentMode = .scaleAspectFit
         }
         
     }

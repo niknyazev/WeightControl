@@ -153,11 +153,11 @@ class ChartViewController: UIViewController {
     
     private func fillElementValues() {
         
-//        let remainWeight = (weightData.last?.weightKilo ?? 0) - userData.weightGoal ?? 0
-//
-//        currentWeightValueLabel.text = String(weightData.last?.weightKilo ?? 0)
-//        startWeightValueLabel.text = String(weightData.first?.weightKilo ?? 0)
-//        remainWeightValueLabel.text = String(remainWeight < 0 ? 0 : remainWeight)
+        let remainWeight = (weightData.last?.weightKilo ?? 0) - userData.weightGoal ?? 0
+
+        currentWeightValueLabel.text = String(weightData.last?.weightKilo ?? 0)
+        startWeightValueLabel.text = String(weightData.first?.weightKilo ?? 0)
+        remainWeightValueLabel.text = String(remainWeight < 0 ? 0 : remainWeight)
     }
     
     private func fetchUserData() {
