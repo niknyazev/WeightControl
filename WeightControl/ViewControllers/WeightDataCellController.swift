@@ -25,7 +25,8 @@ class WeightDataCellController: UITableViewCell {
         iconImage.tintColor = weightDate.photoData == nil ? .systemGray3 : .tintColor
 
         if let weightChange = weightChange {
-            weightChangeLabel.text = String(format: "%.2f", weightChange)
+            let prefix = weightChange > 0 ? "+" : ""
+            weightChangeLabel.text = prefix +  String(format: "%.2f", weightChange)
             weightChangeLabel.textColor = weightChange > 0 ? .red : .green
             weightChangeLabel.isHidden = false
         } else {
