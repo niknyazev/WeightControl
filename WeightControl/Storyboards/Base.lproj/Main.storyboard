@@ -42,52 +42,7 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OJ1-Z9-Ys8" id="O1u-Fa-hEP">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="80.0 kg" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y5C-bB-6LY">
-                                            <rect key="frame" x="337" y="10" width="57" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" systemColor="systemGray2Color"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="- 0.3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VcB-DQ-NQl">
-                                            <rect key="frame" x="367" y="34" width="27" height="15"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                            <color key="textColor" systemColor="systemRedColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.crop.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="V33-nq-WH5">
-                                            <rect key="frame" x="20" y="13" width="35" height="34"/>
-                                            <color key="tintColor" systemColor="systemGray2Color"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="35" id="bvd-Wj-BeI"/>
-                                                <constraint firstAttribute="width" constant="35" id="jcC-g4-h7Z"/>
-                                            </constraints>
-                                        </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20.03.2022 10:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m1q-WU-uXF">
-                                            <rect key="frame" x="67" y="19.5" width="135" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="V33-nq-WH5" firstAttribute="leading" secondItem="O1u-Fa-hEP" secondAttribute="leadingMargin" id="6Is-bu-N5p"/>
-                                        <constraint firstAttribute="trailing" secondItem="y5C-bB-6LY" secondAttribute="trailing" constant="20" symbolic="YES" id="7Ox-yB-LQR"/>
-                                        <constraint firstItem="V33-nq-WH5" firstAttribute="centerY" secondItem="O1u-Fa-hEP" secondAttribute="centerY" id="8md-Dm-Jiu"/>
-                                        <constraint firstItem="m1q-WU-uXF" firstAttribute="centerY" secondItem="O1u-Fa-hEP" secondAttribute="centerY" id="Igt-Fc-wjZ"/>
-                                        <constraint firstItem="y5C-bB-6LY" firstAttribute="top" secondItem="O1u-Fa-hEP" secondAttribute="top" constant="10" id="NXh-4o-edy"/>
-                                        <constraint firstItem="m1q-WU-uXF" firstAttribute="leading" secondItem="V33-nq-WH5" secondAttribute="trailing" constant="12" id="ePO-za-UFk"/>
-                                        <constraint firstItem="y5C-bB-6LY" firstAttribute="leading" relation="lessThanOrEqual" secondItem="m1q-WU-uXF" secondAttribute="trailing" constant="137" id="mZC-4a-Rep"/>
-                                        <constraint firstItem="VcB-DQ-NQl" firstAttribute="trailing" secondItem="O1u-Fa-hEP" secondAttribute="trailingMargin" id="sJA-Rj-EAQ"/>
-                                        <constraint firstItem="VcB-DQ-NQl" firstAttribute="bottom" secondItem="O1u-Fa-hEP" secondAttribute="bottomMargin" id="wzW-Vt-RSr"/>
-                                    </constraints>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="dateLabel" destination="m1q-WU-uXF" id="DrJ-bH-gaS"/>
-                                    <outlet property="iconImage" destination="V33-nq-WH5" id="pQa-GF-brz"/>
-                                    <outlet property="weightChangeLabel" destination="VcB-DQ-NQl" id="Cct-P7-APS"/>
-                                    <outlet property="weightLabel" destination="y5C-bB-6LY" id="HiS-lG-bdX"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -517,7 +472,6 @@
     <resources>
         <image name="camera" catalog="system" width="128" height="94"/>
         <image name="pencil.circle.fill" catalog="system" width="128" height="121"/>
-        <image name="person.crop.circle" catalog="system" width="128" height="121"/>
         <image name="rectangle.portrait.and.arrow.right.fill" catalog="system" width="128" height="108"/>
         <image name="trash.circle" catalog="system" width="128" height="121"/>
         <systemColor name="labelColor">
@@ -526,14 +480,8 @@
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
-        <systemColor name="systemGray2Color">
-            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
         <systemColor name="systemGray3Color">
             <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="tintColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

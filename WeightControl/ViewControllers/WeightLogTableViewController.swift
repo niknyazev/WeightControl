@@ -28,6 +28,7 @@ class WeightLogTableViewController: UITableViewController {
             .realm.objects(WeightData.self)
             .sorted(byKeyPath: "date", ascending: false)
         tableView.rowHeight = 65
+        tableView.register(WeightDataCellController.self, forCellReuseIdentifier: WeightDataCellController.identifier)
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -35,7 +36,10 @@ class WeightLogTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "weightData", for: indexPath) as! WeightDataCellController
+        
+        let cell = tableView.dequeueReusableCell(
+            withIdentifier: WeightDataCellController.identifier,
+            for: indexPath) as! WeightDataCellController
         
         let weightChange = indexPath.row == weightData.count - 1
             ? nil

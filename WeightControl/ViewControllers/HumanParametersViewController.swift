@@ -31,7 +31,6 @@ class HumanParametersViewController: UITableViewController {
         fillPickerValues()
         setupElements()
         calculateIndicators()
-
     }
     
     // MARK: - Table view
