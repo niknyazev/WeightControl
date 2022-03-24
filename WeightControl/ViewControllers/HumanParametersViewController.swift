@@ -15,6 +15,8 @@ class HumanParametersViewController: UITableViewController {
     @IBOutlet weak var heightLabel: UILabel!
     @IBOutlet weak var sexLabel: UILabel!
     @IBOutlet weak var weightGoalLabel: UILabel!
+    @IBOutlet weak var minumumWeightLabel: UILabel!
+    @IBOutlet weak var maximumWeightLabel: UILabel!
     
     private let userDefaults = UserDefaultsManager.shared
     private var pickerValues: [pickerValue] = []
@@ -28,6 +30,7 @@ class HumanParametersViewController: UITableViewController {
         super.viewDidLoad()
         fillPickerValues()
         setupElements()
+        calculateIndicators()
 
     }
     
@@ -39,7 +42,38 @@ class HumanParametersViewController: UITableViewController {
     
     // MARK: - Private methods
     
-    func fillPickerValues() {
+    private func calculateIndicators() {
+        
+        guard let heightString = heightLabel.text else { return }
+        
+        let height = Double(Int(heightString) ?? 0) / 100
+        let minimumBmi = 18.5
+        let maximumBmi = 25.0
+        
+        var minimumWeight = 0
+        var maximumWeight = 0
+        
+        for currentWeight in (10...200) {
+            
+            let bmi = Double(currentWeight) / (height * height)
+            
+            if bmi > minimumBmi && minimumWeight == 0 {
+                minimumWeight = currentWeight - 1
+            } else if bmi > maximumBmi && maximumWeight == 0 {
+                maximumWeight = currentWeight - 1
+            }
+            
+            if minimumWeight > 0 && maximumWeight > 0 {
+                break
+            }
+        }
+        
+        minumumWeightLabel.text = String(minimumWeight)
+        maximumWeightLabel.text = String(maximumWeight)
+        
+    }
+    
+    private func fillPickerValues() {
         
         let sexes = [
             UserData.Sex.male.rawValue,
@@ -82,6 +116,7 @@ class HumanParametersViewController: UITableViewController {
             let selectedRow = pickerView.selectedRow(inComponent: 0)
             currentPicker.element.text = currentPicker.values[selectedRow]
             self.saveValues()
+            self.calculateIndicators()
         })
         editRadiusAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
        
