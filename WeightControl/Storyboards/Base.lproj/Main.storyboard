@@ -66,9 +66,9 @@
         <!--Weight data-->
         <scene sceneID="Pea-IR-XfL">
             <objects>
-                <tableViewController id="nJu-dk-m1I" customClass="WeightDataDetailsViewController" customModule="WeightControl" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="nJu-dk-m1I" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" id="pBr-Xr-ZyS">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <sections>
                             <tableViewSection headerTitle="Weight data" id="X7n-n8-MCM">
@@ -179,15 +179,39 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <outlet property="bodyImage" destination="3ha-SI-9dS" id="k0M-C2-LrZ"/>
-                        <outlet property="datePicker" destination="kv1-5G-OoT" id="j7P-Tf-9Mb"/>
-                        <outlet property="weightPicker" destination="LdU-dw-quJ" id="prL-4J-LVv"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p9l-fq-paA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2201" y="-208"/>
+            <point key="canvasLocation" x="2880" y="-208"/>
+        </scene>
+        <!--Weight Data Details View Controller-->
+        <scene sceneID="kHo-Hv-UW5">
+            <objects>
+                <tableViewController id="MHY-ai-yfU" customClass="WeightDataDetailsViewController" customModule="WeightControl" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="y4X-68-pkK">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="tJI-uc-uYq">
+                                <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tJI-uc-uYq" id="jPw-SR-J48">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="MHY-ai-yfU" id="Z2e-AH-Nb8"/>
+                            <outlet property="delegate" destination="MHY-ai-yfU" id="5CE-3S-Pne"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="cvE-qv-UUU"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nZL-fR-Il9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2151" y="-208"/>
         </scene>
         <!--Weight control-->
         <scene sceneID="O3x-vp-Z00">
@@ -458,7 +482,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="nJu-dk-m1I" kind="relationship" relationship="rootViewController" id="4cC-ua-uYt"/>
+                        <segue destination="MHY-ai-yfU" kind="relationship" relationship="rootViewController" id="PiG-yF-FcS"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Eal-LA-4Tx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

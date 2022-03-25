@@ -10,10 +10,28 @@ import UIKit
 class WeightDataDetailsViewController: UITableViewController {
     
     // MARK: - Properties
+        
+    private lazy var datePicker: UIDatePicker = {
+        let result = UIDatePicker()
+        return result
+    }()
     
-    @IBOutlet weak var datePicker: UIDatePicker!
-    @IBOutlet weak var weightPicker: UIPickerView!
-    @IBOutlet weak var bodyImage: UIImageView!
+    private lazy var weightPicker: UIPickerView = {
+        let result = UIPickerView()
+        return result
+    }()
+    
+    private lazy var bodyImage: UIImageView = {
+        let result = UIImageView(image: UIImage(systemName: "camera"))
+        result.contentMode = .scaleAspectFit
+        result.tintColor = .systemGray3
+        return result
+    }()
+    
+    private lazy var descriptionField: UITextField = {
+        let result = UITextField()
+        return result
+    }()
     
     var weightData: WeightData?
     var lastWeightData: WeightData?
@@ -26,6 +44,45 @@ class WeightDataDetailsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupElements()
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        switch indexPath.row {
+        case 0:
+            return 60
+        case 1:
+            return 150
+        case 2:
+            return 240
+        case 3:
+            return 130
+        default:
+            fatalError()
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+       
+        let cell = UITableViewCell()
+        
+        switch indexPath.row {
+        case 0:
+            setupDateCell(cell)
+        case 1:
+            setupWeightCell(cell)
+        case 2:
+            setupPhotoCell(cell)
+        case 3:
+            setupDescriptionCell(cell)
+        default:
+            fatalError()
+        }
+        return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        4
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -61,9 +118,9 @@ class WeightDataDetailsViewController: UITableViewController {
         bodyImage.layer.cornerRadius = 10
     }
     
-    // MARK: - IBAction methods
+    // MARK: - Handler methods
     
-    @IBAction func savePressed(_ sender: UIBarButtonItem) {
+    @objc func savePressed() {
         
         let imageData = bodyImage.contentMode == .scaleAspectFit
             ? nil
@@ -93,11 +150,82 @@ class WeightDataDetailsViewController: UITableViewController {
         
     }
     
-    @IBAction func cancelPressed(_ sender: Any) {
+    @objc func cancelPressed() {
         dismiss(animated: true, completion: nil)
     }
     
-    func setupElements() {
+    // MARK: - Private methods
+    
+    
+    private func setupDateCell(_ cell: UITableViewCell) {
+        
+        cell.contentView.addSubview(datePicker)
+        
+        datePicker.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            datePicker.centerXAnchor.constraint(equalTo: cell.contentView.centerXAnchor),
+            datePicker.centerYAnchor.constraint(equalTo: cell.contentView.centerYAnchor)
+        ])
+    }
+    
+    private func setupWeightCell(_ cell: UITableViewCell) {
+        
+        cell.contentView.addSubview(weightPicker)
+        
+        weightPicker.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            weightPicker.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor, constant: -20),
+            weightPicker.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor, constant: 20),
+            weightPicker.topAnchor.constraint(equalTo: cell.contentView.topAnchor, constant: 0),
+            weightPicker.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor, constant: 0)
+        ])
+    }
+    
+    private func setupPhotoCell(_ cell: UITableViewCell) {
+        
+        cell.contentView.addSubview(bodyImage)
+        
+        bodyImage.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            bodyImage.centerXAnchor.constraint(equalTo: cell.contentView.centerXAnchor),
+            bodyImage.widthAnchor.constraint(equalTo: bodyImage.heightAnchor, multiplier: 1),
+            bodyImage.topAnchor.constraint(equalTo: cell.contentView.topAnchor, constant: 10),
+            bodyImage.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor, constant: -10)
+        ])
+    }
+    
+    private func setupDescriptionCell(_ cell: UITableViewCell) {
+        
+        cell.contentView.addSubview(descriptionField)
+        
+        descriptionField.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            descriptionField.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor, constant: -20),
+            descriptionField.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor, constant: 20),
+            descriptionField.topAnchor.constraint(equalTo: cell.contentView.topAnchor, constant: 0),
+            descriptionField.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor, constant: 0)
+        ])
+    }
+    
+    private func setupElements() {
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .save,
+            target: self,
+            action: #selector(savePressed)
+        )
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .cancel,
+            target: self,
+            action: #selector(cancelPressed)
+        )
+        
+        tableView = UITableView(frame: CGRect.zero, style: .insetGrouped)
         
         datePicker.locale = Locale(identifier: "ru-RU")
         
@@ -124,9 +252,7 @@ class WeightDataDetailsViewController: UITableViewController {
         } else {
             bodyImage.contentMode = .scaleAspectFit
         }
-        
     }
-    
 }
 
 // MARK: - UIPickerViewDelegate
