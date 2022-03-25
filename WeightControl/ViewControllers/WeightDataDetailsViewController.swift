@@ -25,6 +25,8 @@ class WeightDataDetailsViewController: UITableViewController {
         let result = UIImageView(image: UIImage(systemName: "camera"))
         result.contentMode = .scaleAspectFit
         result.tintColor = .systemGray3
+        result.layer.cornerRadius = 15
+        result.layer.masksToBounds = true
         return result
     }()
     
@@ -112,10 +114,6 @@ class WeightDataDetailsViewController: UITableViewController {
             
             present(alertController, animated: true)
         }
-    }
-    
-    override func viewDidLayoutSubviews() {
-        bodyImage.layer.cornerRadius = 10
     }
     
     // MARK: - Handler methods

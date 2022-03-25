@@ -55,7 +55,7 @@ class WeightLogTableViewController: UITableViewController {
         let currentWeightData = weightData[indexPath.row]
         
         let openAction = UIContextualAction(style: .normal, title: "Open") { _, _, handler in
-            self.performSegue(withIdentifier: "weightDetails", sender: currentWeightData)
+            self.openWeightData(currentWeightData)
             handler(true)
         }
         
@@ -76,30 +76,31 @@ class WeightLogTableViewController: UITableViewController {
         return result
         
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == "weightDetails" {
-            
-            guard let navigationController = segue.destination as? UINavigationController,
-                  let weightDetails = navigationController.viewControllers.first as? WeightDataDetailsViewController else {
-                return
-            }
-            
-            weightDetails.delegate = self
-            
-            if let weightData = sender as? WeightData {
-                weightDetails.weightData = weightData
-            } else {
-                if !weightData.isEmpty {
-                    weightDetails.lastWeightData = weightData.first
-                }
-            }
-        }
-        
+    @IBAction func addWeightDataDidPress(_ sender: Any) {
+        openWeightData()
     }
     
     // MARK: - Private methods
+    
+    func openWeightData(_ currentWeightData: WeightData? = nil) {
+        
+        let weightDetails = WeightDataDetailsViewController()
+        
+        weightDetails.delegate = self
+        
+        if let currentWeightData = currentWeightData {
+            weightDetails.weightData = currentWeightData
+        } else {
+            weightDetails.lastWeightData = weightData.first
+        }
+        
+        present(
+            UINavigationController(rootViewController: weightDetails),
+            animated: true,
+            completion: nil
+        )
+    }
     
     private func formattedDate(date: Date) -> String {
         let dateFormatter = DateFormatter()
