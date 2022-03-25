@@ -133,20 +133,11 @@ class ChartViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupElements()
-        updateChart()
+        updateWeightData()
     }
     
     override func viewDidLayoutSubviews() {
         addProgressCircle(flashcardsLearned: 0.3, color: .red)
-    }
-
-    // MARK: - Public methods
-    
-    func updateChart() {
-        fetchUserData()
-        fetchWeightData()
-        fillElementValues()
-        setChartData()
     }
 
     // MARK: - Private methods
@@ -251,6 +242,12 @@ class ChartViewController: UIViewController {
     }
     
     private func setupElements() {
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .add,
+            target: self,
+            action: #selector(addWeightData)
+        )
                 
         view.addSubview(currentWeightStackView)
         view.addSubview(startWeight)
@@ -263,13 +260,19 @@ class ChartViewController: UIViewController {
         setupBottomInformationViews()
 
     }
-    
-    @IBAction func addWeightDataPressed(_ sender: UIBarButtonItem) {
         
-    }
-    
     @objc private func addWeightData() {
         
+        let weightDetails = WeightDataDetailsViewController()
+        
+        weightDetails.delegate = self
+        weightDetails.lastWeightData = weightData.last
+        
+        present(
+            UINavigationController(rootViewController: weightDetails),
+            animated: true,
+            completion: nil
+        )
     }
     
     private func addProgressCircle(flashcardsLearned: Float, color: UIColor) {
@@ -333,5 +336,15 @@ extension ChartViewController: ChartViewDelegate {
         
     }
 
+}
+
+extension ChartViewController: WeightDataUpdaterDelegate {
+    
+    func updateWeightData() {
+        fetchUserData()
+        fetchWeightData()
+        fillElementValues()
+        setChartData()
+    }
 }
 

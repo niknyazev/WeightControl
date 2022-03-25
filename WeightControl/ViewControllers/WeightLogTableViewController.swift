@@ -77,10 +77,6 @@ class WeightLogTableViewController: UITableViewController {
         
     }
         
-    @IBAction func addWeightDataDidPress(_ sender: Any) {
-        openWeightData()
-    }
-    
     // MARK: - Private methods
     
     func openWeightData(_ currentWeightData: WeightData? = nil) {
@@ -250,6 +246,6 @@ extension WeightLogTableViewController: WeightDataUpdaterDelegate {
               let chart = navigationController.viewControllers[0] as? ChartViewController
         else { return }
         
-        chart.updateChart()
+        chart.updateWeightData()
     }
 }
