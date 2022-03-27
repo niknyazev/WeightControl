@@ -22,6 +22,7 @@ class HumanParametersViewController: UITableViewController {
     private var pickerValues: [pickerValue] = []
     private let pickerWidth: CGFloat = 250
     private let cellId = "settingData"
+    private var userData: UserData!
     
     typealias pickerValue = (values: [String], title: String)
     
@@ -42,9 +43,26 @@ class HumanParametersViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
+//        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
+        let cell = UITableViewCell(style: .value2, reuseIdentifier: "cellId")
         var content = cell.defaultContentConfiguration()
+        
         content.text = pickerValues[indexPath.row].title
+
+        // TODO: change code
+        switch indexPath.row {
+        case 0:
+            content.secondaryText = String(userData.age)
+        case 1:
+            content.secondaryText = String(userData.height)
+        case 2:
+            content.secondaryText = String(userData.sex.rawValue)
+        case 3:
+            content.secondaryText = String(userData.weightGoal)
+        default:
+            break
+        }
+        
         cell.contentConfiguration = content
         return cell
     }
@@ -154,9 +172,10 @@ class HumanParametersViewController: UITableViewController {
     
     private func setupElements() {
         
+        tableView = UITableView(frame: CGRect.zero, style: .insetGrouped)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
         
-        let userData = userDefaults.fetchUserData()
+        userData = userDefaults.fetchUserData()
  
 //        ageLabel.text = String(userData.age)
 //        heightLabel.text = String(userData.height)
