@@ -20,6 +20,7 @@ class HumanParametersViewController: UITableViewController {
     
     private let userDefaults = UserDefaultsManager.shared
     private var pickerValues: [pickerValue] = []
+    private var results: [result] = []
     private let pickerWidth: CGFloat = 250
     private let cellId = "settingData"
     private var userData: UserData!
@@ -28,6 +29,11 @@ class HumanParametersViewController: UITableViewController {
         values: [String],
         title: String,
         currentValueString: String
+    )
+    
+    typealias result = (
+        title: String,
+        value: String
     )
     
     // MARK: - Override methods
@@ -41,6 +47,10 @@ class HumanParametersViewController: UITableViewController {
     
     // MARK: - Table view
     
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return section == 0 ? "User data" : "Weights"
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectValue(tag: indexPath.row)
     }
@@ -49,30 +59,47 @@ class HumanParametersViewController: UITableViewController {
         
         let cell = UITableViewCell(style: .value2, reuseIdentifier: nil)
         var content = cell.defaultContentConfiguration()
-        content.text = pickerValues[indexPath.row].title
-       
-        let valueText = pickerValues[indexPath.row].currentValueString
+        
+        if indexPath.section == 0 {
+            content.text = pickerValues[indexPath.row].title
+           
+            let valueText = pickerValues[indexPath.row].currentValueString
 
-        content.secondaryAttributedText = NSAttributedString(
-            string: valueText,
-            attributes: [.foregroundColor: UIColor.tintColor ]
-        )
+            content.secondaryAttributedText = NSAttributedString(
+                string: valueText,
+                attributes: [.foregroundColor: UIColor.tintColor ]
+            )
+        } else {
+            content.text = results[indexPath.row].title
+           
+            let valueText = results[indexPath.row].value
+
+            content.secondaryAttributedText = NSAttributedString(
+                string: valueText,
+                attributes: [
+                    .foregroundColor: UIColor.black,
+                    .font: UIFont.systemFont(ofSize: 17, weight: .bold)
+                ]
+            )
+        }
         
         cell.contentConfiguration = content
         return cell
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        pickerValues.count
+        return section == 0 ? pickerValues.count : results.count
+    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        2
     }
     
     // MARK: - Private methods
     
     private func calculateIndicators() {
         
-        return
-        
-        guard let heightString = heightLabel.text else { return }
+        let heightString = pickerValues[1].currentValueString
         
         let height = Double(Int(heightString) ?? 0) / 100
         let minimumBmi = 18.5
@@ -96,8 +123,8 @@ class HumanParametersViewController: UITableViewController {
             }
         }
         
-        minumumWeightLabel.text = String(minimumWeight)
-        maximumWeightLabel.text = String(maximumWeight)
+        results[0].value = String(minimumWeight)
+        results[1].value = String(maximumWeight)
         
     }
     
@@ -132,6 +159,18 @@ class HumanParametersViewController: UITableViewController {
             values: (0...300).map { String($0) },
             title: "weight goal",
             currentValueString: String(userData.weightGoal)
+        ))
+    
+        // Results rows
+        
+        results.append((
+            title: "Minimum weight",
+            value: "0"
+        ))
+    
+        results.append((
+            title: "Maximum weight",
+            value: "0"
         ))
     }
     
@@ -172,9 +211,9 @@ class HumanParametersViewController: UITableViewController {
         pickerValues[tag].currentValueString
             = pickerValues[tag].values[selectedRow]
         
-        tableView.reloadData()
         saveValues()
         calculateIndicators()
+        tableView.reloadData()
     }
     
     private func saveValues() {
