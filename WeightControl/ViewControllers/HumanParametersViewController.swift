@@ -24,7 +24,11 @@ class HumanParametersViewController: UITableViewController {
     private let cellId = "settingData"
     private var userData: UserData!
     
-    typealias pickerValue = (values: [String], title: String)
+    typealias pickerValue = (
+        values: [String],
+        title: String,
+        currentValueString: String
+    )
     
     // MARK: - Override methods
     
@@ -43,25 +47,16 @@ class HumanParametersViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-//        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
-        let cell = UITableViewCell(style: .value2, reuseIdentifier: "cellId")
+        let cell = UITableViewCell(style: .value2, reuseIdentifier: nil)
         var content = cell.defaultContentConfiguration()
-        
         content.text = pickerValues[indexPath.row].title
+       
+        let valueText = pickerValues[indexPath.row].currentValueString
 
-        // TODO: change code
-        switch indexPath.row {
-        case 0:
-            content.secondaryText = String(userData.age)
-        case 1:
-            content.secondaryText = String(userData.height)
-        case 2:
-            content.secondaryText = String(userData.sex.rawValue)
-        case 3:
-            content.secondaryText = String(userData.weightGoal)
-        default:
-            break
-        }
+        content.secondaryAttributedText = NSAttributedString(
+            string: valueText,
+            attributes: [.foregroundColor: UIColor.tintColor ]
+        )
         
         cell.contentConfiguration = content
         return cell
@@ -108,80 +103,94 @@ class HumanParametersViewController: UITableViewController {
     
     private func fillPickerValues() {
         
+        userData = userDefaults.fetchUserData()
+        
         let sexes = [
             UserData.Sex.male.rawValue,
             UserData.Sex.female.rawValue
         ]
         
-        pickerValues.append((values: (10...110).map { String($0) }, title: "age"))
-        pickerValues.append((values: (10...250).map { String($0) }, title: "height"))
-        pickerValues.append((values: sexes, title: "sex"))
-        pickerValues.append((values: (0...300).map { String($0) }, title: "weight goal"))
+        pickerValues.append((
+            values: (10...110).map { String($0) },
+            title: "age",
+            currentValueString: String(userData.age)
+        ))
         
+        pickerValues.append((
+            values: (10...250).map { String($0) },
+            title: "height",
+            currentValueString: String(userData.height)
+        ))
+        
+        pickerValues.append((
+            values: sexes,
+            title: "sex",
+            currentValueString: userData.sex.rawValue
+        ))
+        
+        pickerValues.append((
+            values: (0...300).map { String($0) },
+            title: "weight goal",
+            currentValueString: String(userData.weightGoal)
+        ))
     }
     
     private func selectValue(tag: Int) {
         
-//        let viewController = UIViewController()
-//        viewController.preferredContentSize = CGSize(width: pickerWidth,height: 200)
-//
-//        let pickerView = UIPickerView(frame: CGRect(x: 0, y: 0, width: pickerWidth, height: 200))
-//        pickerView.delegate = self
-//        pickerView.dataSource = self
-//        pickerView.tag = tag
-//
-//        let currentValue = pickerValues[tag].element.text ?? ""
-//        let currentValueIndex = pickerValues[tag].values.firstIndex(of: currentValue)
-//
-//        guard let currentValueIndex = currentValueIndex else {
-//            return
-//        }
-//
-//        pickerView.selectRow(currentValueIndex, inComponent: 0, animated: false)
-//
-//        viewController.view.addSubview(pickerView)
-//
-//        let editRadiusAlert = UIAlertController(title: "Choose \(pickerValues[pickerView.tag].title)", message: "", preferredStyle: .alert)
-//
-//        editRadiusAlert.setValue(viewController, forKey: "contentViewController")
-//        editRadiusAlert.addAction(UIAlertAction(title: "Done", style: .default) { _ in
-//            let currentPicker = self.pickerValues[pickerView.tag]
-//            let selectedRow = pickerView.selectedRow(inComponent: 0)
-//            currentPicker.element.text = currentPicker.values[selectedRow]
-//            self.saveValues()
-//            self.calculateIndicators()
-//        })
-//        editRadiusAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-//
-//        self.present(editRadiusAlert, animated: true)
+        let viewController = UIViewController()
+        viewController.preferredContentSize = CGSize(width: pickerWidth, height: 200)
+
+        let pickerView = UIPickerView(frame: CGRect(x: 0, y: 0, width: pickerWidth, height: 200))
+        pickerView.delegate = self
+        pickerView.dataSource = self
+        pickerView.tag = tag
+
+        let currentValue = pickerValues[tag].currentValueString
+        let currentValueIndex = pickerValues[tag].values.firstIndex(of: currentValue)
+
+        guard let currentValueIndex = currentValueIndex else {
+            return
+        }
+
+        pickerView.selectRow(currentValueIndex, inComponent: 0, animated: false)
+
+        viewController.view.addSubview(pickerView)
+
+        let editRadiusAlert = UIAlertController(title: "Choose \(pickerValues[pickerView.tag].title)", message: "", preferredStyle: .alert)
+
+        editRadiusAlert.setValue(viewController, forKey: "contentViewController")
+        editRadiusAlert.addAction(UIAlertAction(title: "Done", style: .default) { _ in
+            self.setSelectedValue(selectedRow: pickerView.selectedRow(inComponent: 0), tag: tag)
+        })
         
+        editRadiusAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        
+        self.present(editRadiusAlert, animated: true)
+    }
+    
+    private func setSelectedValue(selectedRow: Int, tag: Int) {
+        pickerValues[tag].currentValueString
+            = pickerValues[tag].values[selectedRow]
+        
+        tableView.reloadData()
+        saveValues()
+        calculateIndicators()
     }
     
     private func saveValues() {
         
         let userData = UserData(
-            age: Int(ageLabel.text ?? "") ?? 0,
-            height: Int(heightLabel.text ?? "") ?? 0,
-            weightGoal: Int(weightGoalLabel.text ?? "") ?? 0,
-            sex: UserData.Sex(rawValue: sexLabel.text ?? "") ?? .male
+            age: Int(pickerValues[0].currentValueString) ?? 0,
+            height: Int(pickerValues[1].currentValueString) ?? 0,
+            weightGoal: Int(pickerValues[3].currentValueString) ?? 0,
+            sex: UserData.Sex(rawValue: pickerValues[2].currentValueString) ?? .male
         )
-        
+
         userDefaults.saveUserData(userData: userData)
-        
     }
     
     private func setupElements() {
-        
         tableView = UITableView(frame: CGRect.zero, style: .insetGrouped)
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
-        
-        userData = userDefaults.fetchUserData()
- 
-//        ageLabel.text = String(userData.age)
-//        heightLabel.text = String(userData.height)
-//        sexLabel.text = userData.sex.rawValue
-//        weightGoalLabel.text = String(userData.weightGoal)
-//
     }
 
 }
