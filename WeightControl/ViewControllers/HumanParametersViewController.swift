@@ -180,9 +180,9 @@ class HumanParametersViewController: UITableViewController {
     private func selectValue(tag: Int) {
         
         let viewController = UIViewController()
-        viewController.preferredContentSize = CGSize(width: pickerWidth, height: 200)
+        viewController.preferredContentSize = CGSize(width: pickerWidth, height: 170)
 
-        let pickerView = UIPickerView(frame: CGRect(x: 0, y: 0, width: pickerWidth, height: 200))
+        let pickerView = UIPickerView(frame: CGRect(x: 0, y: 0, width: pickerWidth, height: 170))
         pickerView.delegate = self
         pickerView.dataSource = self
         pickerView.tag = tag
