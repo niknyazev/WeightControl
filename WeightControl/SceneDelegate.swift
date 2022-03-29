@@ -24,22 +24,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let logController = UINavigationController(rootViewController: WeightLogTableViewController())
         let settingsController = UINavigationController(rootViewController: HumanParametersViewController())
         
-        chartController.title = "Weight control"
-        logController.title = "History"
-        settingsController.title = "Settings"
-        
         tabBar.setViewControllers([chartController, logController, settingsController], animated: false)
         
         guard let items = tabBar.tabBar.items else { return }
         
-        let images = [
-            UIImage(systemName: "pencil.circle"),
-            UIImage(systemName: "pencil.circle"),
-            UIImage(systemName: "pencil.circle")
+        let itemsSettings = [
+            (title: "Weight control", image: UIImage(systemName: "pencil.circle")),
+            (title: "History", image: UIImage(systemName: "pencil.circle")),
+            (title: "Settings", image: UIImage(systemName: "pencil.circle"))
         ]
         
         for index in 0..<items.count {
-            items[index].image = images[index]
+            items[index].image = itemsSettings[index].image
+            items[index].title = itemsSettings[index].title
         }
         
         window?.rootViewController = tabBar
