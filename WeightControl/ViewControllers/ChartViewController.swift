@@ -248,6 +248,9 @@ class ChartViewController: UIViewController {
             target: self,
             action: #selector(addWeightData)
         )
+        
+        view.backgroundColor = .systemBackground
+        title = "Weight control"
                 
         view.addSubview(currentWeightStackView)
         view.addSubview(startWeight)

@@ -159,7 +159,7 @@ class HumanParametersViewController: UITableViewController {
         )
     
         // Results rows
-        
+                
         results.append(
             SettingRow(
                 values: [],
