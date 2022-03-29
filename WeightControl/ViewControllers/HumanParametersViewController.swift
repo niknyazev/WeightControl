@@ -9,6 +9,12 @@ import UIKit
 
 class HumanParametersViewController: UITableViewController {
 
+    struct SettingRow {
+        let values: [String]
+        var value: String
+        let title: String
+    }
+    
     // MARK: - Properties
     
     @IBOutlet weak var ageLabel: UILabel!
@@ -19,17 +25,17 @@ class HumanParametersViewController: UITableViewController {
     @IBOutlet weak var maximumWeightLabel: UILabel!
     
     private let userDefaults = UserDefaultsManager.shared
-    private var pickerValues: [pickerValue] = []
-    private var results: [result] = []
+    private var pickerValues: [SettingRow] = []
+    private var results: [SettingRow] = []
     private let pickerWidth: CGFloat = 250
     private let cellId = "settingData"
     private var userData: UserData!
     
-    typealias pickerValue = (
-        values: [String],
-        title: String,
-        currentValueString: String
-    )
+//    typealias pickerValue = (
+//        values: [String],
+//        title: String,
+//        currentValueString: String
+//    )
     
     typealias result = (
         title: String,
@@ -52,6 +58,7 @@ class HumanParametersViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         selectValue(tag: indexPath.row)
     }
     
@@ -63,7 +70,7 @@ class HumanParametersViewController: UITableViewController {
         if indexPath.section == 0 {
             content.text = pickerValues[indexPath.row].title
            
-            let valueText = pickerValues[indexPath.row].currentValueString
+            let valueText = pickerValues[indexPath.row].value
 
             content.secondaryAttributedText = NSAttributedString(
                 string: valueText,
@@ -99,7 +106,7 @@ class HumanParametersViewController: UITableViewController {
     
     private func calculateIndicators() {
         
-        let heightString = pickerValues[1].currentValueString
+        let heightString = pickerValues[1].value
         
         let height = Double(Int(heightString) ?? 0) / 100
         let minimumBmi = 18.5
@@ -137,41 +144,55 @@ class HumanParametersViewController: UITableViewController {
             UserData.Sex.female.rawValue
         ]
         
-        pickerValues.append((
-            values: (10...110).map { String($0) },
-            title: "age",
-            currentValueString: String(userData.age)
-        ))
+        pickerValues.append(
+            SettingRow(
+                values: (10...110).map { String($0) },
+                value: String(userData.age),
+                title: "age"
+           )
+        )
+                
+        pickerValues.append(
+            SettingRow(
+                values: (10...250).map { String($0) },
+                value: String(userData.height),
+                title: "height"
+            )
+        )
         
-        pickerValues.append((
-            values: (10...250).map { String($0) },
-            title: "height",
-            currentValueString: String(userData.height)
-        ))
+        pickerValues.append(
+            SettingRow(
+                values: sexes,
+                value: userData.sex.rawValue,
+                title: "sex"
+            )
+        )
         
-        pickerValues.append((
-            values: sexes,
-            title: "sex",
-            currentValueString: userData.sex.rawValue
-        ))
-        
-        pickerValues.append((
-            values: (0...300).map { String($0) },
-            title: "weight goal",
-            currentValueString: String(userData.weightGoal)
-        ))
+        pickerValues.append(
+            SettingRow(
+                values: (0...300).map { String($0) },
+                value: String(userData.weightGoal),
+                title: "weight goal"
+            )
+        )
     
         // Results rows
         
-        results.append((
-            title: "Minimum weight",
-            value: "0"
-        ))
+        results.append(
+            SettingRow(
+                values: [],
+                value: "0",
+                title: "Minimum weight"
+            )
+        )
     
-        results.append((
-            title: "Maximum weight",
-            value: "0"
-        ))
+        results.append(
+            SettingRow(
+                values: [],
+                value: "0",
+                title: "Maximum weight"
+            )
+        )
     }
     
     private func selectValue(tag: Int) {
@@ -184,7 +205,7 @@ class HumanParametersViewController: UITableViewController {
         pickerView.dataSource = self
         pickerView.tag = tag
 
-        let currentValue = pickerValues[tag].currentValueString
+        let currentValue = pickerValues[tag].value
         let currentValueIndex = pickerValues[tag].values.firstIndex(of: currentValue)
 
         guard let currentValueIndex = currentValueIndex else {
@@ -208,7 +229,7 @@ class HumanParametersViewController: UITableViewController {
     }
     
     private func setSelectedValue(selectedRow: Int, tag: Int) {
-        pickerValues[tag].currentValueString
+        pickerValues[tag].value
             = pickerValues[tag].values[selectedRow]
         
         saveValues()
@@ -219,10 +240,10 @@ class HumanParametersViewController: UITableViewController {
     private func saveValues() {
         
         let userData = UserData(
-            age: Int(pickerValues[0].currentValueString) ?? 0,
-            height: Int(pickerValues[1].currentValueString) ?? 0,
-            weightGoal: Int(pickerValues[3].currentValueString) ?? 0,
-            sex: UserData.Sex(rawValue: pickerValues[2].currentValueString) ?? .male
+            age: Int(pickerValues[0].value) ?? 0,
+            height: Int(pickerValues[1].value) ?? 0,
+            weightGoal: Int(pickerValues[3].value) ?? 0,
+            sex: UserData.Sex(rawValue: pickerValues[2].value) ?? .male
         )
 
         userDefaults.saveUserData(userData: userData)
