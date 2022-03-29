@@ -17,30 +17,12 @@ class HumanParametersViewController: UITableViewController {
     
     // MARK: - Properties
     
-    @IBOutlet weak var ageLabel: UILabel!
-    @IBOutlet weak var heightLabel: UILabel!
-    @IBOutlet weak var sexLabel: UILabel!
-    @IBOutlet weak var weightGoalLabel: UILabel!
-    @IBOutlet weak var minumumWeightLabel: UILabel!
-    @IBOutlet weak var maximumWeightLabel: UILabel!
-    
     private let userDefaults = UserDefaultsManager.shared
     private var pickerValues: [SettingRow] = []
     private var results: [SettingRow] = []
     private let pickerWidth: CGFloat = 250
     private let cellId = "settingData"
     private var userData: UserData!
-    
-//    typealias pickerValue = (
-//        values: [String],
-//        title: String,
-//        currentValueString: String
-//    )
-    
-    typealias result = (
-        title: String,
-        value: String
-    )
     
     // MARK: - Override methods
     
