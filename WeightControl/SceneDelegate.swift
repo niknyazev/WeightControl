@@ -17,7 +17,32 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         window?.makeKeyAndVisible()
-        window?.rootViewController = UINavigationController(rootViewController: ChartViewController())
+        
+        let tabBar = UITabBarController()
+        
+        let chartController = UINavigationController(rootViewController: ChartViewController())
+        let logController = UINavigationController(rootViewController: WeightLogTableViewController())
+        let settingsController = UINavigationController(rootViewController: HumanParametersViewController())
+        
+        chartController.title = "Weight control"
+        logController.title = "History"
+        settingsController.title = "Settings"
+        
+        tabBar.setViewControllers([chartController, logController, settingsController], animated: false)
+        
+        guard let items = tabBar.tabBar.items else { return }
+        
+        let images = [
+            UIImage(systemName: "pencil.circle"),
+            UIImage(systemName: "pencil.circle"),
+            UIImage(systemName: "pencil.circle")
+        ]
+        
+        for index in 0..<items.count {
+            items[index].image = images[index]
+        }
+        
+        window?.rootViewController = tabBar
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

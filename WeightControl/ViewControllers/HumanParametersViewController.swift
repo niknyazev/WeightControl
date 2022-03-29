@@ -232,6 +232,7 @@ class HumanParametersViewController: UITableViewController {
     }
     
     private func setupElements() {
+        title = "Settings"
         tableView = UITableView(frame: CGRect.zero, style: .insetGrouped)
     }
 

@@ -27,6 +27,7 @@ class WeightLogTableViewController: UITableViewController {
         weightData = storageManager
             .realm.objects(WeightData.self)
             .sorted(byKeyPath: "date", ascending: false)
+        title = "History"
         tableView.rowHeight = 65
         tableView.register(WeightDataCellController.self, forCellReuseIdentifier: WeightDataCellController.identifier)
     }
