@@ -18,8 +18,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
         window?.makeKeyAndVisible()
         
-        let tabBar = UITabBarController()
-        tabBar.tabBar.tintColor = Colors.barBackground
+        let tabBarController = UITabBarController()
+        tabBarController.tabBar.tintColor = .white
+        tabBarController.tabBar.unselectedItemTintColor = Colors.unselected
+        tabBarController.tabBar.backgroundColor = Colors.tabBarBackground
         
         let chartController = UINavigationController(rootViewController: ChartViewController())
         let logController = UINavigationController(rootViewController: WeightLogTableViewController())
@@ -38,14 +40,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             nc.navigationBar.tintColor = .white
         }
                 
-        tabBar.setViewControllers([chartController, logController, settingsController], animated: false)
+        tabBarController.setViewControllers([chartController, logController, settingsController], animated: false)
         
-        guard let items = tabBar.tabBar.items else { return }
+        guard let items = tabBarController.tabBar.items else { return }
         
         let itemsSettings = [
-            (title: "Weight control", image: UIImage(systemName: "pencil.circle")),
-            (title: "History", image: UIImage(systemName: "pencil.circle")),
-            (title: "Settings", image: UIImage(systemName: "pencil.circle"))
+            (title: "Weight control", image: UIImage(systemName: "house")),
+            (title: "History", image: UIImage(systemName: "list.dash")),
+            (title: "Settings", image: UIImage(systemName: "gearshape"))
         ]
         
         for index in 0..<items.count {
@@ -53,7 +55,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             items[index].title = itemsSettings[index].title
         }
         
-        window?.rootViewController = tabBar
+        window?.rootViewController = tabBarController
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
