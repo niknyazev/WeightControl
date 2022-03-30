@@ -21,7 +21,7 @@ final class Colors {
         red: 157/255,
         green: 78/255,
         blue: 221/255,
-        alpha: 0.6
+        alpha: 1
     )
     
     static let chartBorder = UIColor(
@@ -35,7 +35,7 @@ final class Colors {
         red: 123/255,
         green: 44/255,
         blue: 191/255,
-        alpha: 0.03
+        alpha: 0.04
     )
     
     static let accent = UIColor(
@@ -46,10 +46,10 @@ final class Colors {
     )
     
     static let unselected = UIColor(
-        red: 60/255,
-        green: 9/255,
-        blue: 108/255,
-        alpha: 1
+        red: 255/255,
+        green: 255/255,
+        blue: 255/255,
+        alpha: 0.6
     )
 
     static let title = UIColor(

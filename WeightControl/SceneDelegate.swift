@@ -45,7 +45,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let items = tabBarController.tabBar.items else { return }
         
         let itemsSettings = [
-            (title: "Weight control", image: UIImage(systemName: "house")),
+            (title: "Weight control", image: UIImage(systemName: "house.fill")),
             (title: "History", image: UIImage(systemName: "list.dash")),
             (title: "Settings", image: UIImage(systemName: "gearshape"))
         ]
