@@ -61,10 +61,10 @@ class ChartViewController: UIViewController {
         return result
     }()
 
-    private lazy var remainWeight: UIStackView = {
-        let result = UIStackView()
-        result.axis = .vertical
-        result.alignment = .center
+    private lazy var remainWeightView: InformationStackView = {
+        let result = InformationStackView()
+        result.titleLabel.text = "remain"
+        result.valueLabel.text = "69"
         return result
     }()
     
@@ -114,21 +114,6 @@ class ChartViewController: UIViewController {
         label.textColor = Colors.title
         return label
     }()
-
-    private lazy var remainWeightLabel: UILabel = {
-        let label = UILabel()
-        label.text = "remain"
-        label.textColor = .systemGray
-        return label
-    }()
-    
-    private lazy var remainWeightValueLabel: UILabel = {
-        let label = UILabel()
-        label.text = "75"
-        label.font = .systemFont(ofSize: 30)
-        label.textColor = Colors.title
-        return label
-    }()
     
     // MARK: - Override methods
     
@@ -154,7 +139,7 @@ class ChartViewController: UIViewController {
 
         currentWeightValueLabel.text = String(weightData.last?.weightKilo ?? 0)
         startWeightValueLabel.text = String(weightData.first?.weightKilo ?? 0)
-        remainWeightValueLabel.text = String(remainWeight < 0 ? 0 : remainWeight)
+        remainWeightView.valueLabel.text = String(remainWeight < 0 ? 0 : remainWeight)
     }
     
     private func fetchUserData() {
@@ -187,17 +172,13 @@ class ChartViewController: UIViewController {
         currentWeightStackView.addArrangedSubview(currentWeightLabel)
         currentWeightStackView.addArrangedSubview(currentWeightValueLabel)
         
-        remainWeight.translatesAutoresizingMaskIntoConstraints = false
+        remainWeightView.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            remainWeight.topAnchor.constraint(equalTo: saveArea.topAnchor, constant: 20),
-            remainWeight.trailingAnchor.constraint(equalTo: saveArea.trailingAnchor, constant: -60),
-            remainWeight.heightAnchor.constraint(equalToConstant: 60)
+            remainWeightView.topAnchor.constraint(equalTo: saveArea.topAnchor, constant: 20),
+            remainWeightView.trailingAnchor.constraint(equalTo: saveArea.trailingAnchor, constant: -60),
+            remainWeightView.heightAnchor.constraint(equalToConstant: 60)
         ])
-        
-        remainWeight.addArrangedSubview(remainWeightLabel)
-        remainWeight.addArrangedSubview(remainWeightValueLabel)
-        
     }
     
     private func setupChartView() {
@@ -256,7 +237,7 @@ class ChartViewController: UIViewController {
                 
         view.addSubview(currentWeightStackView)
         view.addSubview(startWeight)
-        view.addSubview(remainWeight)
+        view.addSubview(remainWeightView)
         view.addSubview(lineChartView)
         view.addSubview(circleProgressView)
         
@@ -351,6 +332,44 @@ extension ChartViewController: WeightDataUpdaterDelegate {
         fetchWeightData()
         fillElementValues()
         setChartData()
+    }
+}
+
+class InformationStackView: UIStackView {
+    
+    lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = ""
+        label.textColor = .systemGray
+        return label
+    }()
+        
+    lazy var valueLabel: UILabel = {
+        let label = UILabel()
+        label.text = ""
+        label.font = .systemFont(ofSize: 30)
+        label.textColor = Colors.title
+        return label
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupView()
+        addElements()
+    }
+    
+    required init(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupView() {
+        axis = .vertical
+        alignment = .center
+    }
+    
+    private func addElements() {
+        addArrangedSubview(titleLabel)
+        addArrangedSubview(valueLabel)
     }
 }
 
