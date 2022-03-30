@@ -21,7 +21,14 @@ final class Colors {
         red: 123/255,
         green: 44/255,
         blue: 191/255,
-        alpha: 0.5
+        alpha: 0.7
+    )
+    
+    static let chartBackground = UIColor(
+        red: 123/255,
+        green: 44/255,
+        blue: 191/255,
+        alpha: 0.03
     )
     
     static let accent = UIColor(

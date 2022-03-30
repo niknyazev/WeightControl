@@ -19,11 +19,12 @@ class ChartViewController: UIViewController {
     private lazy var lineChartView: LineChartView = {
        
         let chartView = LineChartView()
-        chartView.backgroundColor = .white
         chartView.legend.enabled = false
         chartView.drawBordersEnabled = true
         chartView.borderColor = Colors.chartBorder
-        chartView.borderLineWidth = 1
+        chartView.borderLineWidth = 2
+        chartView.gridBackgroundColor = Colors.chartBackground
+        chartView.drawGridBackgroundEnabled = true
         
         let rightAxis = chartView.rightAxis
         rightAxis.enabled = false
