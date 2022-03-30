@@ -47,47 +47,22 @@ class ChartViewController: UIViewController {
         return result
     }()
         
-    private lazy var currentWeightStackView: UIStackView = {
-        let result = UIStackView()
-        result.axis = .vertical
-        result.alignment = .center
+    private lazy var currentWeightStackView: InformationStackView = {
+        let result = InformationStackView()
+        result.titleLabel.text = "current"
         return result
     }()
     
-    private lazy var startWeight: UIStackView = {
-        let result = UIStackView()
-        result.axis = .vertical
-        result.alignment = .center
+    private lazy var startWeightStackView: InformationStackView = {
+        let result = InformationStackView()
+        result.titleLabel.text = "start"
         return result
     }()
 
-    private lazy var remainWeightView: InformationStackView = {
+    private lazy var remainWeightStackView: InformationStackView = {
         let result = InformationStackView()
         result.titleLabel.text = "remain"
-        result.valueLabel.text = "69"
         return result
-    }()
-    
-    private lazy var currentWeightLabel: UILabel = {
-        let label = UILabel()
-        label.text = "current"
-        label.textColor = .systemGray
-        return label
-    }()
-    
-    private lazy var currentWeightValueLabel: UILabel = {
-        let label = UILabel()
-        label.text = "80"
-        label.font = .systemFont(ofSize: 30)
-        label.textColor = Colors.title
-        return label
-    }()
-    
-    private lazy var startWeightLabel: UILabel = {
-        let label = UILabel()
-        label.text = "start"
-        label.textColor = .systemGray
-        return label
     }()
     
     // MARK: - Progress label
@@ -102,14 +77,6 @@ class ChartViewController: UIViewController {
     private lazy var progressLabel: UILabel = {
         let label = UILabel()
         label.text = "30"
-        label.font = .systemFont(ofSize: 30)
-        label.textColor = Colors.title
-        return label
-    }()
-    
-    private lazy var startWeightValueLabel: UILabel = {
-        let label = UILabel()
-        label.text = "75"
         label.font = .systemFont(ofSize: 30)
         label.textColor = Colors.title
         return label
@@ -137,9 +104,9 @@ class ChartViewController: UIViewController {
         
         let remainWeight = (weightData.last?.weightKilo ?? 0) - userData.weightGoal
 
-        currentWeightValueLabel.text = String(weightData.last?.weightKilo ?? 0)
-        startWeightValueLabel.text = String(weightData.first?.weightKilo ?? 0)
-        remainWeightView.valueLabel.text = String(remainWeight < 0 ? 0 : remainWeight)
+        currentWeightStackView.valueLabel.text = String(weightData.last?.weightKilo ?? 0)
+        startWeightStackView.valueLabel.text = String(weightData.first?.weightKilo ?? 0)
+        remainWeightStackView.valueLabel.text = String(remainWeight < 0 ? 0 : remainWeight)
     }
     
     private func fetchUserData() {
@@ -150,17 +117,14 @@ class ChartViewController: UIViewController {
         
         let saveArea = view.safeAreaLayoutGuide
         
-        startWeight.translatesAutoresizingMaskIntoConstraints = false
+        startWeightStackView.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            startWeight.topAnchor.constraint(equalTo: saveArea.topAnchor, constant: 20),
-            startWeight.leadingAnchor.constraint(equalTo: saveArea.leadingAnchor, constant: 60),
-            startWeight.heightAnchor.constraint(equalToConstant: 60)
+            startWeightStackView.topAnchor.constraint(equalTo: saveArea.topAnchor, constant: 20),
+            startWeightStackView.leadingAnchor.constraint(equalTo: saveArea.leadingAnchor, constant: 60),
+            startWeightStackView.heightAnchor.constraint(equalToConstant: 60)
         ])
-        
-        startWeight.addArrangedSubview(startWeightLabel)
-        startWeight.addArrangedSubview(startWeightValueLabel)
-        
+                
         currentWeightStackView.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
@@ -168,16 +132,13 @@ class ChartViewController: UIViewController {
             currentWeightStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             currentWeightStackView.heightAnchor.constraint(equalToConstant: 60)
         ])
-        
-        currentWeightStackView.addArrangedSubview(currentWeightLabel)
-        currentWeightStackView.addArrangedSubview(currentWeightValueLabel)
-        
-        remainWeightView.translatesAutoresizingMaskIntoConstraints = false
+                
+        remainWeightStackView.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            remainWeightView.topAnchor.constraint(equalTo: saveArea.topAnchor, constant: 20),
-            remainWeightView.trailingAnchor.constraint(equalTo: saveArea.trailingAnchor, constant: -60),
-            remainWeightView.heightAnchor.constraint(equalToConstant: 60)
+            remainWeightStackView.topAnchor.constraint(equalTo: saveArea.topAnchor, constant: 20),
+            remainWeightStackView.trailingAnchor.constraint(equalTo: saveArea.trailingAnchor, constant: -60),
+            remainWeightStackView.heightAnchor.constraint(equalToConstant: 60)
         ])
     }
     
@@ -236,8 +197,8 @@ class ChartViewController: UIViewController {
         title = "Weight control"
                 
         view.addSubview(currentWeightStackView)
-        view.addSubview(startWeight)
-        view.addSubview(remainWeightView)
+        view.addSubview(startWeightStackView)
+        view.addSubview(remainWeightStackView)
         view.addSubview(lineChartView)
         view.addSubview(circleProgressView)
         
@@ -339,14 +300,14 @@ class InformationStackView: UIStackView {
     
     lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = ""
+        label.text = "title"
         label.textColor = .systemGray
         return label
     }()
         
     lazy var valueLabel: UILabel = {
         let label = UILabel()
-        label.text = ""
+        label.text = "0"
         label.font = .systemFont(ofSize: 30)
         label.textColor = Colors.title
         return label
