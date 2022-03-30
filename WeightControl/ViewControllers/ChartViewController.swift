@@ -22,7 +22,8 @@ class ChartViewController: UIViewController {
         chartView.backgroundColor = .white
         chartView.legend.enabled = false
         chartView.drawBordersEnabled = true
-        chartView.borderColor = .systemGray
+        chartView.borderColor = Colors.chartBorder
+        chartView.borderLineWidth = 1
         
         let rightAxis = chartView.rightAxis
         rightAxis.enabled = false
@@ -77,7 +78,7 @@ class ChartViewController: UIViewController {
         let label = UILabel()
         label.text = "80"
         label.font = .systemFont(ofSize: 30)
-        label.textColor = .tintColor
+        label.textColor = Colors.title
         return label
     }()
     
@@ -101,7 +102,7 @@ class ChartViewController: UIViewController {
         let label = UILabel()
         label.text = "30"
         label.font = .systemFont(ofSize: 30)
-        label.textColor = .tintColor
+        label.textColor = Colors.title
         return label
     }()
     
@@ -109,7 +110,7 @@ class ChartViewController: UIViewController {
         let label = UILabel()
         label.text = "75"
         label.font = .systemFont(ofSize: 30)
-        label.textColor = .tintColor
+        label.textColor = Colors.title
         return label
     }()
 
@@ -124,7 +125,7 @@ class ChartViewController: UIViewController {
         let label = UILabel()
         label.text = "75"
         label.font = .systemFont(ofSize: 30)
-        label.textColor = .tintColor
+        label.textColor = Colors.title
         return label
     }()
     
@@ -137,7 +138,7 @@ class ChartViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
-        addProgressCircle(flashcardsLearned: 0.3, color: .red)
+        addProgressCircle(flashcardsLearned: 0.3, color: Colors.accent)
     }
 
     // MARK: - Private methods
@@ -324,7 +325,8 @@ class ChartViewController: UIViewController {
         dataSet.drawCirclesEnabled = false
         dataSet.mode = .cubicBezier
         dataSet.drawValuesEnabled = false
-        dataSet.setColor(.red)
+        dataSet.setColor(Colors.accent)
+        dataSet.lineWidth = 2
         
         let data = LineChartData(dataSet: dataSet)
         lineChartView.data = data

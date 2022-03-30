@@ -19,11 +19,25 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.makeKeyAndVisible()
         
         let tabBar = UITabBarController()
+        tabBar.tabBar.tintColor = Colors.barBackground
         
         let chartController = UINavigationController(rootViewController: ChartViewController())
         let logController = UINavigationController(rootViewController: WeightLogTableViewController())
         let settingsController = UINavigationController(rootViewController: HumanParametersViewController())
         
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+        appearance.backgroundColor = Colors.barBackground
+               
+        for nc in [chartController, logController, settingsController] {
+            nc.navigationBar.prefersLargeTitles = false
+            nc.navigationBar.compactAppearance = appearance
+            nc.navigationBar.scrollEdgeAppearance = appearance
+            nc.navigationBar.tintColor = .white
+        }
+                
         tabBar.setViewControllers([chartController, logController, settingsController], animated: false)
         
         guard let items = tabBar.tabBar.items else { return }
