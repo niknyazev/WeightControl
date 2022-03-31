@@ -12,7 +12,7 @@ protocol WeightDataUpdaterDelegate {
     func updateWeightData()
 }
 
-class WeightLogTableViewController: UITableViewController {
+class WeightHistoryTableViewController: UITableViewController {
     
     // MARK: - Properties
         
@@ -213,7 +213,7 @@ class WeightLogTableViewController: UITableViewController {
 
 // MARK: - PickerView
 
-extension WeightLogTableViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+extension WeightHistoryTableViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
         60
@@ -239,7 +239,7 @@ extension WeightLogTableViewController: UIPickerViewDelegate, UIPickerViewDataSo
 
 // MARK: - Updater delegate
 
-extension WeightLogTableViewController: WeightDataUpdaterDelegate {
+extension WeightHistoryTableViewController: WeightDataUpdaterDelegate {
     func updateWeightData() {
         tableView.reloadData()
                     

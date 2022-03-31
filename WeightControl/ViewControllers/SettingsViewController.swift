@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HumanParametersViewController: UITableViewController {
+class SettingsViewController: UITableViewController {
 
     struct SettingRow {
         let values: [String]
@@ -240,7 +240,7 @@ class HumanParametersViewController: UITableViewController {
 
 // MARK: - Picker view
 
-extension HumanParametersViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+extension SettingsViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
         pickerWidth

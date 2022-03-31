@@ -24,8 +24,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         tabBarController.tabBar.backgroundColor = Colors.tabBarBackground
         
         let chartController = UINavigationController(rootViewController: ChartViewController())
-        let logController = UINavigationController(rootViewController: WeightLogTableViewController())
-        let settingsController = UINavigationController(rootViewController: HumanParametersViewController())
+        let logController = UINavigationController(rootViewController: WeightHistoryTableViewController())
+        let settingsController = UINavigationController(rootViewController: SettingsViewController())
         
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
