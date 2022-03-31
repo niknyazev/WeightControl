@@ -18,7 +18,7 @@ class WeightDataCellController: UITableViewCell {
     
     private lazy var weightLabel: UILabel = {
         let result = UILabel()
-        result.textColor = .systemGray2
+        result.textColor = Colors.title
         return result
     }()
     
@@ -50,12 +50,12 @@ class WeightDataCellController: UITableViewCell {
         
         dateLabel.text = weightDate.dateDescription
         weightLabel.text = weightDate.weightDescription
-        iconImage.tintColor = weightDate.photoData == nil ? .systemGray3 : .tintColor
+        iconImage.tintColor = weightDate.photoData == nil ? .systemGray3 : Colors.title
 
         if let weightChange = weightChange {
             let prefix = weightChange > 0 ? "+" : ""
             weightChangeLabel.text = prefix +  String(format: "%.2f", weightChange)
-            weightChangeLabel.textColor = weightChange > 0 ? .red : .green
+            weightChangeLabel.textColor = weightChange > 0 ? Colors.failure : Colors.success
             weightChangeLabel.isHidden = false
         } else {
             weightChangeLabel.isHidden = true

@@ -56,7 +56,7 @@ class HumanParametersViewController: UITableViewController {
 
             content.secondaryAttributedText = NSAttributedString(
                 string: valueText,
-                attributes: [.foregroundColor: UIColor.tintColor ]
+                attributes: [.foregroundColor: Colors.title]
             )
         } else {
             content.text = results[indexPath.row].title

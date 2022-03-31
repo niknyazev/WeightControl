@@ -59,4 +59,19 @@ final class Colors {
         alpha: 1
     )
     
+    
+    static let success = UIColor(
+        red: 56/255,
+        green: 176/255,
+        blue: 0/255,
+        alpha: 1
+    )
+    
+    static let failure = UIColor(
+        red: 208/255,
+        green: 0/255,
+        blue: 0/255,
+        alpha: 1
+    )
+    
 }
