@@ -27,9 +27,7 @@ class WeightHistoryTableViewController: UITableViewController {
         weightData = storageManager
             .realm.objects(WeightData.self)
             .sorted(byKeyPath: "date", ascending: false)
-        title = "History"
-        tableView.rowHeight = 65
-        tableView.register(WeightDataCellController.self, forCellReuseIdentifier: WeightDataCellController.identifier)
+        setupElements()
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -80,7 +78,23 @@ class WeightHistoryTableViewController: UITableViewController {
         
     // MARK: - Private methods
     
-    func openWeightData(_ currentWeightData: WeightData? = nil) {
+    private func setupElements() {
+        title = "History"
+        tableView.rowHeight = 65
+        tableView.register(WeightDataCellController.self, forCellReuseIdentifier: WeightDataCellController.identifier)
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .add,
+            target: self,
+            action: #selector(addWeightData)
+        )
+    }
+    
+    @objc private func addWeightData() {
+        openWeightData()
+    }
+    
+    private func openWeightData(_ currentWeightData: WeightData? = nil) {
         
         let weightDetails = WeightDataDetailsViewController()
         
