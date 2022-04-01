@@ -24,9 +24,7 @@ class WeightHistoryTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        weightData = storageManager
-            .realm.objects(WeightData.self)
-            .sorted(byKeyPath: "date", ascending: false)
+        fetchWeightData()
         setupElements()
     }
 
@@ -77,6 +75,12 @@ class WeightHistoryTableViewController: UITableViewController {
     }
         
     // MARK: - Private methods
+    
+    private func fetchWeightData() {
+        weightData = storageManager
+            .realm.objects(WeightData.self)
+            .sorted(byKeyPath: "date", ascending: false)
+    }
     
     private func setupElements() {
         title = "History"
