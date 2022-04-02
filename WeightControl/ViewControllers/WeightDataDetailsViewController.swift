@@ -211,6 +211,20 @@ class WeightDataDetailsViewController: UITableViewController {
     
     private func setupElements() {
         
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+        appearance.backgroundColor = Colors.barBackground
+               
+        if let navigationController = navigationController {
+            navigationController.navigationBar.prefersLargeTitles = false
+            navigationController.navigationBar.compactAppearance = appearance
+            navigationController.navigationBar.compactScrollEdgeAppearance = appearance
+            navigationController.navigationBar.scrollEdgeAppearance = appearance
+            navigationController.navigationBar.tintColor = .white
+        }
+        
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .save,
             target: self,
