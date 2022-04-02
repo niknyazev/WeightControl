@@ -49,7 +49,7 @@ final class Colors {
         red: 255/255,
         green: 255/255,
         blue: 255/255,
-        alpha: 0.6
+        alpha: 0.7
     )
 
     static let title = UIColor(

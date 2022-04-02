@@ -18,10 +18,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
         window?.makeKeyAndVisible()
         
+        let tabBarAppearance = UITabBarAppearance()
+        tabBarAppearance.backgroundColor = Colors.barBackground
+        tabBarAppearance.selectionIndicatorTintColor = .white
+        
         let tabBarController = UITabBarController()
         tabBarController.tabBar.tintColor = .white
         tabBarController.tabBar.unselectedItemTintColor = Colors.unselected
-        tabBarController.tabBar.backgroundColor = Colors.tabBarBackground
+        tabBarController.tabBar.standardAppearance = tabBarAppearance
+        tabBarController.tabBar.scrollEdgeAppearance = tabBarAppearance
         
         let chartController = UINavigationController(rootViewController: ChartViewController())
         let logController = UINavigationController(rootViewController: WeightHistoryTableViewController())
@@ -36,7 +41,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         for nc in [chartController, logController, settingsController] {
             nc.navigationBar.prefersLargeTitles = false
             nc.navigationBar.compactAppearance = appearance
+            nc.navigationBar.compactScrollEdgeAppearance = appearance
             nc.navigationBar.scrollEdgeAppearance = appearance
+            nc.navigationBar.standardAppearance = appearance
             nc.navigationBar.tintColor = .white
         }
                 
