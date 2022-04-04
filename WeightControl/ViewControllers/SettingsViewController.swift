@@ -90,30 +90,15 @@ class SettingsViewController: UITableViewController {
         
         let heightString = pickerValues[1].value
         
-        let height = Double(Int(heightString) ?? 0) / 100
-        let minimumBmi = 18.5
-        let maximumBmi = 25.0
+        let weightCalculator = WeightCalculator(
+            height: Int(heightString) ?? 0,
+            weight: 10
+        )
         
-        var minimumWeight = 0
-        var maximumWeight = 0
+        let bestWeights = weightCalculator.calculateBestWeights()
         
-        for currentWeight in (10...200) {
-            
-            let bmi = Double(currentWeight) / (height * height)
-            
-            if bmi > minimumBmi && minimumWeight == 0 {
-                minimumWeight = currentWeight - 1
-            } else if bmi > maximumBmi && maximumWeight == 0 {
-                maximumWeight = currentWeight - 1
-            }
-            
-            if minimumWeight > 0 && maximumWeight > 0 {
-                break
-            }
-        }
-        
-        results[0].value = String(minimumWeight)
-        results[1].value = String(maximumWeight)
+        results[0].value = String(bestWeights.min)
+        results[1].value = String(bestWeights.max)
         
     }
     
