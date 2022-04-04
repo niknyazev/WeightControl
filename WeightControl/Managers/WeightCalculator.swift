@@ -13,19 +13,19 @@ import Foundation
 class WeightCalculator {
     
     var height: Int
-    var weight: Int
+    var weight: Double
     
     static let minimumBmi = 18.5
     static let maximumBmi = 25.0
     
-    init(height: Int, weight: Int) {
+    init(height: Int, weight: Double) {
         self.height = height
         self.weight = weight
     }
     
     func calculateBmi() -> Double {
         let height = Double(self.height) / 100
-        let result = Double(weight) / (height * height)
+        let result = weight / (height * height)
         return result
     }
     
@@ -39,7 +39,11 @@ class WeightCalculator {
         
         for currentWeight in (10...200) {
             
-            let calculator = WeightCalculator(height: height, weight: currentWeight)
+            let calculator = WeightCalculator(
+                height: height,
+                weight: Double(currentWeight)
+            )
+            
             let bmi = calculator.calculateBmi()
             
             if bmi > minimumBmi && minimumWeight == 0 {

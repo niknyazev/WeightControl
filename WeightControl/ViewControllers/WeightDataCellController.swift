@@ -46,7 +46,7 @@ class WeightDataCellController: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
         
-    func configure(with weightDate: WeightData, weightChange: Float?) {
+    func configure(with weightDate: WeightData, weightChange: Double?) {
         
         dateLabel.text = weightDate.dateDescription
         weightLabel.text = weightDate.weightDescription

@@ -14,8 +14,8 @@ class WeightData: Object {
     @Persisted var weightGramm: Int = 0
     @Persisted var photoData: Data? = nil
     
-    var weight: Float {
-        Float(weightKilo) + Float(weightGramm) / 100
+    var weight: Double {
+        Double(weightKilo) + Double(weightGramm) / 100
     }
     
     var weightDescription: String {

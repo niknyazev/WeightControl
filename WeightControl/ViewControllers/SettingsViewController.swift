@@ -23,12 +23,13 @@ class SettingsViewController: UITableViewController {
     private let pickerWidth: CGFloat = 250
     private let cellId = "settingData"
     private var userData: UserData!
+    private var currentWeight: Double?
     
     // MARK: - Override methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fillPickerValues()
+        fillTableWithRowSettings()
         setupElements()
         calculateIndicators()
     }
@@ -92,17 +93,24 @@ class SettingsViewController: UITableViewController {
         
         let weightCalculator = WeightCalculator(
             height: Int(heightString) ?? 0,
-            weight: 10
+            weight: currentWeight ?? 0
         )
         
+        let currentBmi = weightCalculator.calculateBmi()
         let bestWeights = weightCalculator.calculateBestWeights()
         
-        results[0].value = String(bestWeights.min)
+        results[0].value = String(currentBmi)
         results[1].value = String(bestWeights.max)
-        
+        results[2].value = String(bestWeights.max)
     }
     
-    private func fillPickerValues() {
+    func setCurrentWeight() {
+        // TODO: move to class
+        let weightData = StorageManager.shared.realm.objects(WeightData.self).sorted(byKeyPath: "date")
+        currentWeight = weightData.last?.weight ?? 0
+    }
+    
+    private func fillTableWithRowSettings() {
         
         userData = userDefaults.fetchUserData()
         
@@ -144,6 +152,14 @@ class SettingsViewController: UITableViewController {
         )
     
         // Results rows
+        
+        results.append(
+            SettingRow(
+                values: [],
+                value: "0",
+                title: "Current weight"
+            )
+        )
                 
         results.append(
             SettingRow(
