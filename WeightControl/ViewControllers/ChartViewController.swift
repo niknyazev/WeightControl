@@ -65,23 +65,12 @@ class ChartViewController: UIViewController {
         return result
     }()
     
-    // MARK: - Progress label
-    
-    private lazy var progressTitleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "progress"
-        label.textColor = .systemGray
-        return label
+    private lazy var progressStackView: InformationStackView = {
+        let result = InformationStackView()
+        result.titleLabel.text = "progress"
+        return result
     }()
-    
-    private lazy var progressLabel: UILabel = {
-        let label = UILabel()
-        label.text = "30"
-        label.font = .systemFont(ofSize: 30)
-        label.textColor = Colors.title
-        return label
-    }()
-    
+            
     // MARK: - Override methods
     
     override func viewDidLoad() {
@@ -166,23 +155,14 @@ class ChartViewController: UIViewController {
             circleProgressView.widthAnchor.constraint(equalToConstant: 115)
         ])
         
-        circleProgressView.addSubview(progressLabel)
-        circleProgressView.addSubview(progressTitleLabel)
+        circleProgressView.addSubview(progressStackView)
 
-        progressTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        progressStackView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            progressTitleLabel.topAnchor.constraint(equalTo: circleProgressView.topAnchor, constant: 32),
-            progressTitleLabel.centerXAnchor.constraint(equalTo: circleProgressView.centerXAnchor)
+            progressStackView.topAnchor.constraint(equalTo: circleProgressView.topAnchor, constant: 32),
+            progressStackView.centerXAnchor.constraint(equalTo: circleProgressView.centerXAnchor)
         ])
-        
-        progressLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            progressLabel.topAnchor.constraint(equalTo: progressTitleLabel.bottomAnchor, constant: 5),
-            progressLabel.centerXAnchor.constraint(equalTo: circleProgressView.centerXAnchor)
-        ])
-        
     }
     
     private func setupElements() {
