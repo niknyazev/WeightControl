@@ -15,6 +15,8 @@ class ChartViewController: UIViewController {
 
     private var weightData: Results<WeightData>!
     private var userData: UserData!
+    private var progress: Int?
+    
     
     private lazy var lineChartView: LineChartView = {
        
@@ -80,7 +82,7 @@ class ChartViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
-        addProgressCircle(flashcardsLearned: 0.3, color: Colors.accent)
+        addProgressCircle(flashcardsLearned: Float(progress ?? 0) / 100, color: Colors.accent)
     }
 
     // MARK: - Private methods
@@ -91,11 +93,15 @@ class ChartViewController: UIViewController {
     
     private func fillElementValues() {
         
-        let remainWeight = (weightData.last?.weightKilo ?? 0) - userData.weightGoal
+        let currentWeightDifference = (weightData.last?.weightKilo ?? 0) - userData.weightGoal
+        let startWeightDifference = (weightData.first?.weightKilo ?? 0) - userData.weightGoal
+        progress = 100 - (currentWeightDifference / startWeightDifference) * 100
 
         currentWeightStackView.valueLabel.text = String(weightData.last?.weightKilo ?? 0)
         startWeightStackView.valueLabel.text = String(weightData.first?.weightKilo ?? 0)
-        remainWeightStackView.valueLabel.text = String(remainWeight < 0 ? 0 : remainWeight)
+        remainWeightStackView.valueLabel.text = String(currentWeightDifference < 0 ? 0 : currentWeightDifference)
+        progressStackView.valueLabel.text =  currentWeightDifference < 0 ? "100" : String(progress ?? 0)
+        
     }
     
     private func fetchUserData() {
