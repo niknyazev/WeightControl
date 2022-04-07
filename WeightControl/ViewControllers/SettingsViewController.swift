@@ -23,12 +23,13 @@ class SettingsViewController: UITableViewController {
     private let pickerWidth: CGFloat = 250
     private let cellId = "settingData"
     private var userData: UserData!
-    private var currentWeight: Double?
+    private var currentWeight: Double = 0
     
     // MARK: - Override methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        fetchData()
         fillTableWithRowSettings()
         setupElements()
         calculateIndicators()
@@ -87,32 +88,35 @@ class SettingsViewController: UITableViewController {
     
     // MARK: - Private methods
     
+    private func fetchData() {
+        userData = userDefaults.fetchUserData()
+        setCurrentWeight()
+    }
+    
     private func calculateIndicators() {
         
         let heightString = pickerValues[1].value
         
         let weightCalculator = WeightCalculator(
             height: Int(heightString) ?? 0,
-            weight: currentWeight ?? 0
+            weight: currentWeight
         )
         
         let currentBmi = weightCalculator.calculateBmi()
         let bestWeights = weightCalculator.calculateBestWeights()
         
-        results[0].value = String(currentBmi)
+        results[0].value = String(format: "%.2f", currentBmi)
         results[1].value = String(bestWeights.max)
         results[2].value = String(bestWeights.max)
     }
     
-    func setCurrentWeight() {
+    private func setCurrentWeight() {
         // TODO: move to class
         let weightData = StorageManager.shared.realm.objects(WeightData.self).sorted(byKeyPath: "date")
         currentWeight = weightData.last?.weight ?? 0
     }
     
     private func fillTableWithRowSettings() {
-        
-        userData = userDefaults.fetchUserData()
         
         let sexes = [
             UserData.Sex.male.rawValue,
@@ -157,7 +161,7 @@ class SettingsViewController: UITableViewController {
             SettingRow(
                 values: [],
                 value: "0",
-                title: "Current weight"
+                title: "Current BMI"
             )
         )
                 
