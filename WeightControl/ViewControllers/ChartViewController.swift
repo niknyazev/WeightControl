@@ -264,14 +264,6 @@ class ChartViewController: UIViewController {
 
 }
 
-extension ChartViewController: ChartViewDelegate {
-    
-    func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
-        
-    }
-
-}
-
 extension ChartViewController: WeightDataUpdaterDelegate {
     
     func updateWeightData() {
