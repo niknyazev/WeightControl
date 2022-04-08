@@ -222,6 +222,7 @@ class SettingsViewController: UITableViewController {
         saveValues()
         calculateIndicators()
         tableView.reloadData()
+        updateChartScene()
     }
     
     private func saveValues() {
@@ -239,6 +240,15 @@ class SettingsViewController: UITableViewController {
     private func setupElements() {
         title = "Settings"
         tableView = UITableView(frame: CGRect.zero, style: .insetGrouped)
+    }
+    
+    private func updateChartScene() {
+
+        guard let navigationController = self.tabBarController?.viewControllers?[0] as? UINavigationController,
+              let chart = navigationController.viewControllers[0] as? ChartViewController
+        else { return }
+        
+        chart.updateWeightData()
     }
 
 }
