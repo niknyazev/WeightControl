@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		01302DB727E8843600E43186 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01302DB627E8843600E43186 /* Colors.swift */; };
+		013A327128017B930004EF68 /* WeightDataDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013A327028017B930004EF68 /* WeightDataDetailsViewModel.swift */; };
+		013A3277280189730004EF68 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013A3276280189730004EF68 /* SettingsViewModel.swift */; };
+		013A32792801898A0004EF68 /* WeightHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013A32782801898A0004EF68 /* WeightHistoryViewModel.swift */; };
+		013A327B2801899E0004EF68 /* ChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013A327A2801899E0004EF68 /* ChartViewModel.swift */; };
+		013A327D280189B00004EF68 /* WeightDataCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013A327C280189B00004EF68 /* WeightDataCellViewModel.swift */; };
 		0157A0E427C7F3AD00E2C4BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0157A0E327C7F3AD00E2C4BB /* AppDelegate.swift */; };
 		0157A0E627C7F3AD00E2C4BB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0157A0E527C7F3AD00E2C4BB /* SceneDelegate.swift */; };
 		0157A0E827C7F3AD00E2C4BB /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0157A0E727C7F3AD00E2C4BB /* ChartViewController.swift */; };
@@ -27,6 +32,11 @@
 
 /* Begin PBXFileReference section */
 		01302DB627E8843600E43186 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		013A327028017B930004EF68 /* WeightDataDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightDataDetailsViewModel.swift; sourceTree = "<group>"; };
+		013A3276280189730004EF68 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		013A32782801898A0004EF68 /* WeightHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightHistoryViewModel.swift; sourceTree = "<group>"; };
+		013A327A2801899E0004EF68 /* ChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewModel.swift; sourceTree = "<group>"; };
+		013A327C280189B00004EF68 /* WeightDataCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightDataCellViewModel.swift; sourceTree = "<group>"; };
 		0157A0E027C7F3AD00E2C4BB /* WeightControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeightControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0157A0E327C7F3AD00E2C4BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0157A0E527C7F3AD00E2C4BB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -68,6 +78,51 @@
 			path = "Сonstants";
 			sourceTree = "<group>";
 		};
+		013A326F28017B5F0004EF68 /* WeightDataDetails */ = {
+			isa = PBXGroup;
+			children = (
+				01648AAE27EA13E500F91EE5 /* WeightDataDetailsViewController.swift */,
+				013A327028017B930004EF68 /* WeightDataDetailsViewModel.swift */,
+			);
+			path = WeightDataDetails;
+			sourceTree = "<group>";
+		};
+		013A3272280189270004EF68 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				01E4788127D8F5960068D14B /* SettingsViewController.swift */,
+				013A3276280189730004EF68 /* SettingsViewModel.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		013A3273280189310004EF68 /* WeightHistory */ = {
+			isa = PBXGroup;
+			children = (
+				01E4787727CE663F0068D14B /* WeightHistoryTableViewController.swift */,
+				013A32782801898A0004EF68 /* WeightHistoryViewModel.swift */,
+			);
+			path = WeightHistory;
+			sourceTree = "<group>";
+		};
+		013A3274280189500004EF68 /* WeightDataCell */ = {
+			isa = PBXGroup;
+			children = (
+				018753D827E333FE004248D3 /* WeightDataCellController.swift */,
+				013A327C280189B00004EF68 /* WeightDataCellViewModel.swift */,
+			);
+			path = WeightDataCell;
+			sourceTree = "<group>";
+		};
+		013A32752801895B0004EF68 /* Chart */ = {
+			isa = PBXGroup;
+			children = (
+				0157A0E727C7F3AD00E2C4BB /* ChartViewController.swift */,
+				013A327A2801899E0004EF68 /* ChartViewModel.swift */,
+			);
+			path = Chart;
+			sourceTree = "<group>";
+		};
 		0157A0D727C7F3AD00E2C4BB = {
 			isa = PBXGroup;
 			children = (
@@ -102,11 +157,11 @@
 		01E4787927CE769A0068D14B /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				01648AAE27EA13E500F91EE5 /* WeightDataDetailsViewController.swift */,
-				01E4788127D8F5960068D14B /* SettingsViewController.swift */,
-				018753D827E333FE004248D3 /* WeightDataCellController.swift */,
-				01E4787727CE663F0068D14B /* WeightHistoryTableViewController.swift */,
-				0157A0E727C7F3AD00E2C4BB /* ChartViewController.swift */,
+				013A326F28017B5F0004EF68 /* WeightDataDetails */,
+				013A3272280189270004EF68 /* Settings */,
+				013A3273280189310004EF68 /* WeightHistory */,
+				013A32752801895B0004EF68 /* Chart */,
+				013A3274280189500004EF68 /* WeightDataCell */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -284,6 +339,8 @@
 				0157A0E827C7F3AD00E2C4BB /* ChartViewController.swift in Sources */,
 				01648AAF27EA13E500F91EE5 /* WeightDataDetailsViewController.swift in Sources */,
 				01302DB727E8843600E43186 /* Colors.swift in Sources */,
+				013A327D280189B00004EF68 /* WeightDataCellViewModel.swift in Sources */,
+				013A32792801898A0004EF68 /* WeightHistoryViewModel.swift in Sources */,
 				01648AB327FB4F2E00F91EE5 /* WeightCalculator.swift in Sources */,
 				0157A0E427C7F3AD00E2C4BB /* AppDelegate.swift in Sources */,
 				01E4788227D8F5960068D14B /* SettingsViewController.swift in Sources */,
@@ -293,6 +350,9 @@
 				01E4787827CE663F0068D14B /* WeightHistoryTableViewController.swift in Sources */,
 				0157A0E627C7F3AD00E2C4BB /* SceneDelegate.swift in Sources */,
 				018753D927E333FE004248D3 /* WeightDataCellController.swift in Sources */,
+				013A327B2801899E0004EF68 /* ChartViewModel.swift in Sources */,
+				013A327128017B930004EF68 /* WeightDataDetailsViewModel.swift in Sources */,
+				013A3277280189730004EF68 /* SettingsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
