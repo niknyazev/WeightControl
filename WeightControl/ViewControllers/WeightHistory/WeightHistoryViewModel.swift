@@ -8,9 +8,9 @@
 import Foundation
 
 protocol WeightHistoryViewModelProtocol {
-    
+    var weightDatas: [WeightData] { get }
 }
 
 class WeightHistoryViewModel: WeightHistoryViewModelProtocol {
-    
+    var weightDatas: [WeightData] = []
 }
