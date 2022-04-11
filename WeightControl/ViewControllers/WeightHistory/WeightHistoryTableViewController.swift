@@ -104,11 +104,11 @@ class WeightHistoryTableViewController: UITableViewController {
         
         weightDetails.delegate = self
         
-        if let currentWeightData = currentWeightData {
-            weightDetails.weightData = currentWeightData
-        } else {
-            weightDetails.lastWeightData = weightData.first
-        }
+//        if let currentWeightData = currentWeightData {
+//            weightDetails.weightData = currentWeightData
+//        } else {
+//            weightDetails.lastWeightData = weightData.first
+//        }
         
         present(
             UINavigationController(rootViewController: weightDetails),

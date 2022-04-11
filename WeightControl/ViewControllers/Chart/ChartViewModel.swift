@@ -6,17 +6,76 @@
 //
 
 import Foundation
+import RealmSwift
 
 protocol ChartViewModelProtocol {
-    var startWeight: Double { get }
-    var currentWeight: Double { get }
-    var remainWeight: Double { get }
-    var progress: Int { get }
+    
+    var startWeight: String { get }
+    var currentWeight: String { get }
+    var remainWeight: String { get }
+    var progress: String { get }
+    var progressValue: Int { get }
+    var weightValues: [Double] { get }
+    
+    func lastWeightDetailsViewModel() -> WeightDataDetailsViewModel?
+    func weightDetailsViewModel(for index: Int) -> WeightDataDetailsViewModel
 }
 
 class ChartViewModel: ChartViewModelProtocol {
-    var startWeight: Double = 0
-    var currentWeight: Double = 0
-    var remainWeight: Double = 0
-    var progress: Int = 0
+    
+    var weightValues: [Double] {
+        weightData.map { $0.weight }
+    }
+    
+    var startWeight: String {
+        String(weightData.first?.weightKilo ?? 0)
+    }
+    var currentWeight: String {
+        String(weightData.last?.weightKilo ?? 0)
+    }
+    var remainWeight: String {
+        String(currentWeightDifference < 0 ? 0 : currentWeightDifference)
+    }
+    var progress: String {
+        currentWeightDifference < 0 ? "100" : String(progressValue)
+    }
+    
+    var currentWeightDifference: Int {
+        (weightData.last?.weightKilo ?? 0) - userData.weightGoal
+    }
+    var startWeightDifference: Int {
+        (weightData.first?.weightKilo ?? 0) - userData.weightGoal
+    }
+    
+    var progressValue: Int {
+        100 - (currentWeightDifference / startWeightDifference) * 100
+    }
+    
+    private var weightData: Results<WeightData>
+    private var userData: UserData
+    
+    init() {
+        weightData = StorageManager.shared.realm.objects(WeightData.self).sorted(byKeyPath: "date")
+        userData = UserDefaultsManager.shared.fetchUserData()
+    }
+    
+    func lastWeightDetailsViewModel() -> WeightDataDetailsViewModel? {
+        if let lastWeightData = weightData.last {
+            return WeightDataDetailsViewModel(weightData: lastWeightData)
+        } else {
+            return nil
+        }
+    }
+    
+    func weightDetailsViewModel(for index: Int) -> WeightDataDetailsViewModel {
+        WeightDataDetailsViewModel(weightData: weightData[index])
+    }
+    
+    private func fetchWeightData() {
+        
+    }
+    
+    private func fetchUserData() {
+        
+    }
 }

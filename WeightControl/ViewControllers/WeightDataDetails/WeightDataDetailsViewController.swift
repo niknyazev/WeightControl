@@ -35,8 +35,8 @@ class WeightDataDetailsViewController: UITableViewController {
         return result
     }()
     
-    var weightData: WeightData?
-    var lastWeightData: WeightData?
+    var weightData: WeightDataDetailsViewModel?
+    var lastWeightData: WeightDataDetailsViewModel?
     var delegate: WeightDataUpdaterDelegate!
     
     private let storageManager = StorageManager.shared
@@ -125,13 +125,13 @@ class WeightDataDetailsViewController: UITableViewController {
             : bodyImage.image?.pngData()
         
         if let weightData = weightData {
-            storageManager.edit(
-                weightData,
-                date: datePicker.date,
-                weightKilo: weightPicker.selectedRow(inComponent: 0),
-                weightGramm: weightPicker.selectedRow(inComponent: 1),
-                photoData: imageData
-            )
+//            storageManager.edit(
+//                weightData,
+//                date: datePicker.date,
+//                weightKilo: weightPicker.selectedRow(inComponent: 0),
+//                weightGramm: weightPicker.selectedRow(inComponent: 1),
+//                photoData: imageData
+//            )
         } else {
             let currentWeightData = WeightData()
             
@@ -244,26 +244,26 @@ class WeightDataDetailsViewController: UITableViewController {
         weightPicker.delegate = self
         weightPicker.dataSource = self
         
-        guard let weightData = weightData else {
-            if let lastWeightData = lastWeightData {
-                weightPicker.selectRow(lastWeightData.weightKilo, inComponent: 0, animated: false)
-                weightPicker.selectRow(lastWeightData.weightGramm, inComponent: 1, animated: false)
-            } else {
-                weightPicker.selectRow(50, inComponent: 0, animated: false)
-            }
-            return
-        }
-        
-        datePicker.date = weightData.date
-        weightPicker.selectRow(weightData.weightKilo, inComponent: 0, animated: false)
-        weightPicker.selectRow(weightData.weightGramm, inComponent: 1, animated: false)
-        
-        if let photoData = weightData.photoData {
-            bodyImage.image = UIImage(data: photoData)
-            bodyImage.contentMode = .scaleToFill
-        } else {
-            bodyImage.contentMode = .scaleAspectFit
-        }
+//        guard let weightData = weightData else {
+//            if let lastWeightData = lastWeightData {
+//                weightPicker.selectRow(lastWeightData.weightKilo, inComponent: 0, animated: false)
+//                weightPicker.selectRow(lastWeightData.weightGramm, inComponent: 1, animated: false)
+//            } else {
+//                weightPicker.selectRow(50, inComponent: 0, animated: false)
+//            }
+//            return
+//        }
+//        
+//        datePicker.date = weightData.date
+//        weightPicker.selectRow(weightData.weightKilo, inComponent: 0, animated: false)
+//        weightPicker.selectRow(weightData.weightGramm, inComponent: 1, animated: false)
+//        
+//        if let photoData = weightData.photoData {
+//            bodyImage.image = UIImage(data: photoData)
+//            bodyImage.contentMode = .scaleToFill
+//        } else {
+//            bodyImage.contentMode = .scaleAspectFit
+//        }
     }
 }
 

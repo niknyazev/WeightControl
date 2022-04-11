@@ -7,16 +7,12 @@
 
 import UIKit
 import Charts
-import RealmSwift
 
 class ChartViewController: UIViewController {
     
     // MARK: - Properties
-
-    private var weightData: Results<WeightData>!
-    private var userData: UserData!
-    private var progress: Int?
     
+    private var viewModel: ChartViewModelProtocol!
     
     private lazy var lineChartView: LineChartView = {
        
@@ -77,37 +73,31 @@ class ChartViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel = ChartViewModel()
         setupElements()
         updateWeightData()
     }
     
     override func viewDidLayoutSubviews() {
-        addProgressCircle(flashcardsLearned: Float(progress ?? 0) / 100, color: Colors.accent)
+        addProgressCircle(
+            flashcardsLearned: Float(viewModel.progressValue) / 100,
+            color: Colors.accent
+        )
     }
 
     // MARK: - Private methods
     
-    private func fetchWeightData() {
-        weightData = StorageManager.shared.realm.objects(WeightData.self).sorted(byKeyPath: "date")
-    }
+
     
     private func fillElementValues() {
         
-        let currentWeightDifference = (weightData.last?.weightKilo ?? 0) - userData.weightGoal
-        let startWeightDifference = (weightData.first?.weightKilo ?? 0) - userData.weightGoal
-        progress = 100 - (currentWeightDifference / startWeightDifference) * 100
-
-        currentWeightStackView.valueLabel.text = String(weightData.last?.weightKilo ?? 0)
-        startWeightStackView.valueLabel.text = String(weightData.first?.weightKilo ?? 0)
-        remainWeightStackView.valueLabel.text = String(currentWeightDifference < 0 ? 0 : currentWeightDifference)
-        progressStackView.valueLabel.text =  currentWeightDifference < 0 ? "100" : String(progress ?? 0)
+        currentWeightStackView.valueLabel.text = viewModel.currentWeight
+        startWeightStackView.valueLabel.text = viewModel.startWeight
+        remainWeightStackView.valueLabel.text = viewModel.remainWeight
+        progressStackView.valueLabel.text = viewModel.progress
         
     }
-    
-    private func fetchUserData() {
-        userData = UserDefaultsManager.shared.fetchUserData()
-    }
-    
+        
     private func setupTopInformationViews() {
         
         let saveArea = view.safeAreaLayoutGuide
@@ -199,7 +189,7 @@ class ChartViewController: UIViewController {
         let weightDetails = WeightDataDetailsViewController()
         
         weightDetails.delegate = self
-        weightDetails.lastWeightData = weightData.last
+        weightDetails.lastWeightData = viewModel.lastWeightDetailsViewModel()
         
         present(
             UINavigationController(rootViewController: weightDetails),
@@ -246,8 +236,8 @@ class ChartViewController: UIViewController {
         lineChartView.data = nil
         
         var weightValues: [ChartDataEntry] = []
-        for (index, value) in weightData.enumerated() {
-            weightValues.append(ChartDataEntry(x: Double(index), y: Double(value.weight)))
+        for (index, value) in viewModel.weightValues.enumerated() {
+            weightValues.append(ChartDataEntry(x: Double(index), y: Double(value)))
         }
         
         let dataSet = LineChartDataSet(entries: weightValues, label: "Weight data")
@@ -267,8 +257,6 @@ class ChartViewController: UIViewController {
 extension ChartViewController: WeightDataUpdaterDelegate {
     
     func updateWeightData() {
-        fetchUserData()
-        fetchWeightData()
         fillElementValues()
         setChartData()
     }
