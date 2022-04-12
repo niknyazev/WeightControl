@@ -16,20 +16,19 @@ class WeightHistoryTableViewController: UITableViewController {
     
     // MARK: - Properties
         
-    private var weightData: Results<WeightData>!
-    private let storageManager = StorageManager.shared
     private let pickerWidth: CGFloat = 400
+    private var viewModel: WeightHistoryViewModelProtocol!
     
     // MARK: - Override methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchWeightData()
+        viewModel = WeightHistoryViewModel()
         setupElements()
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        weightData.count
+        viewModel.numbersOfRows
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -38,18 +37,16 @@ class WeightHistoryTableViewController: UITableViewController {
             withIdentifier: WeightDataCellController.identifier,
             for: indexPath) as! WeightDataCellController
         
-        let weightChange = indexPath.row == weightData.count - 1
-            ? nil
-            : weightData[indexPath.row].weight - weightData[indexPath.row + 1].weight
-        
-        cell.configure(with: weightData[indexPath.row], weightChange: weightChange)
+        let cellData = viewModel.cellViewModel(at: indexPath.row)
+              
+        cell.configure(with: cellData)
         
         return cell
     }
         
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
-        let currentWeightData = weightData[indexPath.row]
+        let currentWeightData = viewModel.weightDataDetails(at: indexPath.row)
         
         let openAction = UIContextualAction(style: .normal, title: "Open") { _, _, handler in
             self.openWeightData(currentWeightData)
@@ -62,10 +59,10 @@ class WeightHistoryTableViewController: UITableViewController {
         }
         
         let deleteAction = UIContextualAction(style: .normal, title: "Delete") { _, _, handler in
-            self.storageManager.delete(currentWeightData)
-            self.tableView.deleteRows(at: [indexPath], with: .automatic)
-            self.updateWeightData()
-            handler(true)
+//            self.storageManager.delete(currentWeightData)
+//            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+//            self.updateWeightData()
+//            handler(true)
         }
         
         let result = UISwipeActionsConfiguration(actions: [editAction, openAction, deleteAction])
@@ -75,12 +72,6 @@ class WeightHistoryTableViewController: UITableViewController {
     }
         
     // MARK: - Private methods
-    
-    private func fetchWeightData() {
-        weightData = storageManager
-            .realm.objects(WeightData.self)
-            .sorted(byKeyPath: "date", ascending: false)
-    }
     
     private func setupElements() {
         title = "History"
@@ -98,7 +89,7 @@ class WeightHistoryTableViewController: UITableViewController {
         openWeightData()
     }
     
-    private func openWeightData(_ currentWeightData: WeightData? = nil) {
+    private func openWeightData(_ currentWeightData: WeightDataDetailsViewModelProtocol? = nil) {
         
         let weightDetails = WeightDataDetailsViewController()
         
@@ -141,7 +132,7 @@ class WeightHistoryTableViewController: UITableViewController {
         }
     }
     
-    private func editWeightData(weightData: WeightData? = nil) {
+    private func editWeightData(weightData: WeightDataDetailsViewModelProtocol? = nil) {
         
         let alertController = UIAlertController(
             title: "Select weight value",
@@ -174,31 +165,31 @@ class WeightHistoryTableViewController: UITableViewController {
         pickerView.delegate = self
         pickerView.dataSource = self
 
-        setValuesPickerView(weightData, datePicker, pickerView)
-
-        viewController.view.addSubview(datePicker)
-        viewController.view.addSubview(pickerView)
-
-        datePicker.translatesAutoresizingMaskIntoConstraints = false
-
-        NSLayoutConstraint.activate([
-            datePicker.centerXAnchor.constraint(equalTo: viewController.view.centerXAnchor)
-        ])
-        
-        let doneAction = UIAlertAction(title: "Done", style: .default) {_ in
-            self.saveWeightDataUpdateElements(
-                weightData: weightData,
-                date: datePicker.date,
-                weightKilo: pickerView.selectedRow(inComponent: 0),
-                weightGramm: pickerView.selectedRow(inComponent: 1)
-            )
-        }
-        
-        alertController.setValue(viewController, forKey: "contentViewController")
-        alertController.addAction(doneAction)
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-
-        present(alertController, animated: true)
+//        setValuesPickerView(weightData, datePicker, pickerView)
+//
+//        viewController.view.addSubview(datePicker)
+//        viewController.view.addSubview(pickerView)
+//
+//        datePicker.translatesAutoresizingMaskIntoConstraints = false
+//
+//        NSLayoutConstraint.activate([
+//            datePicker.centerXAnchor.constraint(equalTo: viewController.view.centerXAnchor)
+//        ])
+//
+//        let doneAction = UIAlertAction(title: "Done", style: .default) {_ in
+//            self.saveWeightDataUpdateElements(
+//                weightData: weightData,
+//                date: datePicker.date,
+//                weightKilo: pickerView.selectedRow(inComponent: 0),
+//                weightGramm: pickerView.selectedRow(inComponent: 1)
+//            )
+//        }
+//
+//        alertController.setValue(viewController, forKey: "contentViewController")
+//        alertController.addAction(doneAction)
+//        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+//
+//        present(alertController, animated: true)
         
     }
     
@@ -208,23 +199,23 @@ class WeightHistoryTableViewController: UITableViewController {
         weightKilo: Int,
         weightGramm: Int) {
         
-        if let weightData = weightData {
-            storageManager.edit(
-                weightData,
-                date: date,
-                weightKilo: weightKilo,
-                weightGramm: weightGramm
-            )
-        } else {
-            let currentWeightData = WeightData()
-            
-            currentWeightData.weightKilo = weightKilo
-            currentWeightData.weightGramm = weightGramm
-            currentWeightData.date = date
-            
-            storageManager.save(currentWeightData)
-        }
-            
+//        if let weightData = weightData {
+//            storageManager.edit(
+//                weightData,
+//                date: date,
+//                weightKilo: weightKilo,
+//                weightGramm: weightGramm
+//            )
+//        } else {
+//            let currentWeightData = WeightData()
+//
+//            currentWeightData.weightKilo = weightKilo
+//            currentWeightData.weightGramm = weightGramm
+//            currentWeightData.date = date
+//
+//            storageManager.save(currentWeightData)
+//        }
+//
         updateWeightData()
     }
 }

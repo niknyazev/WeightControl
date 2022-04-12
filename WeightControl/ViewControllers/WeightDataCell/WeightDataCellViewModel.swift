@@ -8,15 +8,31 @@
 import Foundation
 
 protocol WeightDataCellViewModelProtocol {
-    var date: Date { get }
-    var weight: Int { get }
+    var date: String { get }
+    var weight: String { get }
     var hasPicture: Bool { get }
-    var weightChange: Double { get }
+    var weightChange: Double? { get }
 }
 
 class WeightDataCellViewModel: WeightDataCellViewModelProtocol {
-    var date: Date = .now
-    var weight: Int = 0
-    var hasPicture: Bool = false
-    var weightChange: Double = 0
+    
+    var weightChange: Double? = 0
+    
+    var date: String {
+        weightData.dateDescription
+    }
+    
+    var weight: String {
+        weightData.weightDescription
+    }
+    
+    var hasPicture: Bool {
+        weightData.photoData != nil
+    }
+    
+    private let weightData: WeightData
+    
+    init(weightData: WeightData) {
+        self.weightData = weightData
+    }
 }

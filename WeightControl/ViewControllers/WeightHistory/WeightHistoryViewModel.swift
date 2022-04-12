@@ -6,11 +6,37 @@
 //
 
 import Foundation
+import RealmSwift
 
 protocol WeightHistoryViewModelProtocol {
-    var weightDatas: [WeightData] { get }
+//    var weightData: [WeightData] { get }
+    var numbersOfRows: Int { get }
+    func cellViewModel(at index: Int) -> WeightDataCellViewModelProtocol
+    func weightDataDetails(at index: Int) -> WeightDataDetailsViewModelProtocol
+    
 }
 
 class WeightHistoryViewModel: WeightHistoryViewModelProtocol {
-    var weightDatas: [WeightData] = []
+    
+    var numbersOfRows: Int {
+        weightData.count
+    }
+    
+    private var weightData: Results<WeightData>
+    private let storageManager = StorageManager.shared
+
+    init() {
+        weightData = storageManager
+            .realm.objects(WeightData.self)
+            .sorted(byKeyPath: "date", ascending: false)
+    }
+    
+    func cellViewModel(at index: Int) -> WeightDataCellViewModelProtocol {
+        WeightDataCellViewModel(weightData: weightData[index])
+    }
+    
+    func weightDataDetails(at index: Int) -> WeightDataDetailsViewModelProtocol {
+        WeightDataDetailsViewModel(weightData: weightData[index])
+    }
+    
 }

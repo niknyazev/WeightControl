@@ -73,7 +73,6 @@ class ChartViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel = ChartViewModel()
         setupElements()
         updateWeightData()
     }
@@ -257,6 +256,7 @@ class ChartViewController: UIViewController {
 extension ChartViewController: WeightDataUpdaterDelegate {
     
     func updateWeightData() {
+        viewModel = ChartViewModel()
         fillElementValues()
         setChartData()
     }

@@ -46,13 +46,13 @@ class WeightDataCellController: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
         
-    func configure(with weightDate: WeightData, weightChange: Double?) {
+    func configure(with weightData: WeightDataCellViewModelProtocol) {
         
-        dateLabel.text = weightDate.dateDescription
-        weightLabel.text = weightDate.weightDescription
-        iconImage.tintColor = weightDate.photoData == nil ? .systemGray3 : Colors.title
+        dateLabel.text = weightData.date
+        weightLabel.text = weightData.weight
+        iconImage.tintColor = weightData.hasPicture ? .systemGray3 : Colors.title
 
-        if let weightChange = weightChange {
+        if let weightChange = weightData.weightChange {
             let prefix = weightChange > 0 ? "+" : ""
             weightChangeLabel.text = prefix +  String(format: "%.2f", weightChange)
             weightChangeLabel.textColor = weightChange > 0 ? Colors.failure : Colors.success
