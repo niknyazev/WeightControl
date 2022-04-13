@@ -33,7 +33,16 @@ class WeightHistoryViewModel: WeightHistoryViewModelProtocol {
     }
     
     func cellViewModel(at index: Int) -> WeightDataCellViewModelProtocol {
-        WeightDataCellViewModel(weightData: weightData[index])
+        
+        var lastWeight: Double? = nil
+        
+        if index > 0 {
+            lastWeight = weightData[index - 1].weight
+        }
+        return WeightDataCellViewModel(
+            weightData: weightData[index],
+            lastWeight: lastWeight
+        )
     }
     
     func weightDataDetails(at index: Int) -> WeightDataDetailsViewModelProtocol {

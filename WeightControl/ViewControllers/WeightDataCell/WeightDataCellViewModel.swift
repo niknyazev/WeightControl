@@ -11,12 +11,14 @@ protocol WeightDataCellViewModelProtocol {
     var date: String { get }
     var weight: String { get }
     var hasPicture: Bool { get }
-    var weightChange: Double? { get }
+    var weightChange: String? { get }
+    var isDecline: Bool { get }
 }
 
 class WeightDataCellViewModel: WeightDataCellViewModelProtocol {
     
-    var weightChange: Double? = 0
+    var weightChange: String?
+    var isDecline: Bool
     
     var date: String {
         weightData.dateDescription
@@ -32,7 +34,15 @@ class WeightDataCellViewModel: WeightDataCellViewModelProtocol {
     
     private let weightData: WeightData
     
-    init(weightData: WeightData) {
+    init(weightData: WeightData, lastWeight: Double? = nil) {
         self.weightData = weightData
+        if let lastWeight = lastWeight {
+            let weightChange = weightData.weight - lastWeight
+            isDecline = weightChange < 0
+            let prefix = isDecline ? "-" : "+"
+            self.weightChange = prefix + String(format: "%.2f", weightChange)
+        } else {
+            isDecline = false
+        }
     }
 }

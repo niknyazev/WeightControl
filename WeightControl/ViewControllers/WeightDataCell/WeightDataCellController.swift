@@ -50,12 +50,11 @@ class WeightDataCellController: UITableViewCell {
         
         dateLabel.text = weightData.date
         weightLabel.text = weightData.weight
-        iconImage.tintColor = weightData.hasPicture ? .systemGray3 : Colors.title
+        iconImage.tintColor = weightData.hasPicture ? Colors.title : .systemGray3
 
         if let weightChange = weightData.weightChange {
-            let prefix = weightChange > 0 ? "+" : ""
-            weightChangeLabel.text = prefix +  String(format: "%.2f", weightChange)
-            weightChangeLabel.textColor = weightChange > 0 ? Colors.failure : Colors.success
+            weightChangeLabel.text = weightChange
+            weightChangeLabel.textColor = weightData.isDecline ? Colors.success : Colors.failure
             weightChangeLabel.isHidden = false
         } else {
             weightChangeLabel.isHidden = true
