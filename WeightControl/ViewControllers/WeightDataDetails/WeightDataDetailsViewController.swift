@@ -35,11 +35,9 @@ class WeightDataDetailsViewController: UITableViewController {
         return result
     }()
     
-    var weightData: WeightDataDetailsViewModel?
-    var lastWeightData: WeightDataDetailsViewModel?
+    var weightData: WeightDataDetailsViewModelProtocol?
+    var lastWeightData: WeightDataDetailsViewModelProtocol?
     var delegate: WeightDataUpdaterDelegate!
-    
-    private let storageManager = StorageManager.shared
     
     // MARK: - Override methods
     
@@ -124,28 +122,15 @@ class WeightDataDetailsViewController: UITableViewController {
             ? nil
             : bodyImage.image?.pngData()
         
-        if let weightData = weightData {
-//            storageManager.edit(
-//                weightData,
-//                date: datePicker.date,
-//                weightKilo: weightPicker.selectedRow(inComponent: 0),
-//                weightGramm: weightPicker.selectedRow(inComponent: 1),
-//                photoData: imageData
-//            )
-        } else {
-            let currentWeightData = WeightData()
-            
-            currentWeightData.weightKilo = weightPicker.selectedRow(inComponent: 0)
-            currentWeightData.weightGramm = weightPicker.selectedRow(inComponent: 1)
-            currentWeightData.date = datePicker.date
-            currentWeightData.photoData = imageData
-            
-            storageManager.save(currentWeightData)
-        }
+        weightData?.saveData(
+            date: datePicker.date,
+            weightKilo: weightPicker.selectedRow(inComponent: 0),
+            weightGramm: weightPicker.selectedRow(inComponent: 1),
+            photoData: imageData
+        )
         
         delegate.updateWeightData()
         dismiss(animated: true, completion: nil)
-        
     }
     
     @objc func cancelPressed() {
@@ -209,14 +194,14 @@ class WeightDataDetailsViewController: UITableViewController {
         ])
     }
     
-    private func setupElements() {
-        
+    private func setupNavigationBar() {
+       
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
         appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
         appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
         appearance.backgroundColor = Colors.barBackground
-               
+        
         if let navigationController = navigationController {
             navigationController.navigationBar.prefersLargeTitles = false
             navigationController.navigationBar.compactAppearance = appearance
@@ -236,6 +221,11 @@ class WeightDataDetailsViewController: UITableViewController {
             target: self,
             action: #selector(cancelPressed)
         )
+    }
+    
+    private func setupElements() {
+        
+        setupNavigationBar()
         
         tableView = UITableView(frame: CGRect.zero, style: .insetGrouped)
         
@@ -244,26 +234,33 @@ class WeightDataDetailsViewController: UITableViewController {
         weightPicker.delegate = self
         weightPicker.dataSource = self
         
-//        guard let weightData = weightData else {
-//            if let lastWeightData = lastWeightData {
-//                weightPicker.selectRow(lastWeightData.weightKilo, inComponent: 0, animated: false)
-//                weightPicker.selectRow(lastWeightData.weightGramm, inComponent: 1, animated: false)
-//            } else {
-//                weightPicker.selectRow(50, inComponent: 0, animated: false)
-//            }
-//            return
-//        }
-//        
-//        datePicker.date = weightData.date
-//        weightPicker.selectRow(weightData.weightKilo, inComponent: 0, animated: false)
-//        weightPicker.selectRow(weightData.weightGramm, inComponent: 1, animated: false)
-//        
-//        if let photoData = weightData.photoData {
-//            bodyImage.image = UIImage(data: photoData)
-//            bodyImage.contentMode = .scaleToFill
-//        } else {
-//            bodyImage.contentMode = .scaleAspectFit
-//        }
+        guard let weightData = weightData else {
+            if let lastWeightData = lastWeightData {
+                setWeightPicker(kilo: lastWeightData.weightKilo, gram: lastWeightData.weightGramm)
+            } else {
+                setWeightPicker(kilo: 70, gram: 0)
+            }
+            return
+        }
+        
+        datePicker.date = weightData.date
+        descriptionField.text = weightData.description
+        setWeightPicker(kilo: weightData.weightKilo, gram: weightData.weightGramm)
+        setupImage(with: weightData.photoData)
+    }
+    
+    private func setupImage(with data: Data?) {
+        if let photoData = data {
+            bodyImage.image = UIImage(data: photoData)
+            bodyImage.contentMode = .scaleToFill
+        } else {
+            bodyImage.contentMode = .scaleAspectFit
+        }
+    }
+    
+    private func setWeightPicker(kilo: Int, gram: Int) {
+        weightPicker.selectRow(kilo, inComponent: 0, animated: false)
+        weightPicker.selectRow(gram, inComponent: 1, animated: false)
     }
 }
 

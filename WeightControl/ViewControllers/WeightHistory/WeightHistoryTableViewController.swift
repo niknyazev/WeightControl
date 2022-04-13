@@ -49,7 +49,7 @@ class WeightHistoryTableViewController: UITableViewController {
         let currentWeightData = viewModel.weightDataDetails(at: indexPath.row)
         
         let openAction = UIContextualAction(style: .normal, title: "Open") { _, _, handler in
-            self.openWeightData(currentWeightData)
+            self.openWeightData(indexPath.row)
             handler(true)
         }
         
@@ -89,17 +89,17 @@ class WeightHistoryTableViewController: UITableViewController {
         openWeightData()
     }
     
-    private func openWeightData(_ currentWeightData: WeightDataDetailsViewModelProtocol? = nil) {
+    private func openWeightData(_ index: Int? = nil) {
         
         let weightDetails = WeightDataDetailsViewController()
         
         weightDetails.delegate = self
         
-//        if let currentWeightData = currentWeightData {
-//            weightDetails.weightData = currentWeightData
-//        } else {
-//            weightDetails.lastWeightData = weightData.first
-//        }
+        if let index = index {
+            weightDetails.weightData = viewModel.weightDataDetails(at: index)
+        } else {
+            weightDetails.lastWeightData = viewModel.lastWeightDataDetails()
+        }
         
         present(
             UINavigationController(rootViewController: weightDetails),

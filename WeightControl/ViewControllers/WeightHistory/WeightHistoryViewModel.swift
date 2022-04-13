@@ -9,11 +9,12 @@ import Foundation
 import RealmSwift
 
 protocol WeightHistoryViewModelProtocol {
-//    var weightData: [WeightData] { get }
+    
     var numbersOfRows: Int { get }
+    
     func cellViewModel(at index: Int) -> WeightDataCellViewModelProtocol
     func weightDataDetails(at index: Int) -> WeightDataDetailsViewModelProtocol
-    
+    func lastWeightDataDetails() -> WeightDataDetailsViewModelProtocol?
 }
 
 class WeightHistoryViewModel: WeightHistoryViewModelProtocol {
@@ -37,6 +38,10 @@ class WeightHistoryViewModel: WeightHistoryViewModelProtocol {
     
     func weightDataDetails(at index: Int) -> WeightDataDetailsViewModelProtocol {
         WeightDataDetailsViewModel(weightData: weightData[index])
+    }
+    
+    func lastWeightDataDetails() -> WeightDataDetailsViewModelProtocol? {
+        WeightDataDetailsViewModel(weightData: weightData.last)
     }
     
 }
