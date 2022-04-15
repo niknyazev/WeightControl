@@ -8,42 +8,30 @@
 import UIKit
 
 class SettingsViewController: UITableViewController {
-
-    struct SettingRow {
-        let values: [String]
-        var value: String
-        let title: String
-    }
     
     // MARK: - Properties
-    
-    private let userDefaults = UserDefaultsManager.shared
-    private var pickerValues: [SettingRow] = []
-    private var results: [SettingRow] = []
+        
     private let pickerWidth: CGFloat = 250
     private let cellId = "settingData"
-    private var userData: UserData!
-    private var currentWeight: Double = 0
+    private var viewModel: SettingsViewModelProtocol!
     
     // MARK: - Override methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchData()
-        fillTableWithRowSettings()
+        viewModel = SettingsViewModel()
         setupElements()
-        calculateIndicators()
     }
     
     // MARK: - Table view
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return section == 0 ? "User data" : "Weights"
+        viewModel.titleForHeader(for: section)
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        selectValue(tag: indexPath.row)
+       selectValue(indexPath: indexPath)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -51,138 +39,40 @@ class SettingsViewController: UITableViewController {
         let cell = UITableViewCell(style: .value2, reuseIdentifier: nil)
         var content = cell.defaultContentConfiguration()
         
-        if indexPath.section == 0 {
-            content.text = pickerValues[indexPath.row].title
-           
-            let valueText = pickerValues[indexPath.row].value
-
+        let cellData = viewModel.cellViewModel(for: indexPath)
+        
+        content.text = cellData.title
+       
+        if cellData.isEditableCell {
             content.secondaryAttributedText = NSAttributedString(
-                string: valueText,
+                string: cellData.value,
                 attributes: [.foregroundColor: Colors.title]
             )
         } else {
-            content.text = results[indexPath.row].title
-           
-            let valueText = results[indexPath.row].value
-
             content.secondaryAttributedText = NSAttributedString(
-                string: valueText,
+                string: cellData.value,
                 attributes: [
                     .foregroundColor: UIColor.black,
                     .font: UIFont.systemFont(ofSize: 17, weight: .bold)
                 ]
             )
         }
-        
+
         cell.contentConfiguration = content
         return cell
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? pickerValues.count : results.count
+        viewModel.numbersOfRowsInSection(for: section)
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        2
+        viewModel.numbersOfSections()
     }
     
     // MARK: - Private methods
-    
-    private func fetchData() {
-        userData = userDefaults.fetchUserData()
-        setCurrentWeight()
-    }
-    
-    private func calculateIndicators() {
         
-        let heightString = pickerValues[1].value
-        
-        let weightCalculator = WeightCalculator(
-            height: Int(heightString) ?? 0,
-            weight: currentWeight
-        )
-        
-        let currentBmi = weightCalculator.calculateBmi()
-        let bestWeights = weightCalculator.calculateBestWeights()
-        
-        results[0].value = String(format: "%.2f", currentBmi)
-        results[1].value = String(bestWeights.max)
-        results[2].value = String(bestWeights.max)
-    }
-    
-    private func setCurrentWeight() {
-        // TODO: move to class
-        let weightData = StorageManager.shared.realm.objects(WeightData.self).sorted(byKeyPath: "date")
-        currentWeight = weightData.last?.weight ?? 0
-    }
-    
-    private func fillTableWithRowSettings() {
-        
-        let sexes = [
-            UserData.Sex.male.rawValue,
-            UserData.Sex.female.rawValue
-        ]
-        
-        pickerValues.append(
-            SettingRow(
-                values: (10...110).map { String($0) },
-                value: String(userData.age),
-                title: "age"
-           )
-        )
-                
-        pickerValues.append(
-            SettingRow(
-                values: (10...250).map { String($0) },
-                value: String(userData.height),
-                title: "height"
-            )
-        )
-        
-        pickerValues.append(
-            SettingRow(
-                values: sexes,
-                value: userData.sex.rawValue,
-                title: "sex"
-            )
-        )
-        
-        pickerValues.append(
-            SettingRow(
-                values: (0...300).map { String($0) },
-                value: String(userData.weightGoal),
-                title: "weight goal"
-            )
-        )
-    
-        // Results rows
-        
-        results.append(
-            SettingRow(
-                values: [],
-                value: "0",
-                title: "Current BMI"
-            )
-        )
-                
-        results.append(
-            SettingRow(
-                values: [],
-                value: "0",
-                title: "Minimum weight"
-            )
-        )
-    
-        results.append(
-            SettingRow(
-                values: [],
-                value: "0",
-                title: "Maximum weight"
-            )
-        )
-    }
-    
-    private func selectValue(tag: Int) {
+    private func selectValue(indexPath: IndexPath) {
         
         let viewController = UIViewController()
         viewController.preferredContentSize = CGSize(width: pickerWidth, height: 170)
@@ -190,10 +80,12 @@ class SettingsViewController: UITableViewController {
         let pickerView = UIPickerView(frame: CGRect(x: 0, y: 0, width: pickerWidth, height: 170))
         pickerView.delegate = self
         pickerView.dataSource = self
-        pickerView.tag = tag
+        pickerView.tag = indexPath.row
 
-        let currentValue = pickerValues[tag].value
-        let currentValueIndex = pickerValues[tag].values.firstIndex(of: currentValue)
+        let currentCell = viewModel.cellViewModel(for: indexPath)
+        
+        let currentValue = currentCell.value
+        let currentValueIndex = currentCell.values.firstIndex(of: currentValue) // TODO: extract to method
 
         guard let currentValueIndex = currentValueIndex else {
             return
@@ -203,38 +95,38 @@ class SettingsViewController: UITableViewController {
 
         viewController.view.addSubview(pickerView)
 
-        let editRadiusAlert = UIAlertController(title: "Choose \(pickerValues[pickerView.tag].title)", message: "", preferredStyle: .alert)
+        let editRadiusAlert = UIAlertController(
+            title: currentCell.titlePicker,
+            message: "",
+            preferredStyle: .alert
+        )
 
         editRadiusAlert.setValue(viewController, forKey: "contentViewController")
         editRadiusAlert.addAction(UIAlertAction(title: "Done", style: .default) { _ in
-            self.setSelectedValue(selectedRow: pickerView.selectedRow(inComponent: 0), tag: tag)
+            self.setSelectedValue(
+                selectedRow: pickerView.selectedRow(inComponent: 0),
+                tag: indexPath.row
+            )
         })
-        
+
         editRadiusAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        
+
         self.present(editRadiusAlert, animated: true)
     }
     
     private func setSelectedValue(selectedRow: Int, tag: Int) {
-        pickerValues[tag].value
-            = pickerValues[tag].values[selectedRow]
-        
-        saveValues()
-        calculateIndicators()
+        let currentCell = viewModel.cellViewModel(for: IndexPath(row: tag, section: 0))
+//        currentCell.value = currentCell.values[selectedRow]
         tableView.reloadData()
         updateChartScene()
-    }
-    
-    private func saveValues() {
         
-        let userData = UserData(
-            age: Int(pickerValues[0].value) ?? 0,
-            height: Int(pickerValues[1].value) ?? 0,
-            weightGoal: Int(pickerValues[3].value) ?? 0,
-            sex: UserData.Sex(rawValue: pickerValues[2].value) ?? .male
-        )
-
-        userDefaults.saveUserData(userData: userData)
+//        pickerValues[tag].value
+//            = pickerValues[tag].values[selectedRow]
+//
+//        saveValues()
+//        calculateIndicators()
+//
+//
     }
     
     private func setupElements() {
@@ -262,7 +154,8 @@ extension SettingsViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        pickerValues[pickerView.tag].values[row]
+        // TODO: make method
+        viewModel.cellViewModel(for: IndexPath(row: pickerView.tag, section: 0)).values[row]
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -270,7 +163,8 @@ extension SettingsViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerValues[pickerView.tag].values.count
+        // TODO: make method
+        viewModel.cellViewModel(for: IndexPath(row: pickerView.tag, section: 0)).values.count
     }
 
 }
