@@ -43,7 +43,7 @@ class SettingsViewController: UITableViewController {
         
         content.text = cellData.title
        
-        if cellData.isEditableCell {
+        if cellData.isEditable {
             content.secondaryAttributedText = NSAttributedString(
                 string: cellData.value,
                 attributes: [.foregroundColor: Colors.title]
@@ -116,17 +116,10 @@ class SettingsViewController: UITableViewController {
     
     private func setSelectedValue(selectedRow: Int, tag: Int) {
         let currentCell = viewModel.cellViewModel(for: IndexPath(row: tag, section: 0))
-//        currentCell.value = currentCell.values[selectedRow]
+        currentCell.changeValue(with: selectedRow)
+        viewModel.saveValues()
         tableView.reloadData()
         updateChartScene()
-        
-//        pickerValues[tag].value
-//            = pickerValues[tag].values[selectedRow]
-//
-//        saveValues()
-//        calculateIndicators()
-//
-//
     }
     
     private func setupElements() {

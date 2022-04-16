@@ -12,23 +12,39 @@ protocol SettingsViewModelProtocol {
     func numbersOfSections() -> Int
     func numbersOfRowsInSection(for section: Int) -> Int
     func cellViewModel(for indexPath: IndexPath ) -> SettingsCellViewModelProtocol
+    func saveValues()
 }
 
 protocol SettingsCellViewModelProtocol {
+    
     var values: [String] { get }
     var value: String { get set }
     var title: String { get }
-    var isEditableCell: Bool { get }
+    var isEditable: Bool { get }
     var titlePicker: String { get }
+    
+    func changeValue(with index: Int)
 }
 
-struct SettingsCellViewModel: SettingsCellViewModelProtocol {
+class SettingsCellViewModel: SettingsCellViewModelProtocol {
+    
     let values: [String]
     var value: String
     let title: String
-    var isEditableCell: Bool
+    var isEditable: Bool
     var titlePicker: String {
         "Choose \(title)"
+    }
+    
+    init(values: [String], value: String, title: String, isEditable: Bool) {
+        self.values = values
+        self.value = value
+        self.title = title
+        self.isEditable = isEditable
+    }
+    
+    func changeValue(with index: Int) {
+        value = values[index]
     }
 }
 
@@ -38,10 +54,12 @@ class SettingsViewModel: SettingsViewModelProtocol {
     private var pickerValues: [SettingsCellViewModelProtocol] = []
     private var results: [SettingsCellViewModelProtocol] = []
     private var userData: UserData!
+    private let userDefaults = UserDefaultsManager.shared
     
     init() {
         fetchData()
         fillSettingsRows()
+        calculateIndicators()
     }
     
     // MARK: - Public methods
@@ -62,10 +80,22 @@ class SettingsViewModel: SettingsViewModelProtocol {
         indexPath.section == 0 ? pickerValues[indexPath.row] : results[indexPath.row]
     }
     
+    func saveValues() {
+
+        let userData = UserData(
+            age: Int(pickerValues[0].value) ?? 0,
+            height: Int(pickerValues[1].value) ?? 0,
+            weightGoal: Int(pickerValues[3].value) ?? 0,
+            sex: UserData.Sex(rawValue: pickerValues[2].value) ?? .male
+        )
+
+        userDefaults.saveUserData(userData: userData)
+    }
+    
     // MARK: - Private methods
     
     private func fetchData() {
-        userData = UserDefaultsManager.shared.fetchUserData()
+        userData = userDefaults.fetchUserData()
         let weightData = StorageManager
             .shared
             .realm
@@ -104,7 +134,7 @@ class SettingsViewModel: SettingsViewModelProtocol {
                 values: (10...110).map { String($0) },
                 value: String(userData.age),
                 title: "age",
-                isEditableCell: true
+                isEditable: true
            )
         )
                 
@@ -113,7 +143,7 @@ class SettingsViewModel: SettingsViewModelProtocol {
                 values: (10...250).map { String($0) },
                 value: String(userData.height),
                 title: "height",
-                isEditableCell: true
+                isEditable: true
             )
         )
         
@@ -122,7 +152,7 @@ class SettingsViewModel: SettingsViewModelProtocol {
                 values: sexes,
                 value: userData.sex.rawValue,
                 title: "sex",
-                isEditableCell: true
+                isEditable: true
             )
         )
         
@@ -131,7 +161,7 @@ class SettingsViewModel: SettingsViewModelProtocol {
                 values: (0...300).map { String($0) },
                 value: String(userData.weightGoal),
                 title: "weight goal",
-                isEditableCell: true
+                isEditable: true
             )
         )
     
@@ -142,7 +172,7 @@ class SettingsViewModel: SettingsViewModelProtocol {
                 values: [],
                 value: "0",
                 title: "Current BMI",
-                isEditableCell: false
+                isEditable: false
             )
         )
                 
@@ -151,7 +181,7 @@ class SettingsViewModel: SettingsViewModelProtocol {
                 values: [],
                 value: "0",
                 title: "Minimum weight",
-                isEditableCell: false
+                isEditable: false
             )
         )
     
@@ -160,21 +190,9 @@ class SettingsViewModel: SettingsViewModelProtocol {
                 values: [],
                 value: "0",
                 title: "Maximum weight",
-                isEditableCell: false
+                isEditable: false
             )
         )
     }
-    
-    private func saveValues() {
-
-//        let userData = UserData(
-//            age: Int(pickerValues[0].value) ?? 0,
-//            height: Int(pickerValues[1].value) ?? 0,
-//            weightGoal: Int(pickerValues[3].value) ?? 0,
-//            sex: UserData.Sex(rawValue: pickerValues[2].value) ?? .male
-//        )
-//
-//        userDefaults.saveUserData(userData: userData)
-    }
-    
+        
 }
