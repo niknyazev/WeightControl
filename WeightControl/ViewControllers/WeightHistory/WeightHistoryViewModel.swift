@@ -15,6 +15,7 @@ protocol WeightHistoryViewModelProtocol {
     func cellViewModel(at index: Int) -> WeightDataCellViewModelProtocol
     func weightDataDetails(at index: Int?) -> WeightDataDetailsViewModelProtocol
     func lastWeightDataDetails() -> WeightDataDetailsViewModelProtocol?
+    func deleteWeightData(with index: Int)
 }
 
 class WeightHistoryViewModel: WeightHistoryViewModelProtocol {
@@ -30,6 +31,11 @@ class WeightHistoryViewModel: WeightHistoryViewModelProtocol {
         weightData = storageManager
             .realm.objects(WeightData.self)
             .sorted(byKeyPath: "date", ascending: false)
+    }
+    
+    func deleteWeightData(with index: Int) {
+        let currentWeightData = weightData[index]
+        storageManager.delete(currentWeightData)
     }
     
     func cellViewModel(at index: Int) -> WeightDataCellViewModelProtocol {
