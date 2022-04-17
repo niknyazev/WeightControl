@@ -115,9 +115,7 @@ class SettingsViewController: UITableViewController {
     }
     
     private func setSelectedValue(selectedRow: Int, tag: Int) {
-        let currentCell = viewModel.cellViewModel(for: IndexPath(row: tag, section: 0))
-        currentCell.changeValue(with: selectedRow)
-        viewModel.saveValues()
+        viewModel.setValueForEditableCell(row: tag, newValueIndex: selectedRow)
         tableView.reloadData()
         updateChartScene()
     }

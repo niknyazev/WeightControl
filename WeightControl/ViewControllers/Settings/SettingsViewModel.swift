@@ -14,6 +14,7 @@ protocol SettingsViewModelProtocol {
     func cellViewModel(for indexPath: IndexPath ) -> SettingsCellViewModelProtocol
     func saveValues()
     func valuesForEditableCell(for row: Int) -> [String]
+    func setValueForEditableCell(row: Int, newValueIndex: Int)
 }
 
 class SettingsViewModel: SettingsViewModelProtocol {
@@ -31,6 +32,12 @@ class SettingsViewModel: SettingsViewModelProtocol {
     }
     
     // MARK: - Public methods
+    
+    func setValueForEditableCell(row: Int, newValueIndex: Int) {
+        var currentRow = pickerValues[row]
+        currentRow.value = currentRow.values[newValueIndex]
+        saveValues()
+    }
     
     func valuesForEditableCell(for row: Int) -> [String] {
         pickerValues[row].values
