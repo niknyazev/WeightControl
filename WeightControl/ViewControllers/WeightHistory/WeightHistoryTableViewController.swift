@@ -53,10 +53,14 @@ class WeightHistoryTableViewController: UITableViewController {
             handler(true)
         }
         
+        openAction.backgroundColor = Colors.accent
+        
         let editAction = UIContextualAction(style: .normal, title: "Edit") { _, _, handler in
             self.editWeightData(weightData: currentWeightData)
             handler(true)
         }
+        
+        editAction.backgroundColor = Colors.edit
         
         let deleteAction = UIContextualAction(style: .normal, title: "Delete") { _, _, handler in
             self.viewModel.deleteWeightData(with: indexPath.row)
@@ -64,6 +68,8 @@ class WeightHistoryTableViewController: UITableViewController {
             self.updateWeightData()
             handler(true)
         }
+        
+        deleteAction.backgroundColor = Colors.delete
         
         let result = UISwipeActionsConfiguration(actions: [editAction, openAction, deleteAction])
         

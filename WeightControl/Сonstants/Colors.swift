@@ -74,4 +74,17 @@ final class Colors {
         alpha: 1
     )
     
+    static let edit = UIColor(
+        red: 153/255,
+        green: 202/255,
+        blue: 60/255,
+        alpha: 1
+    )
+    
+    static let delete = UIColor(
+        red: 208/255,
+        green: 0,
+        blue: 0,
+        alpha: 1
+    )
 }
