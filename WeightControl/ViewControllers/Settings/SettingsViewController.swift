@@ -147,8 +147,7 @@ extension SettingsViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        // TODO: make method
-        viewModel.cellViewModel(for: IndexPath(row: pickerView.tag, section: 0)).values[row]
+        viewModel.valuesForEditableCell(for: pickerView.tag)[row]
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -156,8 +155,7 @@ extension SettingsViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        // TODO: make method
-        viewModel.cellViewModel(for: IndexPath(row: pickerView.tag, section: 0)).values.count
+        viewModel.valuesForEditableCell(for: pickerView.tag).count
     }
 
 }

@@ -13,39 +13,7 @@ protocol SettingsViewModelProtocol {
     func numbersOfRowsInSection(for section: Int) -> Int
     func cellViewModel(for indexPath: IndexPath ) -> SettingsCellViewModelProtocol
     func saveValues()
-}
-
-protocol SettingsCellViewModelProtocol {
-    
-    var values: [String] { get }
-    var value: String { get set }
-    var title: String { get }
-    var isEditable: Bool { get }
-    var titlePicker: String { get }
-    
-    func changeValue(with index: Int)
-}
-
-class SettingsCellViewModel: SettingsCellViewModelProtocol {
-    
-    let values: [String]
-    var value: String
-    let title: String
-    var isEditable: Bool
-    var titlePicker: String {
-        "Choose \(title)"
-    }
-    
-    init(values: [String], value: String, title: String, isEditable: Bool) {
-        self.values = values
-        self.value = value
-        self.title = title
-        self.isEditable = isEditable
-    }
-    
-    func changeValue(with index: Int) {
-        value = values[index]
-    }
+    func valuesForEditableCell(for row: Int) -> [String]
 }
 
 class SettingsViewModel: SettingsViewModelProtocol {
@@ -63,6 +31,10 @@ class SettingsViewModel: SettingsViewModelProtocol {
     }
     
     // MARK: - Public methods
+    
+    func valuesForEditableCell(for row: Int) -> [String] {
+        pickerValues[row].values
+    }
     
     func titleForHeader(for section: Int) -> String {
         section == 0 ? "User data" : "Weights"
@@ -195,4 +167,37 @@ class SettingsViewModel: SettingsViewModelProtocol {
         )
     }
         
+}
+
+protocol SettingsCellViewModelProtocol {
+    
+    var values: [String] { get }
+    var value: String { get set }
+    var title: String { get }
+    var isEditable: Bool { get }
+    var titlePicker: String { get }
+    
+    func changeValue(with index: Int)
+}
+
+class SettingsCellViewModel: SettingsCellViewModelProtocol {
+    
+    let values: [String]
+    var value: String
+    let title: String
+    var isEditable: Bool
+    var titlePicker: String {
+        "Choose \(title)"
+    }
+    
+    init(values: [String], value: String, title: String, isEditable: Bool) {
+        self.values = values
+        self.value = value
+        self.title = title
+        self.isEditable = isEditable
+    }
+    
+    func changeValue(with index: Int) {
+        value = values[index]
+    }
 }
