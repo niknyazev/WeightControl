@@ -35,7 +35,7 @@ class WeightDataDetailsViewController: UITableViewController {
         return result
     }()
     
-    var weightData: WeightDataDetailsViewModelProtocol?
+    var weightData: WeightDataDetailsViewModelProtocol!
     var lastWeightData: WeightDataDetailsViewModelProtocol?
     var delegate: WeightDataUpdaterDelegate!
     
@@ -86,32 +86,34 @@ class WeightDataDetailsViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 2 {
-            
-            tableView.deselectRow(at: indexPath, animated: true)
-            
-            let alertController = UIAlertController(
-                title: nil,
-                message: nil,
-                preferredStyle: .actionSheet
-            )
-            
-            let camera = UIAlertAction(title: "Camera", style: .default) { _ in
-                self.chooseImagePicker(source: .camera)
-            }
-            
-            let photo = UIAlertAction(title: "Photo", style: .default) { _ in
-                self.chooseImagePicker(source: .photoLibrary)
-            }
-            
-            let cancel = UIAlertAction(title: "Cancel", style: .cancel)
-            
-            alertController.addAction(camera)
-            alertController.addAction(photo)
-            alertController.addAction(cancel)
-            
-            present(alertController, animated: true)
+        
+        if indexPath.row != 2 {
+            return
         }
+            
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let alertController = UIAlertController(
+            title: nil,
+            message: nil,
+            preferredStyle: .actionSheet
+        )
+        
+        let camera = UIAlertAction(title: "Camera", style: .default) { _ in
+            self.chooseImagePicker(source: .camera)
+        }
+        
+        let photo = UIAlertAction(title: "Photo", style: .default) { _ in
+            self.chooseImagePicker(source: .photoLibrary)
+        }
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+        
+        alertController.addAction(camera)
+        alertController.addAction(photo)
+        alertController.addAction(cancel)
+        
+        present(alertController, animated: true)
     }
     
     // MARK: - Handler methods
@@ -122,7 +124,7 @@ class WeightDataDetailsViewController: UITableViewController {
             ? nil
             : bodyImage.image?.pngData()
         
-        weightData?.saveData(
+        weightData.saveData(
             date: datePicker.date,
             weightKilo: weightPicker.selectedRow(inComponent: 0),
             weightGramm: weightPicker.selectedRow(inComponent: 1),

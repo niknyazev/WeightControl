@@ -99,6 +99,7 @@
 		013A3273280189310004EF68 /* WeightHistory */ = {
 			isa = PBXGroup;
 			children = (
+				013A3274280189500004EF68 /* WeightDataCell */,
 				01E4787727CE663F0068D14B /* WeightHistoryTableViewController.swift */,
 				013A32782801898A0004EF68 /* WeightHistoryViewModel.swift */,
 			);
@@ -161,7 +162,6 @@
 				013A3272280189270004EF68 /* Settings */,
 				013A3273280189310004EF68 /* WeightHistory */,
 				013A32752801895B0004EF68 /* Chart */,
-				013A3274280189500004EF68 /* WeightDataCell */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";

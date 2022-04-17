@@ -36,6 +36,7 @@ class SettingsViewModel: SettingsViewModelProtocol {
     func setValueForEditableCell(row: Int, newValueIndex: Int) {
         var currentRow = editableCells[row]
         currentRow.value = currentRow.values[newValueIndex]
+        calculateResultCells()
         saveValues()
     }
     

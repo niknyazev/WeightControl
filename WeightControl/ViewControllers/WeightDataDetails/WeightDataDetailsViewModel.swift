@@ -43,8 +43,8 @@ class WeightDataDetailsViewModel: WeightDataDetailsViewModelProtocol {
     private let weightData: WeightData?
     private let storageManager = StorageManager.shared
     
-    init(weightData: WeightData?) {
-        self.weightData = weightData
+    init(weightData: WeightData? = nil) {
+        self.weightData = weightData ?? WeightData()
     }
     
     func saveData(date: Date, weightKilo: Int, weightGramm: Int, photoData: Data?) {

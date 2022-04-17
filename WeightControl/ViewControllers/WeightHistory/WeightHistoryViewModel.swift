@@ -13,7 +13,7 @@ protocol WeightHistoryViewModelProtocol {
     var numbersOfRows: Int { get }
     
     func cellViewModel(at index: Int) -> WeightDataCellViewModelProtocol
-    func weightDataDetails(at index: Int) -> WeightDataDetailsViewModelProtocol
+    func weightDataDetails(at index: Int?) -> WeightDataDetailsViewModelProtocol
     func lastWeightDataDetails() -> WeightDataDetailsViewModelProtocol?
 }
 
@@ -45,8 +45,12 @@ class WeightHistoryViewModel: WeightHistoryViewModelProtocol {
         )
     }
     
-    func weightDataDetails(at index: Int) -> WeightDataDetailsViewModelProtocol {
-        WeightDataDetailsViewModel(weightData: weightData[index])
+    func weightDataDetails(at index: Int?) -> WeightDataDetailsViewModelProtocol {
+        if let index = index {
+            return WeightDataDetailsViewModel(weightData: weightData[index])
+        } else {
+            return WeightDataDetailsViewModel()
+        }
     }
     
     func lastWeightDataDetails() -> WeightDataDetailsViewModelProtocol? {
