@@ -14,7 +14,6 @@ protocol WeightHistoryViewModelProtocol {
     
     func cellViewModel(at index: Int) -> WeightDataCellViewModelProtocol
     func weightDataDetails(at index: Int?) -> WeightDataDetailsViewModelProtocol
-    func lastWeightDataDetails() -> WeightDataDetailsViewModelProtocol?
     func deleteWeightData(with index: Int)
 }
 
@@ -52,19 +51,18 @@ class WeightHistoryViewModel: WeightHistoryViewModelProtocol {
     }
     
     func weightDataDetails(at index: Int?) -> WeightDataDetailsViewModelProtocol {
+        
+        var result = WeightDataDetailsViewModel()
+        
         if let index = index {
-            return WeightDataDetailsViewModel(weightData: weightData[index])
-        } else {
-            if let lastData = weightData.first {
-                return WeightDataDetailsViewModel(kilo: lastData.weightKilo, gram: lastData.weightGramm)
-            } else {
-                return WeightDataDetailsViewModel()
-            }
+            result = WeightDataDetailsViewModel(weightData: weightData[index])
+        } else if let lastData = weightData.first {
+            result = WeightDataDetailsViewModel(
+                kilo: lastData.weightKilo,
+                gram: lastData.weightGramm
+            )
         }
+        
+        return result
     }
-    
-    func lastWeightDataDetails() -> WeightDataDetailsViewModelProtocol? {
-        WeightDataDetailsViewModel(weightData: weightData.last)
-    }
-    
 }
