@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		011DDD96280D542100380FD7 /* SettingsCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011DDD95280D542100380FD7 /* SettingsCellViewModel.swift */; };
 		01302DB727E8843600E43186 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01302DB627E8843600E43186 /* Colors.swift */; };
 		013A327128017B930004EF68 /* WeightDataDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013A327028017B930004EF68 /* WeightDataDetailsViewModel.swift */; };
 		013A3277280189730004EF68 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013A3276280189730004EF68 /* SettingsViewModel.swift */; };
@@ -31,6 +32,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		011DDD95280D542100380FD7 /* SettingsCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCellViewModel.swift; sourceTree = "<group>"; };
 		01302DB627E8843600E43186 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		013A327028017B930004EF68 /* WeightDataDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightDataDetailsViewModel.swift; sourceTree = "<group>"; };
 		013A3276280189730004EF68 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 			children = (
 				01E4788127D8F5960068D14B /* SettingsViewController.swift */,
 				013A3276280189730004EF68 /* SettingsViewModel.swift */,
+				011DDD95280D542100380FD7 /* SettingsCellViewModel.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -337,6 +340,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0157A0E827C7F3AD00E2C4BB /* ChartViewController.swift in Sources */,
+				011DDD96280D542100380FD7 /* SettingsCellViewModel.swift in Sources */,
 				01648AAF27EA13E500F91EE5 /* WeightDataDetailsViewController.swift in Sources */,
 				01302DB727E8843600E43186 /* Colors.swift in Sources */,
 				013A327D280189B00004EF68 /* WeightDataCellViewModel.swift in Sources */,
