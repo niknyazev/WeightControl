@@ -35,8 +35,8 @@ class WeightDataDetailsViewController: UITableViewController {
         return result
     }()
     
-    var weightData: WeightDataDetailsViewModelProtocol!
-    var lastWeightData: WeightDataDetailsViewModelProtocol?
+    var weightDataViewModel: WeightDataDetailsViewModelProtocol!
+    var lastWeightDataViewModel: WeightDataDetailsViewModelProtocol?
     var delegate: WeightDataUpdaterDelegate!
     
     // MARK: - Override methods
@@ -124,7 +124,7 @@ class WeightDataDetailsViewController: UITableViewController {
             ? nil
             : bodyImage.image?.pngData()
         
-        weightData.saveData(
+        weightDataViewModel.saveData(
             date: datePicker.date,
             weightKilo: weightPicker.selectedRow(inComponent: 0),
             weightGramm: weightPicker.selectedRow(inComponent: 1),
@@ -236,8 +236,8 @@ class WeightDataDetailsViewController: UITableViewController {
         weightPicker.delegate = self
         weightPicker.dataSource = self
         
-        guard let weightData = weightData else {
-            if let lastWeightData = lastWeightData {
+        guard let weightData = weightDataViewModel else {
+            if let lastWeightData = lastWeightDataViewModel {
                 setWeightPicker(kilo: lastWeightData.weightKilo, gram: lastWeightData.weightGramm)
             } else {
                 setWeightPicker(kilo: 70, gram: 0)
