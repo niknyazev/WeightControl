@@ -39,7 +39,7 @@ class WeightDataCellViewModel: WeightDataCellViewModelProtocol {
         if let lastWeight = lastWeight {
             let weightChange = weightData.weight - lastWeight
             isDecline = weightChange < 0
-            let prefix = isDecline ? "-" : "+"
+            let prefix = isDecline ? "" : "+"
             self.weightChange = prefix + String(format: "%.2f", weightChange)
         } else {
             isDecline = false

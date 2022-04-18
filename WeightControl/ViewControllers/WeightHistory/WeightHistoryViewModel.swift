@@ -42,8 +42,8 @@ class WeightHistoryViewModel: WeightHistoryViewModelProtocol {
         
         var lastWeight: Double? = nil
         
-        if index > 0 {
-            lastWeight = weightData[index - 1].weight
+        if index < weightData.count - 1 {
+            lastWeight = weightData[index + 1].weight
         }
         return WeightDataCellViewModel(
             weightData: weightData[index],
