@@ -100,10 +100,8 @@ class WeightHistoryTableViewController: UITableViewController {
         let weightDetails = WeightDataDetailsViewController()
         
         weightDetails.delegate = self
-        
         weightDetails.weightDataViewModel = viewModel.weightDataDetails(at: index)
-        weightDetails.lastWeightDataViewModel = viewModel.lastWeightDataDetails()
-        
+                
         present(
             UINavigationController(rootViewController: weightDetails),
             animated: true,

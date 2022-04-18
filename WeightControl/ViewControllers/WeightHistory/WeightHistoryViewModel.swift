@@ -55,7 +55,11 @@ class WeightHistoryViewModel: WeightHistoryViewModelProtocol {
         if let index = index {
             return WeightDataDetailsViewModel(weightData: weightData[index])
         } else {
-            return WeightDataDetailsViewModel()
+            if let lastData = weightData.first {
+                return WeightDataDetailsViewModel(kilo: lastData.weightKilo, gram: lastData.weightGramm)
+            } else {
+                return WeightDataDetailsViewModel()
+            }
         }
     }
     

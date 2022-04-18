@@ -188,7 +188,7 @@ class ChartViewController: UIViewController {
         let weightDetails = WeightDataDetailsViewController()
         
         weightDetails.delegate = self
-        weightDetails.lastWeightDataViewModel = viewModel.lastWeightDetailsViewModel()
+        weightDetails.weightDataViewModel = viewModel.lastWeightDetailsViewModel()
         
         present(
             UINavigationController(rootViewController: weightDetails),

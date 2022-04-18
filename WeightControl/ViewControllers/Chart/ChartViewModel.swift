@@ -17,7 +17,7 @@ protocol ChartViewModelProtocol {
     var progressValue: Int { get }
     var weightValues: [Double] { get }
     
-    func lastWeightDetailsViewModel() -> WeightDataDetailsViewModel?
+    func lastWeightDetailsViewModel() -> WeightDataDetailsViewModel
     func weightDetailsViewModel(for index: Int) -> WeightDataDetailsViewModel
 }
 
@@ -48,7 +48,9 @@ class ChartViewModel: ChartViewModelProtocol {
     }
     
     var progressValue: Int {
-        100 - (currentWeightDifference / startWeightDifference) * 100
+        startWeightDifference == 0
+            ? 0
+            : 100 - (currentWeightDifference / startWeightDifference) * 100
     }
     
     private var weightData: Results<WeightData>
@@ -59,11 +61,11 @@ class ChartViewModel: ChartViewModelProtocol {
         userData = UserDefaultsManager.shared.fetchUserData()
     }
     
-    func lastWeightDetailsViewModel() -> WeightDataDetailsViewModel? {
+    func lastWeightDetailsViewModel() -> WeightDataDetailsViewModel {
         if let lastWeightData = weightData.last {
-            return WeightDataDetailsViewModel(weightData: lastWeightData)
+            return WeightDataDetailsViewModel(kilo: lastWeightData.weightKilo, gram: lastWeightData.weightGramm)
         } else {
-            return nil
+            return WeightDataDetailsViewModel()
         }
     }
     

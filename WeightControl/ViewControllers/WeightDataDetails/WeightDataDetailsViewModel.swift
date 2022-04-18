@@ -26,11 +26,11 @@ class WeightDataDetailsViewModel: WeightDataDetailsViewModelProtocol {
     }
     
     var weightKilo: Int {
-        weightData?.weightKilo ?? 70
+        weightData?.weightKilo ?? kilo
     }
     
     var weightGramm: Int {
-        weightData?.weightGramm ?? 0
+        weightData?.weightGramm ?? gram
     }
     
     var photoData: Data? {
@@ -43,9 +43,17 @@ class WeightDataDetailsViewModel: WeightDataDetailsViewModelProtocol {
     
     private let weightData: WeightData?
     private let storageManager = StorageManager.shared
+    private var kilo = 80
+    private var gram = 0
     
     init(weightData: WeightData? = nil) {
-        self.weightData = weightData ?? WeightData()
+        self.weightData = weightData
+    }
+    
+    convenience init(kilo: Int, gram: Int) {
+        self.init()
+        self.kilo = kilo
+        self.gram = gram
     }
     
     func saveData(date: Date, weightKilo: Int, weightGramm: Int, photoData: Data?) {

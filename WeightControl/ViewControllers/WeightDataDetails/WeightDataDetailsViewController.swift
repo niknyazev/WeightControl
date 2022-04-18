@@ -36,7 +36,6 @@ class WeightDataDetailsViewController: UITableViewController {
     }()
     
     var weightDataViewModel: WeightDataDetailsViewModelProtocol!
-    var lastWeightDataViewModel: WeightDataDetailsViewModelProtocol?
     var delegate: WeightDataUpdaterDelegate!
     
     // MARK: - Override methods
@@ -236,19 +235,10 @@ class WeightDataDetailsViewController: UITableViewController {
         weightPicker.delegate = self
         weightPicker.dataSource = self
         
-        guard let weightData = weightDataViewModel else {
-            if let lastWeightData = lastWeightDataViewModel {
-                setWeightPicker(kilo: lastWeightData.weightKilo, gram: lastWeightData.weightGramm)
-            } else {
-                setWeightPicker(kilo: 70, gram: 0)
-            }
-            return
-        }
-        
-        datePicker.date = weightData.date
-        descriptionField.text = weightData.note
-        setWeightPicker(kilo: weightData.weightKilo, gram: weightData.weightGramm)
-        setupImage(with: weightData.photoData)
+        datePicker.date = weightDataViewModel.date
+        descriptionField.text = weightDataViewModel.note
+        setWeightPicker(kilo: weightDataViewModel.weightKilo, gram: weightDataViewModel.weightGramm)
+        setupImage(with: weightDataViewModel.photoData)
     }
     
     private func setupImage(with data: Data?) {
