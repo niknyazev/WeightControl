@@ -13,7 +13,7 @@ protocol WeightDataDetailsViewModelProtocol {
     var weightKilo: Int { get }
     var weightGramm: Int { get }
     var photoData: Data? { get }
-    var description: String { get }
+    var note: String { get }
     
     func saveData(date: Date, weightKilo: Int, weightGramm: Int, photoData: Data?)
     func saveData(date: Date, weightKilo: Int, weightGramm: Int)
@@ -37,8 +37,8 @@ class WeightDataDetailsViewModel: WeightDataDetailsViewModelProtocol {
         weightData?.photoData
     }
     
-    var description: String {
-        weightData?.description ?? ""
+    var note: String {
+        weightData?.note ?? ""
     }
     
     private let weightData: WeightData?

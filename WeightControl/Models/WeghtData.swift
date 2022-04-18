@@ -13,6 +13,7 @@ class WeightData: Object {
     @Persisted var weightKilo: Int = 0
     @Persisted var weightGramm: Int = 0
     @Persisted var photoData: Data? = nil
+    @Persisted var note: String = ""
     
     var weight: Double {
         Double(weightKilo) + Double(weightGramm) / 100
@@ -29,5 +30,4 @@ class WeightData: Object {
         let result = dateFormatter.string(from: date)
         return result
     }
- 
 }

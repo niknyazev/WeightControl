@@ -246,7 +246,7 @@ class WeightDataDetailsViewController: UITableViewController {
         }
         
         datePicker.date = weightData.date
-        descriptionField.text = weightData.description
+        descriptionField.text = weightData.note
         setWeightPicker(kilo: weightData.weightKilo, gram: weightData.weightGramm)
         setupImage(with: weightData.photoData)
     }
