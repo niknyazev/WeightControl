@@ -10,6 +10,9 @@ import UIKit
 class WeightDataDetailsViewController: UITableViewController {
     
     // MARK: - Properties
+    
+    var weightDataViewModel: WeightDataDetailsViewModelProtocol!
+    var delegate: WeightDataUpdaterDelegate!
         
     private lazy var datePicker: UIDatePicker = {
         let result = UIDatePicker()
@@ -30,13 +33,14 @@ class WeightDataDetailsViewController: UITableViewController {
         return result
     }()
     
-    private lazy var descriptionField: UITextField = {
-        let result = UITextField()
+    private lazy var descriptionField: UITextView = {
+        let result = UITextView()
+        result.delegate = self
+        result.font = UIFont.systemFont(ofSize: 17)
         return result
     }()
     
-    var weightDataViewModel: WeightDataDetailsViewModelProtocol!
-    var delegate: WeightDataUpdaterDelegate!
+    private let placeHolderColor = UIColor.systemGray4
     
     // MARK: - Override methods
     
@@ -190,7 +194,7 @@ class WeightDataDetailsViewController: UITableViewController {
         NSLayoutConstraint.activate([
             descriptionField.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor, constant: -20),
             descriptionField.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor, constant: 20),
-            descriptionField.topAnchor.constraint(equalTo: cell.contentView.topAnchor, constant: 0),
+            descriptionField.topAnchor.constraint(equalTo: cell.contentView.topAnchor, constant: 10),
             descriptionField.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor, constant: 0)
         ])
     }
@@ -237,6 +241,7 @@ class WeightDataDetailsViewController: UITableViewController {
         
         datePicker.date = weightDataViewModel.date
         descriptionField.text = weightDataViewModel.note
+        setupDescriptionField()
         setWeightPicker(
             kilo: weightDataViewModel.weightKilo,
             gram: weightDataViewModel.weightGramm
@@ -250,6 +255,15 @@ class WeightDataDetailsViewController: UITableViewController {
             bodyImage.contentMode = .scaleToFill
         } else {
             bodyImage.contentMode = .scaleAspectFit
+        }
+    }
+    
+    func setupDescriptionField() {
+        if weightDataViewModel.note.isEmpty {
+            descriptionField.text = "Description"
+            descriptionField.textColor = placeHolderColor
+        } else {
+            descriptionField.textColor = .black
         }
     }
     
@@ -280,6 +294,23 @@ extension WeightDataDetailsViewController: UIPickerViewDelegate, UIPickerViewDat
             return 200
         } else {
             return 10
+        }
+    }
+}
+
+extension WeightDataDetailsViewController: UITextViewDelegate {
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == placeHolderColor {
+            textView.text = nil
+            textView.textColor = .black
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.textColor == placeHolderColor {
+            textView.text = nil
+            textView.textColor = .black
         }
     }
 }
