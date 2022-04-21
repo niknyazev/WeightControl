@@ -131,7 +131,8 @@ class WeightDataDetailsViewController: UITableViewController {
             date: datePicker.date,
             weightKilo: weightPicker.selectedRow(inComponent: 0),
             weightGramm: weightPicker.selectedRow(inComponent: 1),
-            photoData: imageData
+            photoData: imageData,
+            note: descriptionField.text ?? ""
         )
         
         delegate.updateWeightData()

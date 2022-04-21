@@ -15,7 +15,7 @@ protocol WeightDataDetailsViewModelProtocol {
     var photoData: Data? { get }
     var note: String { get }
     
-    func saveData(date: Date, weightKilo: Int, weightGramm: Int, photoData: Data?)
+    func saveData(date: Date, weightKilo: Int, weightGramm: Int, photoData: Data?, note: String)
     func saveData(date: Date, weightKilo: Int, weightGramm: Int)
 }
 
@@ -56,7 +56,7 @@ class WeightDataDetailsViewModel: WeightDataDetailsViewModelProtocol {
         self.gram = gram
     }
     
-    func saveData(date: Date, weightKilo: Int, weightGramm: Int, photoData: Data?) {
+    func saveData(date: Date, weightKilo: Int, weightGramm: Int, photoData: Data?, note: String) {
         
         if let weightData = weightData {
             storageManager.edit(
@@ -64,7 +64,8 @@ class WeightDataDetailsViewModel: WeightDataDetailsViewModelProtocol {
                 date: date,
                 weightKilo: weightKilo,
                 weightGramm: weightGramm,
-                photoData: photoData
+                photoData: photoData,
+                note: note
             )
         } else {
             let currentWeightData = WeightData()
