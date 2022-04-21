@@ -98,7 +98,7 @@ class SettingsViewModel: SettingsViewModelProtocol {
         let bestWeights = weightCalculator.calculateBestWeights()
         
         resultCells[0].value = String(format: "%.2f", currentBmi)
-        resultCells[1].value = String(bestWeights.max)
+        resultCells[1].value = String(bestWeights.min)
         resultCells[2].value = String(bestWeights.max)
     }
     
