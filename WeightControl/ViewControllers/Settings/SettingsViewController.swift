@@ -13,13 +13,12 @@ class SettingsViewController: UITableViewController {
         
     private let pickerWidth: CGFloat = 250
     private let cellId = "settingData"
-    private var viewModel: SettingsViewModelProtocol!
+    private var viewModel: SettingsViewModelProtocol = SettingsViewModel()
     
     // MARK: - Override methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel = SettingsViewModel()
         setupElements()
     }
     

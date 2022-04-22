@@ -72,12 +72,4 @@ class ChartViewModel: ChartViewModelProtocol {
     func weightDetailsViewModel(for index: Int) -> WeightDataDetailsViewModel {
         WeightDataDetailsViewModel(weightData: weightData[index])
     }
-    
-    private func fetchWeightData() {
-        
-    }
-    
-    private func fetchUserData() {
-        
-    }
 }

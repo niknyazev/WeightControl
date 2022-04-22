@@ -16,14 +16,12 @@ class WeightHistoryTableViewController: UITableViewController {
     
     // MARK: - Properties
         
-    private let pickerWidth: CGFloat = 400
-    private var viewModel: WeightHistoryViewModelProtocol!
+    private var viewModel: WeightHistoryViewModelProtocol = WeightHistoryViewModel()
     
     // MARK: - Override methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel = WeightHistoryViewModel()
         setupElements()
     }
 
