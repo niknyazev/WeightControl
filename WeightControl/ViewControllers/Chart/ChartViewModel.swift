@@ -48,9 +48,12 @@ class ChartViewModel: ChartViewModelProtocol {
     }
     
     var progressValue: Int {
-        startWeightDifference == 0
+        let ratio = Double(startWeightDifference - currentWeightDifference)
+            / Double(startWeightDifference)
+        let result = startWeightDifference == 0
             ? 0
-            : 100 - (currentWeightDifference / startWeightDifference) * 100
+            : Int(ratio * 100)
+        return result
     }
     
     private var weightData: Results<WeightData>
