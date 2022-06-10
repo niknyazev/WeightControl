@@ -171,8 +171,8 @@
 				01302DB527E8842100E43186 /* Сonstants */,
 				01E4788327DB8B730068D14B /* Models */,
 				01E4787C27CE8F720068D14B /* Managers */,
-				01E4787A27CE76EA0068D14B /* Storyboards */,
 				01E4787927CE769A0068D14B /* ViewControllers */,
+				01E4787A27CE76EA0068D14B /* Storyboards */,
 				01E4787B27CE77310068D14B /* App */,
 			);
 			path = WeightControl;
