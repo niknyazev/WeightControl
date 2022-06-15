@@ -13,27 +13,50 @@ class UserDefaultsManagerTests: XCTestCase {
     var sut: UserDefaultsManager!
 
     override func setUp() {
+        
         super.setUp()
+        
+        UserDefaults.standard.set(nil, forKey: "userData")
         sut = UserDefaultsManager.shared
     }
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    override func tearDown() {
+        sut = nil
+        super.tearDown()
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    func testFetchDefaultUserData() throws {
+        
+        let userData = sut.fetchUserData()
+        
+        let allValuesCorrect =
+            userData.age == 18 &&
+            userData.height == 180 &&
+            userData.sex == .male &&
+            userData.weightGoal == 80
+        
+        XCTAssertTrue(allValuesCorrect, "Default UserDefaults values are not correct")
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func testSaveUserData() throws {
+        
+        let userDataForSaving = UserData(
+            age: 20,
+            height: 175,
+            weightGoal: 50,
+            sex: .female
+        )
+        
+        sut.saveUserData(userData: userDataForSaving)
+        
+        let userData = sut.fetchUserData()
+        
+        let allValuesCorrect =
+            userData.age == 20 &&
+            userData.height == 175 &&
+            userData.sex == .female &&
+            userData.weightGoal == 50
+        
+        XCTAssertTrue(allValuesCorrect, "UserDefaults values after saving are not correct")
     }
-
 }
