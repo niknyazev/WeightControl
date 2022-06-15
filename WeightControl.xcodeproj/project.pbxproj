@@ -149,7 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				0157A0E227C7F3AD00E2C4BB /* WeightControl */,
-				01FF5FD828536A82004807C9 /* UserDefaultsManagerTests */,
+				01FF5FD828536A82004807C9 /* WeightControlTests */,
 				0157A0E127C7F3AD00E2C4BB /* Products */,
 				409D9E051E94972F6647C933 /* Pods */,
 				7511BDB07224B517E9B83341 /* Frameworks */,
@@ -226,12 +226,12 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		01FF5FD828536A82004807C9 /* UserDefaultsManagerTests */ = {
+		01FF5FD828536A82004807C9 /* WeightControlTests */ = {
 			isa = PBXGroup;
 			children = (
 				01FF5FD928536A82004807C9 /* UserDefaultsManagerTests.swift */,
 			);
-			path = UserDefaultsManagerTests;
+			path = WeightControlTests;
 			sourceTree = "<group>";
 		};
 		409D9E051E94972F6647C933 /* Pods */ = {
