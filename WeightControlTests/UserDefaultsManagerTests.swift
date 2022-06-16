@@ -10,7 +10,7 @@ import XCTest
 
 class UserDefaultsManagerTests: XCTestCase {
     
-    var sut: UserDefaultsManager!
+    private var sut: UserDefaultsManager!
 
     override func setUp() {
         

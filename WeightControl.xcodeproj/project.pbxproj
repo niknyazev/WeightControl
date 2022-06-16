@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		011DDD96280D542100380FD7 /* SettingsCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011DDD95280D542100380FD7 /* SettingsCellViewModel.swift */; };
+		012C81AC285B2A8D00352ECD /* WeightCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012C81AB285B2A8D00352ECD /* WeightCalculatorTests.swift */; };
 		01302DB727E8843600E43186 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01302DB627E8843600E43186 /* Colors.swift */; };
 		013A327128017B930004EF68 /* WeightDataDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013A327028017B930004EF68 /* WeightDataDetailsViewModel.swift */; };
 		013A3277280189730004EF68 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013A3276280189730004EF68 /* SettingsViewModel.swift */; };
@@ -43,6 +44,7 @@
 
 /* Begin PBXFileReference section */
 		011DDD95280D542100380FD7 /* SettingsCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCellViewModel.swift; sourceTree = "<group>"; };
+		012C81AB285B2A8D00352ECD /* WeightCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightCalculatorTests.swift; sourceTree = "<group>"; };
 		01302DB627E8843600E43186 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		013A327028017B930004EF68 /* WeightDataDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightDataDetailsViewModel.swift; sourceTree = "<group>"; };
 		013A3276280189730004EF68 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 			isa = PBXGroup;
 			children = (
 				01FF5FD928536A82004807C9 /* UserDefaultsManagerTests.swift */,
+				012C81AB285B2A8D00352ECD /* WeightCalculatorTests.swift */,
 			);
 			path = WeightControlTests;
 			sourceTree = "<group>";
@@ -421,6 +424,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				01FF5FDA28536A82004807C9 /* UserDefaultsManagerTests.swift in Sources */,
+				012C81AC285B2A8D00352ECD /* WeightCalculatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
