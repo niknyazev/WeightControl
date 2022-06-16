@@ -23,8 +23,18 @@ class WeightCalculatorTests: XCTestCase {
     }
 
     func testBMIForHeight180Weight100() throws {
+        
         let bmi = sut.calculateBmi()
+        
         XCTAssertTrue(round(bmi * 100) == 3086, "BMI for height 180 is incorrect")
+    }
+    
+    func testMinMaxWeightForHeight180() throws {
+        
+        let weights = sut.calculateBestWeights()
+        let weightsIsCorrect = (weights.min == 59 && weights.max == 81)
+        
+        XCTAssertTrue(weightsIsCorrect, "Min or Max weight is not correct for height 180")
     }
 
 }
