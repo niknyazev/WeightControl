@@ -31,6 +31,12 @@ class StorageManager {
         }
     }
     
+    func deleteAll() {
+        write {
+            realm.deleteAll()
+        }
+    }
+    
     func edit(_ weightData: WeightData, date: Date, weightKilo: Int, weightGramm: Int, photoData: Data?, note: String) {
         write {
             weightData.date = date
