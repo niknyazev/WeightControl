@@ -9,4 +9,8 @@ target 'WeightControl' do
   pod 'Charts'
   pod 'RealmSwift', '~>10.25.0'
 
+  target 'WeightControlTests' do
+    inherit! :search_paths
+  end
+
 end
