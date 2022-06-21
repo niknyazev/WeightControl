@@ -10,32 +10,30 @@ import XCTest
 
 class StorageManagerTests: XCTestCase {
 
-//    private var sut: StorageManager!
+    private var sut: StorageManager!
     
     override func setUp() {
         super.setUp()
-//        sut = StorageManager.shared
-//        sut.deleteAll()
+        sut = StorageManager.shared
+        sut.deleteAll()
     }
 
     override func tearDown() {
-//        sut = nil
+        sut = nil
         super.tearDown()
     }
 
     func testSaveWeightData() throws {
         
-//        let weightData = WeightData()
-//
-//        weightData.weightKilo = 100
-//        weightData.weightGramm = 20
-//        weightData.date = .now
-//        weightData.photoData = nil
-//
-//        sut.save(weightData)
-//
-//        let weightsData = sut.realm.objects(WeightData.self)
-//
-//        XCTAssertTrue(weightsData.count == 1, "Can't write weight data")
+        let weightData = WeightData()
+
+        weightData.weightKilo = 100
+        weightData.weightGramm = 20
+        weightData.date = .now
+        weightData.photoData = nil
+
+        sut.save(weightData)
+
+        XCTAssertEqual(sut.getSortedWeightData().count, 1)
     }
 }
