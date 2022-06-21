@@ -76,12 +76,7 @@ class SettingsViewModel: SettingsViewModelProtocol {
     
     private func fetchData() {
         userData = userDefaults.fetchUserData()
-        let weightData = StorageManager
-            .shared
-            .realm
-            .objects(WeightData.self)
-            .sorted(byKeyPath: "date")
-        
+        let weightData = StorageManager.shared.getSortedWeightData()
         currentWeight = weightData.last?.weight ?? 0
     }
         

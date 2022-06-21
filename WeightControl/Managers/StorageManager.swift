@@ -13,12 +13,16 @@ class StorageManager {
    
     static let shared = StorageManager()
     
-    let realm = try! Realm()
+    private let realm = try! Realm()
     
     private init() {}
     
     // MARK: - Public methods
     
+    func getSortedWeightData(ascending: Bool = true) -> Results<WeightData> {
+        realm.objects(WeightData.self).sorted(byKeyPath: "date", ascending: ascending)
+    }
+        
     func save(_ weightData: WeightData) {
         write {
             realm.add(weightData)

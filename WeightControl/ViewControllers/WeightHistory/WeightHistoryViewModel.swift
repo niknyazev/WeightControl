@@ -27,9 +27,7 @@ class WeightHistoryViewModel: WeightHistoryViewModelProtocol {
     private let storageManager = StorageManager.shared
 
     init() {
-        weightData = storageManager
-            .realm.objects(WeightData.self)
-            .sorted(byKeyPath: "date", ascending: false)
+        weightData = storageManager.getSortedWeightData(ascending: false)
     }
     
     func deleteWeightData(with index: Int) {

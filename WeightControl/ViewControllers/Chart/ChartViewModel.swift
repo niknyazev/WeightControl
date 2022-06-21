@@ -60,7 +60,7 @@ class ChartViewModel: ChartViewModelProtocol {
     private var userData: UserData
     
     init() {
-        weightData = StorageManager.shared.realm.objects(WeightData.self).sorted(byKeyPath: "date")
+        weightData = StorageManager.shared.getSortedWeightData()
         userData = UserDefaultsManager.shared.fetchUserData()
     }
     
