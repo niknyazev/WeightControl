@@ -10,6 +10,7 @@
 		011DDD96280D542100380FD7 /* SettingsCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011DDD95280D542100380FD7 /* SettingsCellViewModel.swift */; };
 		012C81AC285B2A8D00352ECD /* WeightCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012C81AB285B2A8D00352ECD /* WeightCalculatorTests.swift */; };
 		012C81AE285BB15700352ECD /* StorageManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012C81AD285BB15700352ECD /* StorageManagerTests.swift */; };
+		012C81C12861C81D00352ECD /* WeightDataDetailsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012C81C02861C81D00352ECD /* WeightDataDetailsViewModelTests.swift */; };
 		01302DB727E8843600E43186 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01302DB627E8843600E43186 /* Colors.swift */; };
 		013A327128017B930004EF68 /* WeightDataDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013A327028017B930004EF68 /* WeightDataDetailsViewModel.swift */; };
 		013A3277280189730004EF68 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013A3276280189730004EF68 /* SettingsViewModel.swift */; };
@@ -47,6 +48,7 @@
 		011DDD95280D542100380FD7 /* SettingsCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsCellViewModel.swift; sourceTree = "<group>"; };
 		012C81AB285B2A8D00352ECD /* WeightCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightCalculatorTests.swift; sourceTree = "<group>"; };
 		012C81AD285BB15700352ECD /* StorageManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManagerTests.swift; sourceTree = "<group>"; };
+		012C81C02861C81D00352ECD /* WeightDataDetailsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightDataDetailsViewModelTests.swift; sourceTree = "<group>"; };
 		01302DB627E8843600E43186 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		013A327028017B930004EF68 /* WeightDataDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightDataDetailsViewModel.swift; sourceTree = "<group>"; };
 		013A3276280189730004EF68 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
@@ -94,6 +96,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		012C81BF2861C80200352ECD /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				012C81C02861C81D00352ECD /* WeightDataDetailsViewModelTests.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		01302DB527E8842100E43186 /* Сonstants */ = {
 			isa = PBXGroup;
 			children = (
@@ -233,6 +243,7 @@
 		01FF5FD828536A82004807C9 /* WeightControlTests */ = {
 			isa = PBXGroup;
 			children = (
+				012C81BF2861C80200352ECD /* ViewModels */,
 				01FF5FD928536A82004807C9 /* UserDefaultsManagerTests.swift */,
 				012C81AB285B2A8D00352ECD /* WeightCalculatorTests.swift */,
 				012C81AD285BB15700352ECD /* StorageManagerTests.swift */,
@@ -429,6 +440,7 @@
 				012C81AE285BB15700352ECD /* StorageManagerTests.swift in Sources */,
 				01FF5FDA28536A82004807C9 /* UserDefaultsManagerTests.swift in Sources */,
 				012C81AC285B2A8D00352ECD /* WeightCalculatorTests.swift in Sources */,
+				012C81C12861C81D00352ECD /* WeightDataDetailsViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
