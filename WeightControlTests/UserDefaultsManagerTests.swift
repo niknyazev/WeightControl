@@ -13,10 +13,7 @@ class UserDefaultsManagerTests: XCTestCase {
     private var sut: UserDefaultsManager!
 
     override func setUp() {
-        
         super.setUp()
-        
-        UserDefaults.standard.set(nil, forKey: "userData")
         sut = UserDefaultsManager.shared
     }
 
@@ -27,18 +24,19 @@ class UserDefaultsManagerTests: XCTestCase {
 
     func testFetchDefaultUserData() throws {
         
+        removeData()
+        
         let userData = sut.fetchUserData()
-        
-        let allValuesCorrect =
-            userData.age == 18 &&
-            userData.height == 180 &&
-            userData.sex == .male &&
-            userData.weightGoal == 80
-        
-        XCTAssertTrue(allValuesCorrect, "Default UserDefaults values are not correct")
+            
+        XCTAssertEqual(userData.age, 18)
+        XCTAssertEqual(userData.height, 180)
+        XCTAssertEqual(userData.sex, .male)
+        XCTAssertEqual(userData.weightGoal, 80)
     }
     
     func testSaveUserData() throws {
+        
+        removeData()
         
         let userDataForSaving = UserData(
             age: 20,
@@ -51,12 +49,14 @@ class UserDefaultsManagerTests: XCTestCase {
         
         let userData = sut.fetchUserData()
         
-        let allValuesCorrect =
-            userData.age == 20 &&
-            userData.height == 175 &&
-            userData.sex == .female &&
-            userData.weightGoal == 50
-        
-        XCTAssertTrue(allValuesCorrect, "UserDefaults values after saving are not correct")
+        XCTAssertEqual(userData.age, 20)
+        XCTAssertEqual(userData.height, 175)
+        XCTAssertEqual(userData.sex, .female)
+        XCTAssertEqual(userData.weightGoal, 50)
     }
+    
+    private func removeData() {
+        UserDefaults.standard.set(nil, forKey: "userData")
+    }
+    
 }

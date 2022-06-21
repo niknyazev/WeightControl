@@ -15,7 +15,6 @@ class StorageManagerTests: XCTestCase {
     override func setUp() {
         super.setUp()
         sut = StorageManager.shared
-        sut.deleteAll()
     }
 
     override func tearDown() {
@@ -23,7 +22,9 @@ class StorageManagerTests: XCTestCase {
         super.tearDown()
     }
 
-    func testSaveWeightData() throws {
+    func testSaveAndEditWeightData() throws {
+        
+        sut.deleteAll()
         
         let weightData = WeightData()
 
@@ -33,7 +34,22 @@ class StorageManagerTests: XCTestCase {
         weightData.photoData = nil
 
         sut.save(weightData)
+        
+        var savedData = sut.getSortedWeightData()
+        var firstElement = savedData.first
 
-        XCTAssertEqual(sut.getSortedWeightData().count, 1)
+        XCTAssertEqual(savedData.count, 1)
+        XCTAssertEqual(firstElement?.weightKilo, 100)
+        XCTAssertEqual(firstElement?.weightGramm, 20)
+        
+        sut.edit(firstElement!, date: .now, weightKilo: 90, weightGramm: 10)
+        
+        savedData = sut.getSortedWeightData()
+        firstElement = savedData.first
+
+        XCTAssertEqual(savedData.count, 1)
+        XCTAssertEqual(firstElement?.weightKilo, 90)
+        XCTAssertEqual(firstElement?.weightGramm, 10)
     }
+        
 }
