@@ -15,8 +15,6 @@ class WeightDataDetailsViewModelTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        sut = WeightDataDetailsViewModel()
-        storageManager.deleteAll()
     }
 
     override func tearDown() {
@@ -25,6 +23,10 @@ class WeightDataDetailsViewModelTests: XCTestCase {
     }
 
     func testSaveWeightData() throws {
+
+        storageManager.deleteAll()
+        
+        sut = WeightDataDetailsViewModel()
         
         sut.saveData(date: .now, weightKilo: 100, weightGramm: 10, photoData: nil, note: "Test data")
         let entriesCount = storageManager.getSortedWeightData().count
@@ -32,4 +34,25 @@ class WeightDataDetailsViewModelTests: XCTestCase {
         XCTAssertEqual(entriesCount, 1)
     }
     
+    func testWeightDataValuesAreCorrect() throws {
+        
+        let weightData = WeightData()
+        
+        let nowDate = Date.now
+
+        weightData.weightKilo = 100
+        weightData.weightGramm = 20
+        weightData.date = nowDate
+        weightData.photoData = nil
+        weightData.note = "Test data"
+
+        storageManager.save(weightData)
+        
+        sut = WeightDataDetailsViewModel(weightData: weightData)
+        
+        XCTAssertEqual(sut.weightKilo, 100)
+        XCTAssertEqual(sut.weightGramm, 20)
+        XCTAssertEqual(sut.date, nowDate)
+        XCTAssertEqual(sut.note, "Test data")
+    }
 }
