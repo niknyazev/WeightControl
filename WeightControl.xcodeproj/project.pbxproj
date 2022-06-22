@@ -11,6 +11,7 @@
 		012C81AC285B2A8D00352ECD /* WeightCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012C81AB285B2A8D00352ECD /* WeightCalculatorTests.swift */; };
 		012C81AE285BB15700352ECD /* StorageManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012C81AD285BB15700352ECD /* StorageManagerTests.swift */; };
 		012C81C12861C81D00352ECD /* WeightDataDetailsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012C81C02861C81D00352ECD /* WeightDataDetailsViewModelTests.swift */; };
+		012C81C32863536D00352ECD /* ChartViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012C81C22863536D00352ECD /* ChartViewModelTests.swift */; };
 		01302DB727E8843600E43186 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01302DB627E8843600E43186 /* Colors.swift */; };
 		013A327128017B930004EF68 /* WeightDataDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013A327028017B930004EF68 /* WeightDataDetailsViewModel.swift */; };
 		013A3277280189730004EF68 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013A3276280189730004EF68 /* SettingsViewModel.swift */; };
@@ -50,6 +51,7 @@
 		012C81AB285B2A8D00352ECD /* WeightCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightCalculatorTests.swift; sourceTree = "<group>"; };
 		012C81AD285BB15700352ECD /* StorageManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManagerTests.swift; sourceTree = "<group>"; };
 		012C81C02861C81D00352ECD /* WeightDataDetailsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightDataDetailsViewModelTests.swift; sourceTree = "<group>"; };
+		012C81C22863536D00352ECD /* ChartViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewModelTests.swift; sourceTree = "<group>"; };
 		01302DB627E8843600E43186 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		013A327028017B930004EF68 /* WeightDataDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightDataDetailsViewModel.swift; sourceTree = "<group>"; };
 		013A3276280189730004EF68 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				012C81C02861C81D00352ECD /* WeightDataDetailsViewModelTests.swift */,
+				012C81C22863536D00352ECD /* ChartViewModelTests.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -469,6 +472,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				012C81AE285BB15700352ECD /* StorageManagerTests.swift in Sources */,
+				012C81C32863536D00352ECD /* ChartViewModelTests.swift in Sources */,
 				01FF5FDA28536A82004807C9 /* UserDefaultsManagerTests.swift in Sources */,
 				012C81AC285B2A8D00352ECD /* WeightCalculatorTests.swift in Sources */,
 				012C81C12861C81D00352ECD /* WeightDataDetailsViewModelTests.swift in Sources */,
