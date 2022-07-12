@@ -7,9 +7,6 @@
 
 import Foundation
 
-// TODO: need refactoring - implement new class, without weight. Weight does not need
-// then we calculate min and max weights
-
 class WeightCalculator {
     
     var height: Int

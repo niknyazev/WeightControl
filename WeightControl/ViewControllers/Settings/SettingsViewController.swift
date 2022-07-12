@@ -84,7 +84,7 @@ class SettingsViewController: UITableViewController {
         let currentCell = viewModel.cellViewModel(for: indexPath)
         
         let currentValue = currentCell.value
-        let currentValueIndex = currentCell.values.firstIndex(of: currentValue) // TODO: extract to method
+        let currentValueIndex = currentCell.values.firstIndex(of: currentValue)
 
         guard let currentValueIndex = currentValueIndex else {
             return
