@@ -30,4 +30,15 @@ class WeightData: Object {
         let result = dateFormatter.string(from: date)
         return result
     }
+    
+    var dateDescriptionShort: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .none
+        dateFormatter.locale = Locale(identifier: "en_US")
+        dateFormatter.dateFormat = "dd MMM"
+        
+        let result = dateFormatter.string(from: date)
+        return result
+    }
 }

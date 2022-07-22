@@ -235,9 +235,14 @@ class ChartViewController: UIViewController {
         lineChartView.data = nil
         
         var weightValues: [ChartDataEntry] = []
+        var labels: [String] = []
+        
         for (index, value) in viewModel.weightValues.enumerated() {
-            weightValues.append(ChartDataEntry(x: Double(index), y: Double(value)))
+            weightValues.append(ChartDataEntry(x: Double(index), y: value.weight))
+            labels.append(value.dayLabel)
         }
+        
+        lineChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: labels)
         
         let dataSet = LineChartDataSet(entries: weightValues, label: "Weight data")
         dataSet.drawCirclesEnabled = false

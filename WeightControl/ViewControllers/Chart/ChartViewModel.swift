@@ -15,7 +15,7 @@ protocol ChartViewModelProtocol {
     var remainWeight: String { get }
     var progress: String { get }
     var progressValue: Int { get }
-    var weightValues: [Double] { get }
+    var weightValues: [ChartDayData] { get }
     
     func lastWeightDetailsViewModel() -> WeightDataDetailsViewModel
     func weightDetailsViewModel(for index: Int) -> WeightDataDetailsViewModel
@@ -23,8 +23,14 @@ protocol ChartViewModelProtocol {
 
 class ChartViewModel: ChartViewModelProtocol {
     
-    var weightValues: [Double] {
-        weightData.map { $0.weight }
+    var weightValues: [ChartDayData] {
+        weightData.map { data in
+            ChartDayData(
+                day: data.date,
+                weight: data.weight,
+                dayLabel: "\(data.dateDescriptionShort)"
+            )
+        }
     }
     
     var startWeight: String {
@@ -75,4 +81,10 @@ class ChartViewModel: ChartViewModelProtocol {
     func weightDetailsViewModel(for index: Int) -> WeightDataDetailsViewModel {
         WeightDataDetailsViewModel(weightData: weightData[index])
     }
+}
+
+struct ChartDayData {
+    let day: Date
+    let weight: Double
+    let dayLabel: String
 }
